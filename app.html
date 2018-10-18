@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html lang="en-US" class="lt-ie9 ie9" {{ HTML_ATTRS }}><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html {{ HTML_ATTRS }}><!--<![endif]-->
+  <head>
+    {{ HEAD }}
+    <script>
+      var deviceWidth = document.documentElement.clientWidth || window.innerWidth || document.body.clientWidth
+      if (deviceWidth >= 750) {
+        deviceWidth = 750
+        document.documentElement.style.fontSize=(deviceWidth / 7.5) + 'px'
+      }
+      if (deviceWidth <= 320) { 
+        deviceWidth=320 
+        document.documentElement.style.fontSize=(deviceWidth / 7.5) + 'px'
+      } 
+      else{
+        document.documentElement.style.fontSize=(deviceWidth / 7.5) + 'px'
+      }
+      console.log(document.documentElement.style.fontSize)
+    </script>
+  </head>
+  <body {{ BODY_ATTRS }}>
+    {{ APP }}
+
+  </body>
+</html>
