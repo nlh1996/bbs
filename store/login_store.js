@@ -39,12 +39,12 @@ export default {
                     console.log(response.data)
                     commit('USER_LOGIN', { userName: '萌妹子', postsNum: '100', headImg: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58', })
                     //var storage = window.localStorage
-                    //将JSON对象转换为JSON字符串存储
+                    //将对象转换为JSON字符串存储
                     // let form = JSON.stringify(this.form)
                     // storage.data = form
                     // console.log(typeof storage.data)
                     //storage.username = '萌妹子'
-                    //将JSON字符串转换成为JSON对象输出
+                    //将JSON字符串转换成为对象输出
                     // let json = storage.data
                     // let jsonObj = JSON.parse(json)
                     // console.log(typeof jsonObj)
