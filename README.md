@@ -1,7 +1,6 @@
 # bbs
-
-> Nuxt.js project
-
+> 这是一个用nuxt开发的手机端游戏社区项目。
+> 安装完请将package.json中最后的ip地址改成你自己主机的ip地址，方便手机观看效果。
 ## Build Setup
 
 ``` bash
