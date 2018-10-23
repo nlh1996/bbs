@@ -1,7 +1,9 @@
 //头部内容
 <template>
     <div class="header">
-        <span class="close">×</span>
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-close"></use>
+        </svg>
         <span class="title">{{name}}游戏圈</span>
     </div>
 </template>
@@ -10,9 +12,10 @@
     export default {
         data() {
             return {
-                name: '微信'
+               
             }
         },
+        props: ['name']
     }
 </script>
 
@@ -26,7 +29,7 @@
     font-size: 0.4rem;
 }
 .title{
-    margin-left: 0.2rem;
+    margin-left: 0.1rem;
     font-size:  0.35rem;
     font-weight: bold;
 }

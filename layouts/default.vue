@@ -5,9 +5,9 @@
 </template>
 
 <style>
+
 html {
   font-family: "微软雅黑", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
@@ -16,7 +16,7 @@ html {
 }
 
 *, *:before, *:after {
-  font-size: 0.16rem;
+  font-size: 0.3rem;
   margin: 0;
   padding: 0;
 

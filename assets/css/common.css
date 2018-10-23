@@ -1,0 +1,17 @@
+.icon {
+    width: 0.35rem;
+    height: 0.35rem;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
+ .view{
+    width: 7.5rem;
+    margin: 0 auto;
+ }
+ h2{
+    font-size: 0.4rem;
+ }
+ h3{
+     font-size: 0.35rem;
+ }
