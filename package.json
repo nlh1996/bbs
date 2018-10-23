@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "element-ui": "^2.4.8",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
@@ -26,10 +25,10 @@
     "eslint-loader": "^2.1.1",
     "eslint-plugin-vue": "^4.0.0"
   },
-  "config":{
-    "nuxt":{
-      "host":"192.168.1.11",
-      "port":"3001"
+  "config": {
+    "nuxt": {
+      "host": "192.168.1.11",
+      "port": "3001"
     }
   }
 }
