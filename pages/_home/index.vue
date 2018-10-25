@@ -3,8 +3,7 @@
         <header-view :name="msg"></header-view>
 
         <div class="headlist bg">
-            <div class="left">
-                <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:0.8rem"/>
+            <div class="left">                <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:0.8rem"/>
             </div>
             
             <div class="text"> {{$route.params.home}}</div>
@@ -54,23 +53,24 @@
         </div>
         <div class="notice bg">公告/置顶</div>
 
-        <van-list v-model="loading" :finished="finished" @load="onLoad">
-            <ul v-for="item in list" :key="item" :title="item">
-                <li>{{item}}</li>
-            </ul>
-        </van-list>
-
-        <div class="tail bg">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wodefabu"></use>
-            </svg>
-            <button class="text-button">发表话题</button>
+        <div class="list">
+            <van-list v-model="loading" :finished="finished" @load="onLoad">
+                <ul v-for="item in list" :key="item" :title="item">
+                    <li>{{item}}</li>
+                </ul>
+            </van-list>
         </div>
+
+        <div class="footer bg">
+            <footer-view></footer-view>
+        </div>
+        
     </div>
 </template>
 
 <script>
 import headerView from '~/components/header'
+import footerView from '~/components/footer'
     export default {
         data() {
             return {
@@ -82,6 +82,7 @@ import headerView from '~/components/header'
         },
         components: {
             headerView,
+            footerView
         },
         mounted() {
             console.log(this.$route.params.home)
@@ -102,7 +103,7 @@ import headerView from '~/components/header'
                 }
 
                 // 数据全部加载完成
-                if (this.list.length >= 1000) {
+                if (this.list.length >= 500) {
                     this.finished = true;
                 }
             }, 500);
@@ -120,6 +121,7 @@ import headerView from '~/components/header'
 
 <style scoped>
 .view{
+    position: relative;
     background-color: #F5F5F5;
     height: 10rem;
 }
@@ -160,10 +162,11 @@ ul,li{
 }
 
 ul li button{
-    outline: black;
+    outline: none;
     font-size: 0.3rem;
     background-color: white;
-    padding: 0.08rem;
+    line-height: 0.5rem;
+    padding: 0.04rem;
     border-radius: 10%;
     /* -webkit-transition-duration: 0.4s; Safari */
     /* transition-duration: 0.4s; */
@@ -179,10 +182,13 @@ ul li button{
     background-color:chartreuse;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 } */
-.tail{
-    text-align: center;
+.list{
+    padding-bottom: 0.9rem;
 }
-.tail button{
-    color: chartreuse;
+/* 底部吸底效果 */
+.footer{
+    margin-bottom: 0;
+    position: fixed;
+    bottom: 0;
 }
 </style>
