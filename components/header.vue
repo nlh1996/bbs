@@ -1,9 +1,11 @@
 //头部内容
 <template>
     <div class="header">
-        <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-close"></use>
-        </svg>
+        <span @click="close" class="clink">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-close"></use>
+            </svg>
+        </span>
         <span class="title">{{name}}游戏圈</span>
     </div>
 </template>
@@ -15,7 +17,12 @@
                
             }
         },
-        props: ['name']
+        props: ['name'],
+        methods:{
+            close() {
+                console.log("11111")
+            }
+        }
     }
 </script>
 
@@ -23,7 +30,7 @@
 .header{
     height: 0.45rem;
     margin: 0.1rem;
-
+    line-height: 0.5rem;
 }
 .close{
     font-size: 0.4rem;
@@ -32,6 +39,9 @@
     margin-left: 0.1rem;
     font-size:  0.35rem;
     font-weight: bold;
+}
+.clink:active{
+
 }
 
 </style>

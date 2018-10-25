@@ -16,8 +16,14 @@ module.exports = {
   },
 
   css: [
-    '~/assets/css/common.css'
+    {src: '~/assets/css/common.css'},
+    {src: 'vant/lib/vant-css/base.css'},
+    {src: 'vant/lib/vant-css/list.css'}
   ],
+  plugins: [{
+    src:'~plugins/vant',
+    ssr: true //是能在服务端运行
+  }],
   /*
   ** Customize the progress bar color
   */

@@ -6,7 +6,7 @@
     <hr>
     <nuxt-link :to="router"> 
       <dl>
-        <dt><img :src="form.headImg" style="width:80px"></dt>
+        <dt><img :src="form.headImg" style="width:1.5rem"></dt>
         <dd>     
           <div class="text">
             <h3>王者荣耀</h3>
@@ -18,7 +18,7 @@
 
     <nuxt-link :to="router2"> 
       <dl>
-        <dt><img :src="form.headImg" style="width:80px"></dt>
+        <dt><img :src="form.headImg" style="width:1.5rem"></dt>
         <dd>     
           <div class="text">
             <h3>绝地求生</h3>
@@ -28,7 +28,32 @@
       </dl>
     </nuxt-link>
     <div class="clean"></div>
+
     <div class="title">全部游戏圈</div>
+    <nuxt-link :to="router"> 
+      <dl>
+        <dt><img :src="form.headImg" style="width:1.5rem"></dt>
+        <dd>     
+          <div class="text">
+            <h3>王者荣耀</h3>
+            <p>话题100</p>
+          </div>
+        </dd>
+      </dl>
+    </nuxt-link>
+
+    <nuxt-link :to="router2"> 
+      <dl>
+        <dt><img :src="form.headImg" style="width:1.5rem"></dt>
+        <dd>     
+          <div class="text">
+            <h3>绝地求生</h3>
+            <p>话题100</p>
+          </div>
+        </dd>
+      </dl>
+    </nuxt-link>
+    
   </div>
 </template>
 
@@ -69,14 +94,12 @@ dd{
   float: left;
   color: black;
 }
-.clean{
-  clear: both;
-}
+
 .title{
   margin: 0.05rem;
   padding: 0.1rem;
   height: 0.32rem;
-  background-color: #F5F5F5;;
+  background-color: #F5F5F5;
   font-size: 0.28rem;
   color: darkgray;
 }

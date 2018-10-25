@@ -1,6 +1,6 @@
 .icon {
-    width: 0.35rem;
-    height: 0.35rem;
+    width: 0.4rem;
+    height: 0.4rem;
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
@@ -15,3 +15,15 @@
  h3{
      font-size: 0.35rem;
  }
+
+ .clean{
+    clear: both;
+  }
+
+  /* 文本按钮 */
+  .text-button{
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    background-color: white;
+  }
