@@ -6,7 +6,7 @@
                 <use xlink:href="#icon-close"></use>
             </svg>
         </span>
-        <span class="title">{{name}}游戏圈</span>
+        <span class="title">{{name}}</span>
     </div>
 </template>
 

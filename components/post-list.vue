@@ -66,7 +66,7 @@
   display: flex;
   flex-wrap: wrap;
   background-color: white;
-  margin: 0.1rem auto;
+  margin: 0.04rem auto;
   padding: 0.08rem;
 }
 

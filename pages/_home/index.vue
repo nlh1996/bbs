@@ -15,15 +15,18 @@
                     <li><button>礼包</button></li>
                     <li><button>商城</button></li>
                 </ul>
-
+                
+                <nuxt-link :to='route'>
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-wode1"></use>
                 </svg>
+                </nuxt-link>
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-sousuo"></use>
                 </svg>  
             </div>            
         </div>
+
         <div class="classify bg">
             <ul>
                 <li>
@@ -76,7 +79,8 @@ import postList from '~/components/post-list'
     export default {
         data() {
             return {
-                msg: this.$route.params.home,
+                msg: this.$route.params.home+'游戏圈',
+                route: '/user/123',
             }
         },
         components: {
@@ -134,7 +138,7 @@ ul,li{
 }
 
 .classify li{  
-    margin: 0 0.6rem;
+    margin: 0 0.4rem;
 }
 
 .tag{
@@ -151,7 +155,7 @@ ul li button{
     border-radius: 10%;
     /* -webkit-transition-duration: 0.4s; Safari */
     /* transition-duration: 0.4s; */
-    box-shadow: 0 0.04rem 0.08rem 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 0.04rem 0.08rem 0 rgba(0,0,0,0.2), 0 0.06rem 0.1rem 0 rgba(0,0,0,0.19);
 }
 
 .box:hover{

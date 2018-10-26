@@ -62,7 +62,7 @@
   export default {
     data() {
       return {
-        msg: '微信',
+        msg: '微信游戏圈',
         router: '/王者',
         router2: '/绝地'
       }

@@ -5,11 +5,13 @@
   }
 
   .icon {
-      width: 0.4rem;
-      height: 0.4rem;
-      vertical-align: -0.15em;
-      fill: currentColor;
-      overflow: hidden;
+    margin: 0 0.1rem;
+    width: 0.5rem;
+    height: 0.4rem;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+    color: black;
   }
 
   .view{

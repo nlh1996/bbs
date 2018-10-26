@@ -19,6 +19,7 @@ module.exports = {
     {src: '~/assets/css/common.css'},
     {src: 'vant/lib/vant-css/base.css'},
     {src: 'vant/lib/vant-css/list.css'},
+    {src: 'vant/lib/vant-css/tab.css'}
   ],
   plugins: [{
     src:'~plugins/vant',
