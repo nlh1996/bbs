@@ -82,18 +82,6 @@
 </script>
 
 <style scoped>
-dl{
-  float: left;
-}
-dt{
-  float: left;
-  margin: 0.1rem;
-}
-dd{
-  padding: 0.2rem;
-  float: left;
-  color: black;
-}
 
 .title{
   margin: 0.05rem;

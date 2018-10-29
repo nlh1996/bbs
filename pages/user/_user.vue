@@ -2,7 +2,7 @@
   <div class="view">
     <header-view :name="title"></header-view>
     <div class="user-data">
-      <div class="headimg">               
+      <div class="headImg">               
         <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:0.8rem"/>
       </div>
       <span>萌妹子</span>
@@ -46,10 +46,6 @@ import headerView from '~/components/header'
 .user-data span{
 
 
-}
-
-.headimg img{
-  border-radius: 50%;
 }
 
 .content,.user-data{

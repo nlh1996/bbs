@@ -21,10 +21,12 @@
 
   h2{
     font-size: 0.4rem;
+    color: black;
   }
   h3{
     font-size: 0.35rem;
   }
+  
   p{
     color: gray;
   }
@@ -49,4 +51,22 @@
     width: 0.8rem;
     border-radius: 15%;
     color: white;
+  }
+  
+  /*头像样式*/
+  .headImg img{
+    border-radius: 50%;
+  }
+
+  dl{
+    float: left;
+  }
+  dt{
+    float: left;
+    margin: 0.1rem;
+  }
+  dd{
+    padding: 0.2rem;
+    float: left;
+    color: black;
   }

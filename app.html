@@ -4,24 +4,24 @@
   <head>
     <script src="http://at.alicdn.com/t/font_885059_xvaubngyet.js"></script>
     {{ HEAD }}
-    <script>
-      var deviceWidth = document.documentElement.clientWidth || window.innerWidth || document.body.clientWidth
-      if (deviceWidth >= 750) {
-        deviceWidth = 750
-        document.documentElement.style.fontSize=(deviceWidth / 7.5) + 'px'
-      }
-      if (deviceWidth <= 320) { 
-        deviceWidth=320 
-        document.documentElement.style.fontSize=(deviceWidth / 6) + 'px'
-      } 
-      else{
-        document.documentElement.style.fontSize=(deviceWidth / 7.5) + 'px'
-      }
-      console.log('1rem = '+document.documentElement.style.fontSize)
-    </script>
     
   </head>
   <body {{ BODY_ATTRS }}>
+      <script>
+          var deviceWidth = document.documentElement.clientWidth || window.innerWidth || document.body.clientWidth
+          if (deviceWidth >= 750) {
+            deviceWidth = 750
+            document.documentElement.style.fontSize=(deviceWidth / 7.5) + 'px'
+          }
+          if (deviceWidth <= 320) { 
+            deviceWidth=320 
+            document.documentElement.style.fontSize=(deviceWidth / 7.5) + 'px'
+          } 
+          else{
+            document.documentElement.style.fontSize=(deviceWidth / 7.5) + 'px'
+          }
+          console.log('1rem = '+document.documentElement.style.fontSize)
+      </script>
     {{ APP }}
 
   </body>

@@ -3,6 +3,7 @@
     <van-list v-model="loading" :finished="finished" @load="onLoad">
       <ul v-for="item in list" :key="item" :title="item">
         <li>
+        <nuxt-link :to="route">
           <div class="box">
             <div class="row">
               <div class="tag">攻略</div>
@@ -18,10 +19,11 @@
               <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:1.8rem;height:1.8rem"/>
             </div>
             <div class="row">
-              <span class="item">刚刚</span>
-              <span class="item">赞666</span>
+              <span class="item"><p>刚刚</p></span>
+              <span class="item"><p>赞666</p></span>
             </div>
           </div>
+        </nuxt-link>
         </li>
       </ul>
     </van-list>
@@ -34,7 +36,8 @@
       return {
         list: [],
         loading: false,
-        finished: false
+        finished: false,
+        route: '/post/王者'
       }
     },
     methods: {
@@ -62,6 +65,7 @@
 </script>
 
 <style scoped>
+
 .box {
   display: flex;
   flex-wrap: wrap;

@@ -38,7 +38,8 @@ export default {
                     //此处数据模拟从后端获取，正确处理用response.data替换下面的数据
                     console.log(response.data)
                     commit('USER_LOGIN', { userName: '萌妹子', postsNum: '100', headImg: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58', })
-                    //var storage = window.localStorage
+                    // var storage = window.localStorage
+                    // console.log(storage)
                     //将对象转换为JSON字符串存储
                     // let form = JSON.stringify(this.form)
                     // storage.data = form
@@ -49,6 +50,7 @@ export default {
                     // let jsonObj = JSON.parse(json)
                     // console.log(typeof jsonObj)
                 })
+                  
             commit('SWITCH_LOGIN')
         },
     }
