@@ -59,6 +59,7 @@
 
 <script>
   import headerView from '~/components/header'
+
   export default {
     data() {
       return {
@@ -69,6 +70,7 @@
     }, 
     components: {
       headerView,
+
     },
     computed: {
       form: function() {

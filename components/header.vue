@@ -7,10 +7,16 @@
             </svg>
         </span>
         <span class="title">{{name}}</span>
+        <div class="box">
+        <login></login>
+        <register></register>
+        </div>
     </div>
 </template>
 
 <script>
+  import login from '~/components/login'
+  import register from '~/components/register'
     export default {
         data() {
             return {
@@ -22,15 +28,24 @@
             close() {
                 console.log("11111")
             }
+        },
+        components: {
+          login,
+          register
         }
     }
 </script>
 
 <style scoped>
 .header{
+    width: 7.5rem;
     height: 0.45rem;
     margin: 0.1rem;
     line-height: 0.5rem;
+}
+.box{
+  float: right;
+  margin-right: 0.4rem;
 }
 .close{
     font-size: 0.4rem;
