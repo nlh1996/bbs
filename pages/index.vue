@@ -78,7 +78,7 @@
       }
     },
     mounted() {
-      this.$store.dispatch('login')
+      this.$store.dispatch('load')
     },
   }
 </script>
