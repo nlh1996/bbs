@@ -48,10 +48,6 @@ import headerView from '~/components/header'
   height: 1rem;
   line-height: 1rem;
 }
-.user-data span{
-
-
-}
 
 .content,.user-data{
   padding: 0.1rem;

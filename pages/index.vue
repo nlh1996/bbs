@@ -74,7 +74,7 @@
     },
     computed: {
       form: function() {
-        return this.$store.state.login.userdata || ''
+        return this.$store.state.page.data || ''
       }
     },
     mounted() {

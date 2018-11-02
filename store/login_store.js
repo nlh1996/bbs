@@ -36,7 +36,6 @@ export default {
                 }
             )
                 .then(response => {
-                    //此处数据模拟从后端获取，正确处理用response.data替换下面的数据
                     console.log(response.data)
                     commit('USER_LOGIN', response.data)
                     // var storage = window.localStorage

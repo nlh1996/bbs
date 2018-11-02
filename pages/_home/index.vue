@@ -21,9 +21,12 @@
                     <use xlink:href="#icon-wode1"></use>
                 </svg>
                 </nuxt-link>
+                
+                <nuxt-link to='/'>
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-sousuo"></use>
-                </svg>  
+                </svg>
+                </nuxt-link>  
             </div>            
         </div>
 
@@ -64,11 +67,12 @@
         <div class="list">
           <post-list></post-list>  
         </div>
-
-        <div class="footer bg">
-          <footer-view></footer-view>
-        </div>
         
+        <nuxt-link to="/admin">
+          <div class="footer bg">
+            <footer-view></footer-view>
+          </div>
+        </nuxt-link>
     </div>
 </template>
 
@@ -89,7 +93,7 @@ import postList from '~/components/post-list'
             postList
         },
         mounted() {
-            console.log(this.$route.params.home)
+            //console.log(this.$route.params.home)
         },
 
         // async asyncData ({ params }) {
@@ -128,7 +132,7 @@ import postList from '~/components/post-list'
 }
 
 .right{
-    margin-left: 2.5rem;
+    margin-left: 2.4rem;
 }
 
 ul,li{
