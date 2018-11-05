@@ -1,6 +1,5 @@
 //引入axios
 import axios from 'axios'
-
 /* 这里需要注意，因为是服务器端渲染，我们得时刻明确当前地址是属于路由跳转还是属于
 axios 请求。所以我们需要在 service/index.js 写入以下判断*/
 
@@ -78,20 +77,22 @@ axios.interceptors.response.use(response => {
 axios.defaults.baseURL = '/api'
 axios.defaults.headers = {
     'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': 'application/json; charset=UTF-8'
+    'Content-Type': 'application/json; charset=UTF-8',
 }
 axios.defaults.timeout = 10000
-
-
+// 跨域是否带Token
+axios.defaults.withCredentials = true
 
 export default {
     //get请求
-    get (url,params) {
-      return new Promise((resolve,reject) => {
+    get (url,data) {
+      let storage = window.localStorage
+      return new Promise((resolve) => {
         axios({
           method: 'get',
           url: url,
-          params: params,
+          params: data,
+          headers: {'Authorization': storage.token},
           cancelToken: new CancelToken(c => {
             cancel = c
           })
@@ -103,11 +104,13 @@ export default {
 
     //post请求
     post (url,data) {
-      return new Promise((resolve,reject) => {
+      let storage = window.localStorage
+      return new Promise((resolve) => {
         axios({
           method: 'post',
           url: url,
           data: JSON.stringify(data),//将post请求的数据转化为json对象
+          headers: {'Authorization': storage.token},
           cancelToken: new CancelToken(c => {
             cancel = c
           })

@@ -2,10 +2,10 @@
 <template>
   <div class="view">
 
-    <header-view :name="title"></header-view>
+    <header-view :name="value"></header-view>
 
     <van-cell-group>
-      <van-field v-model="value" placeholder="话题标题(可选)" />
+      <van-field v-model="title" placeholder="话题标题(可选)" />
     </van-cell-group>
 
     <van-cell-group>
@@ -18,7 +18,6 @@
       />
     </van-cell-group>
 
-
     <van-cell-group>
       <van-cell title="上传图片">
         <van-uploader :after-read="upload">
@@ -26,7 +25,8 @@
         </van-uploader>
       </van-cell>
     </van-cell-group>
-    <div class="text">
+    
+    <div class="text" @click="publish">
       发表  
     </div>    
 
@@ -35,11 +35,12 @@
 
 <script>
 import headerView from '~/components/header'
+import axios from '~/http'
   export default {
     data() {
       return {
-        title: "发表话题",
-        value: "",
+        value: "发表话题",
+        title: "",
         message: ""
       }
     },
@@ -49,6 +50,15 @@ import headerView from '~/components/header'
     methods:{
       upload(file) {
         console.log(file)
+      },
+      publish() {
+        axios.GET(
+          '/v1/publish',
+          {
+            title: this.title,
+            message: this.message,
+          }
+        )
       }
     }
   }

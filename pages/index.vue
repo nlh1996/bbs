@@ -79,6 +79,8 @@
     },
     mounted() {
       this.$store.dispatch('load')
+      var storage = window.localStorage
+      console.log(storage.token)
     },
   }
 </script>

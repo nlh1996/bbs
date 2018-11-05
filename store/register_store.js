@@ -1,18 +1,13 @@
 import axios from '../http'
 export default {
     state:{
-        show: false,
         userdata: {}
     },
     mutations:{
-        SWITCH_REGISTER(state){//这里的state对应着上面这个state
-            state.show = state.show?false:true;
-            //你还可以在这里执行其他的操作改变state
-        },
+
         //初始化登录用户数据
         USER_REGISTER(state, arg) {
           state.userdata = arg
-          console.log(state.userdata)
       },    
     },
     //监听分发事件，可用于处理多个监听事件，方法名与分发名相同
@@ -41,8 +36,6 @@ export default {
                   // let jsonObj = JSON.parse(json)
                   // console.log(typeof jsonObj)
               })
-                
-          commit('SWITCH_LOGIN')
       },
   }
 }

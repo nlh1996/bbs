@@ -7,9 +7,12 @@
             </svg>
         </span>
         <span class="title">{{name}}</span>
-        <div class="box">
-        <login></login>
-        <register></register>
+        <div class="box" v-if="!$store.state.login.isLoad">
+          <login></login>
+          <register></register>
+        </div>
+        <div class="box" v-else>
+          1111111111
         </div>
     </div>
 </template>
