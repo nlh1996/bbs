@@ -52,13 +52,16 @@ import axios from '~/http'
         console.log(file)
       },
       publish() {
-        axios.GET(
-          '/v1/publish',
+        axios.get(
+          '/v2/publish',
           {
             title: this.title,
             message: this.message,
-          }
-        )
+          }).then(response => {
+              console.log(response)
+            }           
+          )
+        
       }
     }
   }
