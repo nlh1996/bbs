@@ -40,7 +40,7 @@
     border: 0;
     outline: none;
     cursor: pointer;
-    background-color: white;
+    background: none;
   }
 
   /* 通用标签 */

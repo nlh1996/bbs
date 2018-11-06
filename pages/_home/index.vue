@@ -16,6 +16,7 @@
                     <li><button>商城</button></li>
                 </ul>
                 
+                
                 <nuxt-link :to='route'>
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-wode1"></use>
@@ -26,6 +27,7 @@
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-sousuo"></use>
                 </svg>
+
                 </nuxt-link>  
             </div>            
         </div>
@@ -135,10 +137,14 @@ import postList from '~/components/post-list'
     margin-left: 2.4rem;
 }
 
+.right svg{
+  margin-left: 0.2rem;
+}
+
 ul,li{
     display: inline-block;
     list-style: none;
-    margin-left: 0.2rem;
+    margin-left: 0.15rem;
 }
 
 .classify li{  
@@ -161,7 +167,9 @@ ul li button{
     /* transition-duration: 0.4s; */
     box-shadow: 0 0.04rem 0.08rem 0 rgba(0,0,0,0.2), 0 0.06rem 0.1rem 0 rgba(0,0,0,0.19);
 }
-
+.box{
+  padding-right: 0.1rem;
+}
 .box:hover{
     cursor: pointer;
     background-color:darkorange;

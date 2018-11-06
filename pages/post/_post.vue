@@ -27,15 +27,24 @@
       </div>
       <div class="row">
         <span class="item"><p>26分钟前</p></span>
-        <span class="item"><p>3回复</p></span>
+        <span class="item"><p>3阅读 1回复</p></span>
       </div>
     </div>
 
+    <div class="list">
+      <reply-list></reply-list>
+    </div>
+
+    <div class="footer">
+      <reply-footer></reply-footer>
+    </div>
   </div>
 </template>
 
 <script>
 import headerView from '~/components/header'
+import replyList from '~/components/reply-list'
+import replyFooter from '~/components/reply-footer'
   export default {
     data() {
       return {
@@ -45,6 +54,8 @@ import headerView from '~/components/header'
     },
     components:{
       headerView,
+      replyList,
+      replyFooter
     },
     mounted() {
       console.log(this.$route.params.post)
@@ -70,5 +81,17 @@ import headerView from '~/components/header'
 
 .row:nth-child(5){
   justify-content: space-between;
+}
+
+.list{
+  margin-top: 0.06rem;
+  padding-bottom: 0.7rem;
+}
+
+/* 底部吸底效果 */
+.footer{
+    margin-bottom: 0;
+    position: fixed;
+    bottom: 0;
 }
 </style>

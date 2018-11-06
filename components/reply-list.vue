@@ -1,30 +1,26 @@
-//贴子列表组件
+//回复列表
 <template>
-  <div class="post-list">
+  <div class="reply-list">
+    <div class="head-text">全部回复</div>
     <van-list v-model="loading" :finished="finished" @load="onLoad">
       <ul v-for="item in list" :key="item" :title="item">
         <li>
-        <nuxt-link :to="route">
           <div class="box">
+
             <div class="row">
-              <div class="tag">攻略</div>
-              <h2>王者荣耀</h2>
-              <br/>
+              我是开发
             </div>
+
             <div class="row">
-              <p>王者荣耀23号更新版本</p>
+              你有什么问题
             </div>
+
             <div class="row">
-              <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:1.8rem;height:1.8rem"/>
-              <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:1.8rem;height:1.8rem"/>
-              <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:1.8rem;height:1.8rem"/>
+              <span class="item"><p>2分钟前</p></span>
+              <span class="item"><p>回复</p></span>
             </div>
-            <div class="row">
-              <span class="item"><p>刚刚</p></span>
-              <span class="item"><p>赞666</p></span>
-            </div>
+
           </div>
-        </nuxt-link>
         </li>
       </ul>
     </van-list>
@@ -38,7 +34,6 @@
         list: [],
         loading: false,
         finished: false,
-        route: '/post/王者'
       }
     },
     methods: {
@@ -56,9 +51,9 @@
           }
 
           // 数据全部加载完成
-          if (this.list.length >= 30) {
+          if (this.list.length >= 5) {
             this.finished = true;
-            }
+          }
         }, 50);
       }            
     }
@@ -75,8 +70,11 @@
   padding: 0.08rem;
 }
 
-.tag{
-  background-color: chartreuse;
+.head-text{
+  height: 0.8rem;
+  line-height: 0.8rem;
+  background: white;
+  padding-left: 0.2rem;
 }
 
 .row{
@@ -84,7 +82,7 @@
   display:flex;
 }
 
-.row:nth-child(4){
+.row:nth-child(3){
   justify-content: space-between;
 }
 </style>

@@ -10,7 +10,7 @@
 
     <van-cell-group>
       <van-field
-        v-model="message"
+        v-model="content"
         type="textarea"
         placeholder="话题内容,至少五个字"
         rows="10"
@@ -41,7 +41,7 @@ import axios from '~/http'
       return {
         value: "发表话题",
         title: "",
-        message: ""
+        content: ""
       }
     },
     components: {
@@ -52,11 +52,11 @@ import axios from '~/http'
         console.log(file)
       },
       publish() {
-        axios.get(
+        axios.post(
           '/v2/publish',
           {
             title: this.title,
-            message: this.message,
+            content: this.content,
           }).then(response => {
               console.log(response)
             }           
