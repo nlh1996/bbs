@@ -16,7 +16,6 @@
                     <li><button>商城</button></li>
                 </ul>
                 
-                
                 <nuxt-link :to='route'>
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-wode1"></use>
