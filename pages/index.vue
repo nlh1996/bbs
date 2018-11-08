@@ -59,13 +59,13 @@
 
 <script>
   import headerView from '~/components/header'
-
+  import axios from '~/http/'
   export default {
     data() {
       return {
         msg: '微信游戏圈',
         router: '/王者',
-        router2: '/绝地'
+        router2: '/绝地',
       }
     }, 
     components: {
@@ -77,11 +77,12 @@
         return this.$store.state.page.data || ''
       }
     },
-    mounted() {
-      this.$store.dispatch('load')
-      var storage = window.localStorage
-      console.log(storage.token)
+
+    async asyncData(context){
+      context.store.dispatch('load')
+
     },
+
   }
 </script>
 

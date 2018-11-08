@@ -86,13 +86,11 @@ axios.defaults.withCredentials = true
 export default {
     //get请求
     get (url,data) {
-      let storage = window.localStorage
       return new Promise((resolve) => {
         axios({
           method: 'get',
           url: url,
           params: data,
-          headers: {'Authorization': storage.token},
           cancelToken: new CancelToken(c => {
             cancel = c
           })
@@ -118,5 +116,5 @@ export default {
           resolve(res)
         })
       })
-     }
+    }
   }

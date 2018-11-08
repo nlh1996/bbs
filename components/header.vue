@@ -12,7 +12,7 @@
           <register></register>
         </div>
         <div class="box" v-else>
-          1111111111
+          {{$store.state.login.userdata.user}}
         </div>
     </div>
 </template>
@@ -58,8 +58,6 @@
     font-size:  0.35rem;
     font-weight: bold;
 }
-.clink:active{
 
-}
 
 </style>

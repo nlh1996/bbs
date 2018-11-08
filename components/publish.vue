@@ -12,14 +12,18 @@
         v-model="content"
         type="textarea"
         placeholder="话题内容,至少五个字"
-        rows="10"
+        rows="9"
         autosize
+        style="line-height:0.4rem"
       />
     </van-cell-group>
 
     <van-cell-group>
       <van-cell title="上传图片">
-        <van-uploader :after-read="uploadImg">
+        <van-uploader :after-read="uploadImg" 
+          accept="image/gif, image/jpeg ,image/png"
+          :max-size=5000000
+          @oversize="overSize" >          
           <van-icon name="photograph"/>
         </van-uploader>
       </van-cell>
@@ -63,6 +67,10 @@ import axios from '~/http'
       delImg(index){
         this.imgBase64.splice(index,1);
       },
+      //图片上传尺寸大于限制时触发
+      overSize(){
+        alert("图片大小超出上传限制啦！")
+      },
 
       publish() {
         axios.post(
@@ -73,7 +81,11 @@ import axios from '~/http'
             imgList: this.imgBase64
           })
           .then( response => {
-              console.log(response)
+              console.log(this.imgBase64.length)
+              if(response.status == 200) {
+                this.imgBase64 = []
+                console.log(this.imgBase64)
+              }
             }           
           )
       }
@@ -82,6 +94,7 @@ import axios from '~/http'
 </script>
 
 <style scoped>
+
 .item {
   position:relative;
   float:left;
@@ -91,8 +104,8 @@ import axios from '~/http'
 }
 .item .cancel-btn {
   position:absolute;
-  right:0;
-  top:0;
+  right:0.03rem;
+  top:0.03rem;
   display:block;
   width:0.3rem;
   height:0.3rem;

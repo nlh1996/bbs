@@ -19,9 +19,9 @@ export default {
 
     //监听分发事件，可用于处理多个监听事件，方法名与分发名相同
     actions: {
-        load({ commit }) {
-            axios.get(
-                '/v1/',
+        async load({ commit }) {
+            await axios.get(
+                '/v1/index',
                 {
 
                 }

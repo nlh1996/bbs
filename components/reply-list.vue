@@ -61,7 +61,6 @@
 </script>
 
 <style scoped>
-
 .box {
   display: flex;
   flex-wrap: wrap;
