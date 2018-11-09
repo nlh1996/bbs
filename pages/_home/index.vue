@@ -16,7 +16,7 @@
                     <li><button>商城</button></li>
                 </ul>
                 
-                <nuxt-link :to='route'>
+                <nuxt-link :to='user_route'>
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-wode1"></use>
                 </svg>
@@ -69,7 +69,7 @@
           <post-list></post-list>  
         </div>
         
-        <nuxt-link to="/admin">
+        <nuxt-link :to="publish_route">
           <div class="footer bg">
             <footer-view></footer-view>
           </div>
@@ -85,7 +85,8 @@ import postList from '~/components/post-list'
         data() {
             return {
                 msg: this.$route.params.home+'游戏圈',
-                route: '/user/123',
+                user_route: '/user/123',
+                publish_route: '/'+this.$route.params.home+'/publish'
             }
         },
         components: {

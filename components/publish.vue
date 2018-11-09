@@ -22,7 +22,7 @@
       <van-cell title="上传图片">
         <van-uploader :after-read="uploadImg" 
           accept="image/gif, image/jpeg ,image/png"
-          :max-size=5000000
+          :max-size=6000000
           @oversize="overSize" >          
           <van-icon name="photograph"/>
         </van-uploader>
@@ -37,8 +37,10 @@
     </div>
 
     <div class="publish-btn" @click="publish">
-      发表  
+      <div v-show="show">发表</div>
+      <div class="loading" v-show="!show"><van-loading color="green" /></div>
     </div>    
+    
   </div>
 </template>
 
@@ -51,7 +53,8 @@ import axios from '~/http'
         value: "发表话题",
         title: "",
         content: "",
-        imgBase64: []
+        imgBase64: [],
+        show: true
       }
     },
     components: {
@@ -73,6 +76,7 @@ import axios from '~/http'
       },
 
       publish() {
+        this.show = false
         axios.post(
           '/v2/publish',
           {
@@ -81,10 +85,10 @@ import axios from '~/http'
             imgList: this.imgBase64
           })
           .then( response => {
-              console.log(this.imgBase64.length)
+              this.show = true
               if(response.status == 200) {
                 this.imgBase64 = []
-                console.log(this.imgBase64)
+                history.go('-1')
               }
             }           
           )
@@ -138,8 +142,15 @@ import axios from '~/http'
   background-color: white;
   cursor: pointer;
 }
+
 .publish-btn:active {
   box-shadow: 0 1px white;
   transform: translateY(3px);
 }
+
+.loading{
+  margin-top: 0.1rem;
+  margin-left: 3.5rem;
+}
+
 </style>
