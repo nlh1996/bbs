@@ -75,18 +75,15 @@ axios.interceptors.response.use(response => {
 
 //抽离get,post公共配置
 
-axios.defaults.baseURL = 'api'
-//当axios在服务端运行时获取不到配置的api,需要重新配置默认请求地址，此时客户端无法解决跨域需要服务端解决跨域问题
-if (axios.defaults.baseURL === "api") {
-  axios.defaults.baseURL = 'http://localhost:8000'
-}
+axios.defaults.baseURL = 'http://192.168.1.11:8000'
  
 axios.defaults.headers = {
     'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': 'application/json; charset=UTF-8',
 }
 axios.defaults.timeout = 10000
-// 跨域是否带Token
+
+// 跨域是否带cookie
 axios.defaults.withCredentials = true
 
 export default {

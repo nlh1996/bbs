@@ -59,22 +59,6 @@ module.exports = {
       target: 'http://localhost:8000',
       pathRewrite: { '^/api': '' }
     },
-    '/japi': {
-      target: 'https://gold-tag-ms.juejin.im',
-      pathRewrite: { '^/japi': '' }
-    },
-    '/rapi': {
-      target: 'https://recommender-api-ms.juejin.im',
-      pathRewrite: { '^/rapi': '' }
-    },
-    '/tapi': {
-      target: 'https://timeline-merger-ms.juejin.im',
-      pathRewrite: { '^/tapi': '' }
-    },
-    '/xapi': {
-      target: 'https://xiaoce-timeline-api-ms.juejin.im',
-      pathRewrite: { '^/xapi': '' }
-    }
   },
 }
 

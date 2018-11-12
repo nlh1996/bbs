@@ -66,7 +66,7 @@ export default {
       msg: "微信游戏圈",
       router: "/王者",
       router2: "/绝地"
-    };
+    }
   },
   components: {
     headerView
@@ -76,7 +76,7 @@ export default {
     let {data} = await axios.get('/v1/index')
     return {form: data.data}
   }
-};
+}
 </script>
 
 <style scoped>
