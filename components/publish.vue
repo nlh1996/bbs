@@ -80,6 +80,7 @@ import axios from '~/http'
         axios.post(
           '/v2/publish',
           {
+            uid: this.$store.state.login.userdata.user,
             title: this.title,
             content: this.content,
             imgList: this.imgBase64

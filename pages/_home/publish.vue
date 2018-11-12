@@ -14,7 +14,8 @@ import publish from '~/components/publish'
     },
     components: {
       publish,
-    }
+    },
+    transition: 'test'
   }
 </script>
 
