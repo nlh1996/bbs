@@ -15,7 +15,7 @@
               <p>王者荣耀23号更新版本</p>
             </div>
             <div class="row">
-              <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:1.8rem;height:1.8rem"/>
+              <img src="http://115.159.77.155:12000/img/201811131010400.jpg" style="width:1.8rem;height:1.8rem"/>
               <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:1.8rem;height:1.8rem"/>
               <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:1.8rem;height:1.8rem"/>
             </div>
@@ -58,7 +58,7 @@
           // 数据全部加载完成
           if (this.list.length >= 30) {
             this.finished = true;
-            }
+          }
         }, 50);
       }            
     }

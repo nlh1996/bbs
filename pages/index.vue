@@ -75,7 +75,10 @@ export default {
   async asyncData() {
     let {data} = await axios.get('/v1/index')
     return {form: data.data}
-  }
+  },
+  beforeMount() {
+    this.$store.dispatch("isLoad")
+  },
 }
 </script>
 

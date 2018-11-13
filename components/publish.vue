@@ -4,7 +4,7 @@
     <header-view :name="value"></header-view>
 
     <van-cell-group>
-      <van-field v-model="title" placeholder="话题标题(可选)" />
+      <van-field v-model="title" placeholder="话题标题" />
     </van-cell-group>
 
     <van-cell-group>
@@ -63,7 +63,11 @@ import axios from '~/http'
     methods:{
       //添加图片，自动base64编码
       uploadImg(file) {
-        this.imgBase64.push(file.content)
+        if(this.imgBase64.length < 6) {
+          this.imgBase64.push(file.content)
+        }else{
+          alert("最多上传6张图片")
+        }
       },
 
       //删除图片

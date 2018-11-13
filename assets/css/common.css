@@ -6,7 +6,7 @@
 
   /* 路由动画 */
   .test-enter-active, .test-leave-active{
-    transition: opacity 0.5s;
+    transition: opacity 0.3s;
   }
   .test-enter, .test-leave-active{
     opacity: 0;

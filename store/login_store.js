@@ -35,7 +35,7 @@ export default {
               }
           )
               .then(response => {
-                if(response.data.status_code == 200) {
+                if(response.status == 200) {
                   commit('USER_LOGIN', response.data.data)
                   var storage = window.localStorage
                   // console.log(storage)

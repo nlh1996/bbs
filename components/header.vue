@@ -12,7 +12,9 @@
       <register></register>
     </div>
     <div class="box" v-else>
-      {{$store.state.login.userdata.user}}
+      <span>{{$store.state.login.userdata.user}}</span>
+      <span>头衔：{{$store.state.login.userdata.exp}}</span>
+      <span>积分：{{$store.state.login.userdata.jifen}}</span>
     </div>
   </div>
 </template>
