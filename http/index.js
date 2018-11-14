@@ -1,7 +1,5 @@
 //引入axios
 import axios from 'axios'
-/* 这里需要注意，因为是服务器端渲染，我们得时刻明确当前地址是属于路由跳转还是属于
-axios 请求。所以我们需要在 service/index.js 写入以下判断*/
 
 //重复请求取消
 let cancel ,promiseArr = {}

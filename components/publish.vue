@@ -1,7 +1,14 @@
 //发帖组件
 <template>
   <div class="view">
-    <header-view :name="value"></header-view>
+    <div class="header">
+      <span @click="close" class="clink">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-close"></use>
+        </svg>
+      </span>
+      <span class="title">发表话题</span>
+    </div>
 
     <van-cell-group>
       <van-field v-model="title" placeholder="话题标题" />
@@ -45,7 +52,6 @@
 </template>
 
 <script>
-import headerView from '~/components/header'
 import axios from '~/http'
   export default {
     data() {
@@ -57,10 +63,11 @@ import axios from '~/http'
         show: true
       }
     },
-    components: {
-      headerView,
-    },
+
     methods:{
+      close() {
+        history.go('-1')
+      },
       //添加图片，自动base64编码
       uploadImg(file) {
         if(this.imgBase64.length < 6) {
@@ -81,14 +88,20 @@ import axios from '~/http'
 
       publish() {
         this.show = false
-        axios.post(
-          '/v2/publish',
-          {
-            uid: this.$store.state.login.userdata.user,
-            title: this.title,
-            content: this.content,
-            imgList: this.imgBase64
-          })
+        if(this.title == ''&& this.content == ''){
+          this.show = true
+          alert("标题和内容不能为空")
+        }
+        else{
+          axios.post(
+            '/v2/publish',
+            {
+              uid: this.$store.state.login.userdata.user,
+              title: this.title,
+              content: this.content,
+              imgList: this.imgBase64
+            }
+          )
           .then( response => {
               this.show = true
               if(response.status == 200) {
@@ -97,13 +110,13 @@ import axios from '~/http'
               }
             }           
           )
+        }
       }
     }
   }
 </script>
 
 <style scoped>
-
 .item {
   position:relative;
   float:left;
@@ -158,4 +171,18 @@ import axios from '~/http'
   margin-left: 3.5rem;
 }
 
+.header{
+  width: 7.4rem;
+  height: 0.45rem;
+  margin: 0.1rem;
+  line-height: 0.5rem;
+}
+.close{
+  font-size: 0.4rem;
+}
+.title{
+  margin-left: 0.1rem;
+  font-size:  0.35rem;
+  font-weight: bold;
+}
 </style>

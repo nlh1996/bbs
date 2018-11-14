@@ -7,6 +7,7 @@
       </svg>
     </span>
     <span class="title">{{name}}</span>
+    
     <div class="box" v-if="!$store.state.login.isLoad">
       <login></login>
       <register></register>
@@ -43,7 +44,7 @@ import register from '~/components/register'
 
 <style scoped>
 .header{
-  width: 7.5rem;
+  width: 7.4rem;
   height: 0.45rem;
   margin: 0.1rem;
   line-height: 0.5rem;

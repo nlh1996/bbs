@@ -39,6 +39,9 @@ import headerView from '~/components/header'
         return this.$store.state.login.userdata || ''
       }
     },
+    beforeMount() {
+      this.$store.dispatch("isLoad")
+    },
   }
 </script>
 

@@ -4,7 +4,7 @@
   <head>
     <script src="http://at.alicdn.com/t/font_885059_xvaubngyet.js"></script>
     {{ HEAD }}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   </head>
   <body {{ BODY_ATTRS }}>
       <script>
@@ -13,10 +13,6 @@
             deviceWidth = 750
             document.documentElement.style.fontSize=(deviceWidth / 7.5) + 'px'
           }
-          if (deviceWidth <= 320) { 
-            deviceWidth=320 
-            document.documentElement.style.fontSize=(deviceWidth / 7.5) + 'px'
-          } 
           else{
             document.documentElement.style.fontSize=(deviceWidth / 7.5) + 'px'
           }
