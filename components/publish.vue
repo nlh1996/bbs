@@ -151,7 +151,7 @@ import axios from '~/http'
   clear: both;
   position:relative;
   float:left;
-  width: 7.5rem;
+  width: 7.4rem;
   font-size: 0.4rem;
   color:limegreen;
   text-align: center;

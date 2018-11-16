@@ -67,13 +67,14 @@ axios.interceptors.response.use(response => {
       err.message = "连接到服务器失败"
     }
     //alert(err.message)
-    console.log(err.message)
+    alert(err.message)
     return Promise.resolve(err.response)
 })
 
 //抽离get,post公共配置
 
-axios.defaults.baseURL = 'http://192.168.1.11:8000'
+//axios.defaults.baseURL = 'http://192.168.1.11:8000'
+axios.defaults.baseURL = 'http://115.159.77.155:11400'
  
 axios.defaults.headers = {
     'X-Requested-With': 'XMLHttpRequest',
@@ -85,37 +86,37 @@ axios.defaults.timeout = 10000
 axios.defaults.withCredentials = true
 
 export default {
-    //get请求
-    get (url,data) {
-      return new Promise((resolve) => {
-        axios({
-          method: 'get',
-          url: url,
-          params: data,
-          cancelToken: new CancelToken(c => {
-            cancel = c
-          })
-        }).then(res => {
-          resolve(res)
+  //get请求
+  get(url, data) {
+    return new Promise((resolve) => {
+      axios({
+        method: 'get',
+        url: url,
+        params: data,
+        cancelToken: new CancelToken(c => {
+          cancel = c
         })
+      }).then(res => {
+        resolve(res)
       })
-    },
+    })
+  },
 
-    //post请求
-    post (url,data) {
-      let storage = window.localStorage
-      return new Promise((resolve) => {
-        axios({
-          method: 'post',
-          url: url,
-          data: JSON.stringify(data),//将post请求的数据转化为json对象
-          headers: {'Authorization': storage.token},
-          cancelToken: new CancelToken(c => {
-            cancel = c
-          })
-        }).then(res => {
-          resolve(res)
+  //post请求
+  post(url, data) {
+    let storage = window.localStorage
+    return new Promise((resolve) => {
+      axios({
+        method: 'post',
+        url: url,
+        data: JSON.stringify(data),//将post请求的数据转化为json对象
+        headers: { 'Authorization': storage.token },
+        cancelToken: new CancelToken(c => {
+          cancel = c
         })
+      }).then(res => {
+        resolve(res)
       })
-    }
+    })
   }
+}

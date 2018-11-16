@@ -23,28 +23,27 @@
 
     <div class="list">
     <van-list v-model="loading" :finished="finished" @load="onLoad">
-      <ul v-for="item in list" :key="item" :title="item">
+      <ul v-for="(item,index) in list" :key="index" :title="item">
         <li>
-        <nuxt-link :to="route">
           <div class="box">
+            <nuxt-link :to="route">
             <div class="row">
               <div class="tag">攻略</div>
-              <h2>王者荣耀</h2>
+              <h2>{{item.title}}</h2>
             </div>
             <div class="row">
-              <p>王者荣耀23号更新版本</p>
+              <p>{{item.content}}</p>
             </div>
-            <div class="row">
-              <img src="http://115.159.77.155:12000/img/201811131010400.jpg" style="width:1.8rem;height:1.8rem"/>
-              <img src="http://115.159.77.155:12000/img/201811131010400.jpg" style="width:1.8rem;height:1.8rem"/>
-              <img src="http://115.159.77.155:12000/img/201811131010400.jpg" style="width:1.8rem;height:1.8rem"/>
+            <div class="row" v-for="(imgSrc,index) in item.imgList" :key="index">
+              <img src=imgSrc style="width:1.8rem;height:1.8rem"/>
             </div>
+            </nuxt-link>
             <div class="row">
-              <span class="item"><p>刚刚</p></span>
-              <span class="item"><p>赞666</p></span>
+              <span class="item"><p>{{item.uid}}</p></span>
+              <span class="item"><p>{{item.currenttime}}</p></span>
+              <span class="item"><p>赞{{item.support}}</p></span>
             </div>
           </div>
-        </nuxt-link>
         </li>
       </ul>
     </van-list>
@@ -73,10 +72,11 @@ import axios from '~/http/'
         ],
         msg: this.$route.params.home+'游戏圈',
         publish_route: '/'+this.$route.params.home+'/publish',
-        list: [],
         loading: false,
         finished: false,
         route: '/post/王者',
+        list: [],
+        index: 0
       }
     },
     components: {
@@ -86,9 +86,11 @@ import axios from '~/http/'
     },
     async asyncData ({ params }) {
       let { data } = await axios.get('/v1/posts')
-      return { data: data.posts[0] }
+      return { posts: data.posts }
     },
-    beforeMount() {
+    mounted() {
+      console.log(this.posts)
+      this.posts = this.posts.reverse()
       this.$store.dispatch("isLoad")
     },
     methods: {
@@ -96,7 +98,12 @@ import axios from '~/http/'
         // 异步更新数据
         setTimeout(() => {
           for (let i = 0; i < 5; i++) {
-            this.list.push(this.list.length + 1);
+            i
+            let obj = this.posts[this.index]
+            if(obj){
+              this.list.push(obj)
+            }
+            this.index++ 
           }
           // 加载状态结束
           this.loading = false;
@@ -106,11 +113,14 @@ import axios from '~/http/'
           }
 
           // 数据全部加载完成
-          if (this.list.length >= 30) {
+          if (this.index >= this.posts.length) {
             this.finished = true;
           }
         }, 50);
       }  
+    },
+    scrollBehavior (to, from, savedPosition) {
+      return { x: 0 , y: 0 }
     }
 
   }
@@ -161,7 +171,8 @@ import axios from '~/http/'
   flex-basis: 100%;
   flex-wrap: wrap; /*元素换行 */
   background-color: white;
-  padding: 0.08rem;
+  padding: 0.14rem;
+  padding-bottom: 0;
 }
 
 .list li{
@@ -170,7 +181,7 @@ import axios from '~/http/'
 }
 
 .row .tag{
-  margin: 0.04rem;
+  margin: 0.02rem;
   background-color: chartreuse;
 }
 
@@ -183,7 +194,7 @@ import axios from '~/http/'
   margin-left: 0.05rem;
 }
 
-.row:nth-child(4){
+.row:nth-child(2){
   justify-content: space-between;
 }
 </style>
