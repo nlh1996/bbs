@@ -1,29 +1,26 @@
 //动态路由，贴子详情
 <template>
   <div class="view">
-    <header-view :name="msg"></header-view>
     <div class="box">
       <div class="row">
         <dl>
           <dt><div class="headImg"><img :src="headImg" style="width:1rem"></div></dt>
           <dd>     
             <div class="text">
-              <h3>月夜小曲</h3>
+              <h3>{{post.topStorey.uid}}</h3>
               <p></p>
             </div>
           </dd>
         </dl>
       </div>
       <div class="row">
-        <h2>游戏闪退</h2>
+        <h2>{{post.topStorey.title}}</h2>
       </div>
       <div class="row">
-        <p>游戏突然闪退</p>
+        <p>{{post.topStorey.content}}</p>
       </div>
-      <div class="row">
-        <img :src="headImg" style="width:1.8rem;height:1.8rem"/>
-        <img :src="headImg" style="width:1.8rem;height:1.8rem"/>
-        <img :src="headImg" style="width:1.8rem;height:1.8rem"/>
+      <div class="row-img" v-for="(imgSrc,index) in post.topStorey.imgList" :key="index">
+        <img :src=imgSrc style="width:1.8rem;height:1.8rem;"/>
       </div>
       <div class="row">
         <span class="item"><p>26分钟前</p></span>
@@ -45,11 +42,11 @@
 import headerView from '~/components/header'
 import replyList from '~/components/reply-list'
 import replyFooter from '~/components/reply-footer'
+import axios from '~/http/'
   export default {
     data() {
       return {
-        msg: this.$route.params.post+'游戏圈',
-        headImg: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58'
+        headImg: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58',
       }
     },
     components:{
@@ -57,9 +54,11 @@ import replyFooter from '~/components/reply-footer'
       replyList,
       replyFooter
     },
-    mounted() {
-      console.log(this.$route.params.post)
-    },    
+    
+    async asyncData ({ params }) {
+      let { data } = await axios.get('/v1/post', {tid: params.post})
+      return { post: data.post }
+    },
   }
 </script>
 

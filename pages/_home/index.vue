@@ -9,7 +9,7 @@
         <li>
           <div class="icon-box">
             <svg class="icon" aria-hidden="true">
-                <use :xlink:href=item.name></use>
+              <use :xlink:href=item.name></use>
             </svg>
             {{item.msg}}
           </div>
@@ -25,8 +25,8 @@
     <van-list v-model="loading" :finished="finished" @load="onLoad">
       <ul v-for="(item,index) in list" :key="index" :title="item">
         <li>
+          <nuxt-link :to="'/post/'+item.tid">
           <div class="box">
-            <nuxt-link :to="route">
             <div class="row">
               <div class="tag">攻略</div>
               <h2>{{item.title}}</h2>
@@ -34,16 +34,16 @@
             <div class="row">
               <p>{{item.content}}</p>
             </div>
-            <div class="img-show" v-for="(imgSrc,index) in item.imgList" :key="index">
+            <div class="row-img" v-for="(imgSrc,index) in item.imgList" :key="index">
               <img :src=imgSrc style="width:1.8rem;height:1.8rem;"/>
             </div>
-            </nuxt-link>
-            <div class="row">
+            <div class="row row-bottom">
               <span class="item"><p>{{item.uid}}</p></span>
               <span class="item"><p>{{item.createTime}}</p></span>
               <span class="item"><p>赞{{item.support}}</p></span>
             </div>
           </div>
+          </nuxt-link>
         </li>
       </ul>
     </van-list>
@@ -74,11 +74,11 @@ import axios from '~/http/'
         publish_route: '/'+this.$route.params.home+'/publish',
         loading: false,
         finished: false,
-        route: '/post/王者',
         list: [],
         index: 0
       }
     },
+    props: ["tid"],
     components: {
       headerView,
       footerView,
@@ -121,7 +121,7 @@ import axios from '~/http/'
     },
     scrollBehavior (to, from, savedPosition) {
       return { x: 0 , y: 0 }
-    }
+    },
 
   }
     
@@ -166,7 +166,7 @@ import axios from '~/http/'
   bottom: 0;
 }
 
-.box {
+.box{
   display: flex;
   flex-basis: 100%;
   flex-wrap: wrap; /*元素换行 */
@@ -190,12 +190,12 @@ import axios from '~/http/'
   display:flex;
 }
 
-.img-show {
+.row-img{
   float: left;
   margin-right: 0.1rem;
 }
 
-.row:nth-child(2){
+.row-bottom{
   justify-content: space-between;
 }
 </style>
