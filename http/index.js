@@ -73,8 +73,8 @@ axios.interceptors.response.use(response => {
 
 //抽离get,post公共配置
 
-//axios.defaults.baseURL = 'http://192.168.1.11:8000'
-axios.defaults.baseURL = 'http://115.159.77.155:11400'
+axios.defaults.baseURL = 'http://192.168.1.11:8000'
+//axios.defaults.baseURL = 'http://115.159.77.155:11400'
  
 axios.defaults.headers = {
     'X-Requested-With': 'XMLHttpRequest',

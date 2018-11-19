@@ -34,13 +34,13 @@
             <div class="row">
               <p>{{item.content}}</p>
             </div>
-            <div class="row" v-for="(imgSrc,index) in item.imgList" :key="index">
-              <img src=imgSrc style="width:1.8rem;height:1.8rem"/>
+            <div class="img-show" v-for="(imgSrc,index) in item.imgList" :key="index">
+              <img :src=imgSrc style="width:1.8rem;height:1.8rem;"/>
             </div>
             </nuxt-link>
             <div class="row">
               <span class="item"><p>{{item.uid}}</p></span>
-              <span class="item"><p>{{item.currenttime}}</p></span>
+              <span class="item"><p>{{item.createTime}}</p></span>
               <span class="item"><p>赞{{item.support}}</p></span>
             </div>
           </div>
@@ -190,8 +190,9 @@ import axios from '~/http/'
   display:flex;
 }
 
-.row img{
-  margin-left: 0.05rem;
+.img-show {
+  float: left;
+  margin-right: 0.1rem;
 }
 
 .row:nth-child(2){
