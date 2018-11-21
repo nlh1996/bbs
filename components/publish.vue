@@ -64,7 +64,7 @@ import axios from '~/http'
       }
     },
 
-    methods:{
+    methods: {
       close() {
         history.go('-1')
       },
@@ -96,7 +96,7 @@ import axios from '~/http'
           axios.post(
             '/v2/publish',
             {
-              uid: this.$store.state.login.userdata.user,
+              uName: this.$store.state.login.userdata.user,
               title: this.title,
               content: this.content,
               imgList: this.imgBase64

@@ -7,7 +7,7 @@
           <dt><div class="headImg"><img :src="headImg" style="width:1rem"></div></dt>
           <dd>     
             <div class="text">
-              <h3>{{post.topStorey.uid}}</h3>
+              <h3>{{post.topStorey.uName}}</h3>
               <p></p>
             </div>
           </dd>
@@ -22,9 +22,9 @@
       <div class="row-img" v-for="(imgSrc,index) in post.topStorey.imgList" :key="index">
         <img :src=imgSrc style="width:1.8rem;height:1.8rem;"/>
       </div>
-      <div class="row">
-        <span class="item"><p>26分钟前</p></span>
-        <span class="item"><p>3阅读 1回复</p></span>
+      <div class="row row-bottom">
+        <span class="item"><p>{{post.topStorey.createTime}}</p></span>
+        <span class="item"><p>{{post.replyNum}}评论</p></span>
       </div>
     </div>
 
@@ -59,12 +59,13 @@ import axios from '~/http/'
       let { data } = await axios.get('/v1/post', {tid: params.post})
       return { post: data.post }
     },
+    mounted() {
+      this.$store.commit("POST_SAVE",this.post)
+    },
   }
 </script>
 
 <style scoped>
-
-
 .box {
   display: flex;
   flex-wrap: wrap;
@@ -78,7 +79,7 @@ import axios from '~/http/'
   display:flex;
 }
 
-.row:nth-child(5){
+.row-bottom{
   justify-content: space-between;
 }
 

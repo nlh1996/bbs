@@ -3,23 +3,22 @@
   <div class="reply-list">
     <div class="head-text">全部回复</div>
     <van-list v-model="loading" :finished="finished" @load="onLoad">
-      <ul v-for="item in list" :key="item" :title="item">
+      <ul v-for="(item,index) in reList1" :key="index" :title="item">
         <li>
           <div class="box">
-
             <div class="row">
-              我是开发
+              <div class="headImg"><img :src="headImg" style="width:1rem"></div>
+              {{item.uName}}
             </div>
 
             <div class="row">
-              你有什么问题
+              {{item.content}}
             </div>
 
             <div class="row">
-              <span class="item"><p>2分钟前</p></span>
-              <span class="item"><p>回复</p></span>
+              <span class="item"><p>{{item.createTime}}</p></span>
+              <span class="item"><button class="text-button" >回复</button></span>
             </div>
-
           </div>
         </li>
       </ul>
@@ -31,9 +30,11 @@
   export default {
     data() {
       return {
+        headImg: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58',
         list: [],
         loading: false,
         finished: false,
+        index: 0,
       }
     },
     methods: {
@@ -41,7 +42,12 @@
         // 异步更新数据
         setTimeout(() => {
           for (let i = 0; i < 5; i++) {
-            this.list.push(this.list.length + 1);
+            i
+            let obj = this.reList1[this.index]
+            if(obj){
+              this.list.push(obj)
+            }
+            this.index++ 
           }
           // 加载状态结束
           this.loading = false;
@@ -51,12 +57,18 @@
           }
 
           // 数据全部加载完成
-          if (this.list.length >= 5) {
+          if (this.index >= this.reList1.length) {
             this.finished = true;
           }
         }, 50);
       }            
+    },
+    computed: {
+      reList1: function() {
+        console.log(this.$store.state.reply.post.reList1)
+        return this.$store.state.reply.post.reList1
     }
+}
   }
 </script>
 

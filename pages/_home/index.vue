@@ -38,9 +38,9 @@
               <img :src=imgSrc style="width:1.8rem;height:1.8rem;"/>
             </div>
             <div class="row row-bottom">
-              <span class="item"><p>{{item.uid}}</p></span>
+              <span class="item"><p>{{item.uName}}</p></span>
               <span class="item"><p>{{item.createTime}}</p></span>
-              <span class="item"><p>赞{{item.support}}</p></span>
+              <span class="item"><p>评论{{item.replyNum}} 赞{{item.support}}</p></span>
             </div>
           </div>
           </nuxt-link>
@@ -89,7 +89,6 @@ import axios from '~/http/'
       return { posts: data.posts }
     },
     mounted() {
-      console.log(this.posts)
       this.posts = this.posts.reverse()
       this.$store.dispatch("isLoad")
     },

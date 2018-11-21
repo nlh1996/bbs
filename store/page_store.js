@@ -10,7 +10,7 @@ export default {
     //官方建议mutations中事件名称大写，state属性只允许在mutations中处理 
     mutations: {
       //加载首页数据
-      FIRST_LOAD(state) {
+      FIRST_LOAD(state,arg) {
         state.data = arg
       },
     },
