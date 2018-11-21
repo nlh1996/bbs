@@ -65,7 +65,6 @@
     },
     computed: {
       reList1: function() {
-        console.log(this.$store.state.reply.post.reList1)
         return this.$store.state.reply.post.reList1
     }
 }
