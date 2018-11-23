@@ -34,7 +34,7 @@ import axios from '~/http'
           )
           .then( response => {
               this.value = ''
-              this.$store.commit("ADD_REPLY",response.data.reply)
+              this.$store.commit("ADD_REPLY1",response.data.reply)
             }           
           )
         }

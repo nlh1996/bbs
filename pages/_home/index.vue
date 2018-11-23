@@ -89,7 +89,6 @@ import axios from '~/http/'
       return { posts: data.posts }
     },
     mounted() {
-      this.posts = this.posts.reverse()
       this.$store.dispatch("isLoad")
     },
     methods: {

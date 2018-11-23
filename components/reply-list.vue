@@ -5,7 +5,7 @@
     <van-list v-model="loading" :finished="finished" @load="onLoad">
       <ul v-for="(item,index) in reList1" :key="index" :title="item">
         <li>
-          <div class="box">
+          <div class="reply1-box">
             <div class="row">
               <div class="headImg"><img :src="headImg" style="width:1rem"></div>
               {{item.uName}}
@@ -15,11 +15,30 @@
               {{item.content}}
             </div>
 
-            <div class="row">
+            <div class="row row-foot">
               <span class="item"><p>{{item.createTime}}</p></span>
-              <span class="item"><button class="text-button" >回复</button></span>
+              <span class="item"><button class="text-button" @click="reply(item.uName,item.id)">回复</button></span>
             </div>
           </div>
+
+          <ul v-for="(value,index) in reList2" :key="index">
+            <li v-if="value.rid==item.id">
+              <div class="reply2-box">
+                <div class="row">
+                  <div class="headImg"><img :src="headImg" style="width:1rem"></div>
+                  {{value.uName}}<br>回复:{{value.rName}}
+                </div>
+              
+                <div class="row">{{value.content}}</div>
+
+                <div class="row row-foot">
+                  <span class="item"><p>{{value.createTime}}</p></span>
+                  <span class="item"><button class="text-button" @click="reply(value.uName,item.id)">回复</button></span>
+                </div>    
+              </div>          
+            </li>
+          </ul>
+
         </li>
       </ul>
     </van-list>
@@ -27,6 +46,7 @@
 </template>
 
 <script>
+import axios from '~/http'
   export default {
     data() {
       return {
@@ -35,6 +55,7 @@
         loading: false,
         finished: false,
         index: 0,
+        value: '一点点',
       }
     },
     methods: {
@@ -61,21 +82,52 @@
             this.finished = true;
           }
         }, 50);
-      }            
+      },
+      reply(name,id) {
+        if(this.value) {
+          axios.post(
+            '/v2/reply2',
+            {
+              tid: this.$route.params.post,
+              uName: this.$store.state.login.userdata.user,
+              rName: name,
+              content: this.value,
+              rid: id,
+            }
+          )
+          .then( response => {
+              this.value = ''
+              this.$store.commit("ADD_REPLY2",response.data.reply)
+            }           
+          )
+        }
+
+      },           
     },
     computed: {
       reList1: function() {
         return this.$store.state.reply.post.reList1
+      },
+      reList2: function() {
+        return this.$store.state.reply.post.reList2
+      }
     }
-}
   }
 </script>
 
 <style scoped>
-.box {
+.reply1-box {
   display: flex;
   flex-wrap: wrap;
   background-color: white;
+  margin: 0.04rem auto;
+  padding: 0.08rem;
+}
+
+.reply2-box {
+  display: flex;
+  width: 7rem;
+  flex-wrap: wrap;
   margin: 0.04rem auto;
   padding: 0.08rem;
 }
@@ -92,7 +144,7 @@
   display:flex;
 }
 
-.row:nth-child(3){
+.row-foot{
   justify-content: space-between;
 }
 </style>

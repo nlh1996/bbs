@@ -11,9 +11,13 @@ export default {
     POST_SAVE(state,arg) {
       state.post = arg
     },
-    ADD_REPLY(state,arg) {
+    ADD_REPLY1(state,arg) {
       state.post.reList1.push(arg)
-    }
+    },
+    ADD_REPLY2(state,arg) {
+      state.post.reList2.push(arg)
+    },
+
   },
 
   //监听分发事件，可用于处理多个监听事件，方法名与分发名相同

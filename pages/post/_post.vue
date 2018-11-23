@@ -1,6 +1,7 @@
 //动态路由，贴子详情
 <template>
   <div class="view">
+    <cover-layer></cover-layer>
     <div class="box">
       <div class="row">
         <dl>
@@ -19,7 +20,7 @@
       <div class="row">
         <p>{{post.topStorey.content}}</p>
       </div>
-      <div class="row-img" v-for="(imgSrc,index) in post.topStorey.imgList" :key="index">
+      <div class="row-img" v-for="(imgSrc,index) in post.topStorey.imgList" :key="index" @click="$store.commit('CHANGE_SHOW',imgSrc)">
         <img :src=imgSrc style="width:1.8rem;height:1.8rem;"/>
       </div>
       <div class="row row-bottom">
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+import coverLayer from '~/components/cover-layer'
 import headerView from '~/components/header'
 import replyList from '~/components/reply-list'
 import replyFooter from '~/components/reply-footer'
@@ -52,7 +54,8 @@ import axios from '~/http/'
     components:{
       headerView,
       replyList,
-      replyFooter
+      replyFooter,
+      coverLayer
     },
     
     async asyncData ({ params }) {
@@ -61,6 +64,7 @@ import axios from '~/http/'
     },
     mounted() {
       this.$store.commit("POST_SAVE",this.post)
+      this.$store.commit("CLOSE_SHOW")
     },
   }
 </script>
@@ -90,8 +94,8 @@ import axios from '~/http/'
 
 /* 底部吸底效果 */
 .footer{
-    margin-bottom: 0;
-    position: fixed;
-    bottom: 0;
+  margin-bottom: 0;
+  position: fixed;
+  bottom: 0;
 }
 </style>
