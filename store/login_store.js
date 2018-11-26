@@ -17,7 +17,11 @@ export default {
         }
         //你还可以在这里执行其他的操作改变state
       },
-
+      
+      LOGIN_OUT(state){
+        window.localStorage.token = ''
+        state.isLoad = false
+      },
       //初始化登录用户数据
       USER_LOGIN(state, arg) {
         state.userdata = arg

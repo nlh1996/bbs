@@ -3,29 +3,38 @@
   <div class="view">
     <cover-layer></cover-layer>
     <div class="box">
-      <div class="row">
+      <div class="row row-top">
         <dl>
           <dt><div class="headImg"><img :src="headImg" style="width:1rem"></div></dt>
           <dd>     
             <div class="text">
-              <h3>{{post.topStorey.uName}}</h3>
+              <h3>楼主:{{post.topStorey.uName}}</h3>
               <p></p>
             </div>
           </dd>
         </dl>
+        <svg v-if="icon_show" class="icon text-button" aria-hidden="true" @click="icon_click">
+          <use xlink:href="#icon-dianzan1"></use>
+        </svg>
+        <svg v-else class="icon text-button" aria-hidden="true" @click="icon_click">
+          <use xlink:href="#icon-dianzan"></use>
+        </svg>
       </div>
+
       <div class="row">
         <h2>{{post.topStorey.title}}</h2>
       </div>
-      <div class="row">
-        <p>{{post.topStorey.content}}</p>
+      <div class="row row-content">
+        {{post.topStorey.content}}
       </div>
       <div class="row-img" v-for="(imgSrc,index) in post.topStorey.imgList" :key="index" @click="$store.commit('CHANGE_SHOW',imgSrc)">
         <img :src=imgSrc style="width:1.8rem;height:1.8rem;"/>
       </div>
       <div class="row row-bottom">
         <span class="item"><p>{{post.topStorey.createTime}}</p></span>
-        <span class="item"><p>{{post.replyNum}}评论</p></span>
+        <nuxt-link to="/post/reply">
+          <span class="item"><p>{{post.replyNum}}评论</p></span>
+        </nuxt-link>
       </div>
     </div>
 
@@ -48,6 +57,7 @@ import axios from '~/http/'
   export default {
     data() {
       return {
+        icon_show: true,
         headImg: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58',
       }
     },
@@ -66,6 +76,11 @@ import axios from '~/http/'
       this.$store.commit("POST_SAVE",this.post)
       this.$store.commit("CLOSE_SHOW")
     },
+    methods: {
+      icon_click(){
+        this.icon_show = this.icon_show ? false : true
+      }
+    }
   }
 </script>
 
@@ -83,8 +98,12 @@ import axios from '~/http/'
   display:flex;
 }
 
-.row-bottom{
+.row-bottom,.row-top{
   justify-content: space-between;
+}
+
+.row-content{
+  margin-left: 0.3rem;
 }
 
 .list{
@@ -97,5 +116,9 @@ import axios from '~/http/'
   margin-bottom: 0;
   position: fixed;
   bottom: 0;
+}
+
+.icon{
+  margin: 0.3rem 0.5rem;
 }
 </style>

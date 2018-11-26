@@ -3,8 +3,8 @@
   <div class="reply-footer">
     <div class="box">
       <div>
-        <input type="text" placeholder="发表回复" style="border:black" v-model="value">
-        <button class="text-button" @click="reply">发送</button>
+        <input type="text" placeholder="说说你的看法..." style="border:black" v-model="value" id="huifu">
+        <button class="text-button" @click="reply" id="fasong">发送</button>
       </div>
       <div>
         <van-icon name="like-o"/> 
@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script>
+<script>               
 import axios from '~/http'
   export default {
     data() {

@@ -14,8 +14,9 @@
     </div>
     <div class="box" v-else>
       <span>{{$store.state.login.userdata.user}}</span>
-      <span>头衔：{{$store.state.login.userdata.exp}}</span>
-      <span>积分：{{$store.state.login.userdata.jifen}}</span>
+      <span>等级:{{level}}</span>
+      <span>积分:{{$store.state.login.userdata.jifen}}</span>
+      <button class="text-button" @click="$store.commit('LOGIN_OUT')">退出登录</button>
     </div>
   </div>
 </template>
@@ -38,6 +39,16 @@ import register from '~/components/register'
     components: {
       login,
       register
+    },
+    computed: {
+      level: function() {
+        if(this.$store.state.login.userdata.exp<15){
+          return 1
+        }
+        let temp = parseInt(this.$store.state.login.userdata.exp/15)
+        let diejia = parseInt(temp/3/3)
+        return parseInt(temp/(3+diejia))+2
+      }
     }
   }
 </script>
@@ -51,7 +62,6 @@ import register from '~/components/register'
 }
 .box{
   float: right;
-  margin-right: 0.4rem;
 }
 .close{
   font-size: 0.4rem;

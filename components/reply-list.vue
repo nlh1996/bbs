@@ -8,16 +8,18 @@
           <div class="reply1-box">
             <div class="row">
               <div class="headImg"><img :src="headImg" style="width:1rem"></div>
-              {{item.uName}}
+              <span v-if="item.uName==louzhu">楼主:</span>{{item.uName}}<br>{{item.createTime}}
             </div>
 
-            <div class="row">
+            <div class="row row-content">
               {{item.content}}
             </div>
 
             <div class="row row-foot">
-              <span class="item"><p>{{item.createTime}}</p></span>
-              <span class="item"><button class="text-button" @click="reply(item.uName,item.id)">回复</button></span>
+              <span class="item"><p>第{{index+2}}楼</p></span>
+              <span class="item"> 
+                <button class="text-button" @click="reply2(item.uName,item.id)">点击回复</button>
+              </span>
             </div>
           </div>
 
@@ -25,20 +27,22 @@
             <li v-if="value.rid==item.id">
               <div class="reply2-box">
                 <div class="row">
-                  <div class="headImg"><img :src="headImg" style="width:1rem"></div>
-                  {{value.uName}}<br>回复:{{value.rName}}
+                  <div class="headImg"><img :src="headImg" style="width:0.6rem"></div>
+                  {{value.uName}} 
                 </div>
-              
-                <div class="row">{{value.content}}</div>
+
+                <div>
+                  回复 {{value.rName}}: {{value.content}}
+                </div>
 
                 <div class="row row-foot">
                   <span class="item"><p>{{value.createTime}}</p></span>
-                  <span class="item"><button class="text-button" @click="reply(value.uName,item.id)">回复</button></span>
+                  <span class="item"><button class="text-button" @click="reply2(value.uName,item.id)">回复</button></span>
                 </div>    
-              </div>          
+              </div>   
+              <hr>        
             </li>
           </ul>
-
         </li>
       </ul>
     </van-list>
@@ -55,7 +59,6 @@ import axios from '~/http'
         loading: false,
         finished: false,
         index: 0,
-        value: '一点点',
       }
     },
     methods: {
@@ -83,20 +86,24 @@ import axios from '~/http'
           }
         }, 50);
       },
-      reply(name,id) {
-        if(this.value) {
+
+      reply2(name,id) {
+        let input = document.getElementById("huifu")             
+        input.focus()
+        if(input.value) {
           axios.post(
             '/v2/reply2',
             {
               tid: this.$route.params.post,
               uName: this.$store.state.login.userdata.user,
               rName: name,
-              content: this.value,
+              content: value,
               rid: id,
+              show: true,
             }
           )
           .then( response => {
-              this.value = ''
+              input.value = ''
               this.$store.commit("ADD_REPLY2",response.data.reply)
             }           
           )
@@ -110,6 +117,9 @@ import axios from '~/http'
       },
       reList2: function() {
         return this.$store.state.reply.post.reList2
+      },
+      louzhu: function() {
+        return this.$store.state.reply.post.topStorey.uName
       }
     }
   }
@@ -128,7 +138,7 @@ import axios from '~/http'
   display: flex;
   width: 7rem;
   flex-wrap: wrap;
-  margin: 0.04rem auto;
+  margin-left: 0.2rem;
   padding: 0.08rem;
 }
 
@@ -146,5 +156,12 @@ import axios from '~/http'
 
 .row-foot{
   justify-content: space-between;
+}
+
+.row-content{
+  margin-left: 0.5rem;
+}
+hr{
+  color: black;
 }
 </style>
