@@ -62,12 +62,12 @@ import register from '~/components/register'
 }
 .box{
   float: right;
+  padding-right: 0.1rem;
 }
 .close{
   font-size: 0.4rem;
 }
 .title{
-  margin-left: 0.1rem;
   font-size:  0.35rem;
   font-weight: bold;
 }

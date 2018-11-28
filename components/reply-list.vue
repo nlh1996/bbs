@@ -3,8 +3,8 @@
   <div class="reply-list">
     <div class="head-text">全部回复</div>
     <van-list v-model="loading" :finished="finished" @load="onLoad">
-      <ul v-for="(item,index) in reList1" :key="index" :title="item">
-        <li>
+      <ul>
+        <li v-for="(item,index1) in reList1" :key="index1" :title="item">
           <div class="reply1-box">
             <div class="row">
               <div class="headImg"><img :src="headImg" style="width:1rem"></div>
@@ -16,15 +16,20 @@
             </div>
 
             <div class="row row-foot">
-              <span class="item"><p>第{{index+2}}楼</p></span>
+              <span class="item"><p>第{{index1+2}}楼</p></span>
               <span class="item"> 
-                <button class="text-button" @click="reply2(item.uName,item.id)">点击回复</button>
+                <button class="text-button" @click="()=>{$store.commit('CLOSE_REPLY');item.show = item.show?false:true}">回复</button>
               </span>
+            </div>
+
+            <div class="row row-reply" v-show="item.show">
+              <div spellcheck="false" contenteditable="true" :placeholder="'回复'+item.uName+'...'" class="rich-input" :id="'0'+index1"></div>
+              <button class="text-button" @click="()=>{item.show=false;reply('',item.id,'0'+index1)}">发送</button>
             </div>
           </div>
 
-          <ul v-for="(value,index) in reList2" :key="index">
-            <li v-if="value.rid==item.id">
+          <ul>
+            <li v-if="value.rid==item.id" v-for="(value,index2) in reList2" :key="index2">
               <div class="reply2-box">
                 <div class="row">
                   <div class="headImg"><img :src="headImg" style="width:0.6rem"></div>
@@ -32,15 +37,18 @@
                 </div>
 
                 <div>
-                  回复 {{value.rName}}: {{value.content}}
+                  <span v-if="value.rName">回复 <span class="reply-name">{{value.rName}}</span>: </span>{{value.content}}
                 </div>
 
                 <div class="row row-foot">
                   <span class="item"><p>{{value.createTime}}</p></span>
-                  <span class="item"><button class="text-button" @click="reply2(value.uName,item.id)">回复</button></span>
+                  <span class="item"><button class="text-button" @click="()=>{$store.commit('CLOSE_REPLY');value.show = value.show?false:true}">回复</button></span>
                 </div>    
               </div>   
-              <hr>        
+              <div class="row row-reply" v-show="value.show">
+                <div spellcheck="false" contenteditable="true" :placeholder="'回复'+value.uName" class="rich-input" :id="'00'+index2"></div>
+                <button class="text-button" @click="()=>{value.show=false;reply(value.uName,item.id,'00'+index2)}">发送</button>
+              </div>     
             </li>
           </ul>
         </li>
@@ -87,10 +95,9 @@ import axios from '~/http'
         }, 50);
       },
 
-      reply2(name,id) {
-        let input = document.getElementById("huifu")             
-        input.focus()
-        if(input.value) {
+      reply(name,id,index) {
+        let value = document.getElementById(index).innerText 
+        if(value) {
           axios.post(
             '/v2/reply2',
             {
@@ -99,17 +106,20 @@ import axios from '~/http'
               rName: name,
               content: value,
               rid: id,
-              show: true,
+              show: false,
             }
           )
           .then( response => {
-              input.value = ''
+              document.getElementById(index).innerText = ''
+              this.$toast({
+                message: '+5经验 +5积分',
+                duration: 1000
+              })
               this.$store.commit("ADD_REPLY2",response.data.reply)
             }           
           )
         }
-
-      },           
+      },       
     },
     computed: {
       reList1: function() {
@@ -136,10 +146,10 @@ import axios from '~/http'
 
 .reply2-box {
   display: flex;
-  width: 7rem;
   flex-wrap: wrap;
-  margin-left: 0.2rem;
-  padding: 0.08rem;
+  padding: 0.1rem 0.1rem 0.1rem 0.6rem;
+  background-color: #fafbfc;
+  border-bottom: 1px solid #f1f1f1;
 }
 
 .head-text{
@@ -161,7 +171,14 @@ import axios from '~/http'
 .row-content{
   margin-left: 0.5rem;
 }
-hr{
-  color: black;
+
+.row-reply{
+  padding: 0 0.5rem;
+  justify-content: space-between;
+  background-color:#fafbfc;
+}
+
+.reply-name{
+  color:#406599;
 }
 </style>

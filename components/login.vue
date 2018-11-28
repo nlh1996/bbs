@@ -3,7 +3,7 @@
   <div class="login">
     <button @click="show = true" class="text-button">登录</button>
     <van-dialog
-    v-model="show"
+      v-model="show"
       show-cancel-button
       :before-close="beforeClose" 
     >
@@ -35,8 +35,7 @@
     methods: {
       onClickConfirm() {
         this.$dialog.confirm({
-          title: this.$t('title'),
-          message: this.$t('content')
+
         });
       },      
       beforeClose(action, done) {

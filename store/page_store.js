@@ -3,7 +3,6 @@ export default {
   state: {
     show: false,
     src: '',
-    token: '',
     data: {
     },
   },

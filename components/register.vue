@@ -42,8 +42,7 @@
     methods: {
       onClickConfirm() {
         this.$dialog.confirm({
-          title: this.$t('title'),
-          message: this.$t('content')
+
         });
       },      
       beforeClose(action, done) {

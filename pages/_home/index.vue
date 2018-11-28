@@ -23,13 +23,16 @@
 
     <div class="list">
     <van-list v-model="loading" :finished="finished" @load="onLoad">
-      <ul v-for="(item,index) in list" :key="index" :title="item">
-        <li>
-          <nuxt-link :to="'/post/'+item.tid">
+      <ul>
+        <li v-for="(item,index) in list" :key="index" :title="item">
+          <nuxt-link :to="'/post/'+item.tid" id="link">
           <div class="box">
             <div class="row">
               <div class="tag">攻略</div>
               <h2>{{item.title}}</h2>
+              <svg class="icon shanchu" aria-hidden="true" @click="shanchu">
+                <use xlink:href="#icon-shanchu"></use>
+              </svg>
             </div>
             <div class="row">
               <p>{{item.content}}</p>
@@ -115,12 +118,15 @@ import axios from '~/http/'
             this.finished = true;
           }
         }, 50);
-      }  
+      },
+      shanchu(e) {
+        
+        e.preventDefault()
+      },
     },
     scrollBehavior (to, from, savedPosition) {
       return { x: 0 , y: 0 }
     },
-
   }
     
 </script>
@@ -128,7 +134,6 @@ import axios from '~/http/'
 <style scoped>
 .view{
   position: relative;
-  height: 10rem;
 }
 
 .classify ul,li{
@@ -166,7 +171,6 @@ import axios from '~/http/'
 
 .box{
   display: flex;
-  flex-basis: 100%;
   flex-wrap: wrap; /*元素换行 */
   background-color: white;
   padding: 0.14rem;
@@ -189,11 +193,17 @@ import axios from '~/http/'
 }
 
 .row-img{
-  float: left;
+  display: flex;
   margin-right: 0.1rem;
 }
 
 .row-bottom{
   justify-content: space-between;
+}
+
+.shanchu{
+  color: lightgray;
+  position:absolute;
+  right: 0rem;
 }
 </style>

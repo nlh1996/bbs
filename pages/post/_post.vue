@@ -108,7 +108,7 @@ import axios from '~/http/'
 
 .list{
   margin-top: 0.06rem;
-  padding-bottom: 0.7rem;
+  padding-bottom: 0.8rem;
 }
 
 /* 底部吸底效果 */

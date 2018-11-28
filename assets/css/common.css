@@ -90,3 +90,17 @@
     padding: 0.05rem;
     width: 7.4rem;
   }
+
+  .rich-input{
+    padding: 0.1rem 0.2rem;
+    width: 4.5rem;
+    min-height: 0.4rem;
+    outline: 0;
+    border: 1px solid #a0b3d6;
+    background-color: white;
+  }
+
+  .rich-input:empty::before{
+    content:attr(placeholder);
+    color:lightgrey;
+  }

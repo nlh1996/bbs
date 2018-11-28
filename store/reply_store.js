@@ -17,7 +17,14 @@ export default {
     ADD_REPLY2(state,arg) {
       state.post.reList2.push(arg)
     },
-
+    CLOSE_REPLY(state) {
+      for(let i=0;i<state.post.reList2.length;i++) {
+        state.post.reList2[i].show = false
+      }
+      for(let i=0;i<state.post.reList1.length;i++) {
+        state.post.reList1[i].show = false
+      }
+    }
   },
 
   //监听分发事件，可用于处理多个监听事件，方法名与分发名相同

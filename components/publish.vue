@@ -105,6 +105,10 @@ import axios from '~/http'
           .then( response => {
               this.show = true
               if(response.status == 200) {
+                this.$toast({
+                  message: '+15经验 +15积分',
+                  duration: 1000
+                })
                 this.imgBase64 = []
                 history.go('-1')
               }
