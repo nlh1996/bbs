@@ -1,5 +1,6 @@
 export default {
   state: {
+    id: '',
     post: {
 
     },
@@ -17,13 +18,14 @@ export default {
     ADD_REPLY2(state,arg) {
       state.post.reList2.push(arg)
     },
-    CLOSE_REPLY(state) {
+    CLOSE_REPLY(state,arg) {
       for(let i=0;i<state.post.reList2.length;i++) {
         state.post.reList2[i].show = false
       }
       for(let i=0;i<state.post.reList1.length;i++) {
         state.post.reList1[i].show = false
       }
+      state.id = arg
     }
   },
 

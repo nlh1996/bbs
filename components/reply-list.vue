@@ -18,12 +18,12 @@
             <div class="row row-foot">
               <span class="item"><p>第{{index1+2}}楼</p></span>
               <span class="item"> 
-                <button class="text-button" @click="()=>{let state = item.show; $store.commit('CLOSE_REPLY');if(state == false){item.show = true}}">回复</button>
+                <button class="text-button" @click="()=>{let state = item.show;$store.commit('CLOSE_REPLY','0'+index1);if(state == false){item.show = true}}">回复</button>
               </span>
             </div>
 
             <div class="row row-reply" v-show="item.show">
-              <div spellcheck="false" contenteditable="true" :placeholder="'回复'+item.uName+'...'" class="rich-input" :id="'0'+index1"></div>
+              <div spellcheck="false" contenteditable="true" :placeholder="'回复'+item.uName+'...'" tabindex="-1" class="rich-input" :id="'0'+index1"></div>
               <button class="text-button" @click="()=>{item.show=false;reply('',item.id,'0'+index1)}">发送</button>
             </div>
           </div>
@@ -42,11 +42,11 @@
 
                 <div class="row row-foot">
                   <span class="item"><p>{{value.createTime}}</p></span>
-                  <span class="item"><button class="text-button" @click="()=>{let state = value.show; $store.commit('CLOSE_REPLY');if(state == false){value.show = true}}">回复</button></span>
+                  <span class="item"><button class="text-button" @click="()=>{let state = value.show; $store.commit('CLOSE_REPLY','00'+index2);if(state == false){value.show = true}}">回复</button></span>
                 </div>    
               </div>   
               <div class="row row-reply" v-show="value.show">
-                <div spellcheck="false" contenteditable="true" :placeholder="'回复'+value.uName" class="rich-input" :id="'00'+index2"></div>
+                <div spellcheck="false" contenteditable="true" :placeholder="'回复'+value.uName" class="rich-input" tabindex="-1" :id="'00'+index2"></div>
                 <button class="text-button" @click="()=>{value.show=false;reply(value.uName,item.id,'00'+index2)}">发送</button>
               </div>     
             </li>
@@ -67,6 +67,7 @@ import axios from '~/http'
         loading: false,
         finished: false,
         index: 0,
+        id: ''
       }
     },
     methods: {
@@ -119,7 +120,7 @@ import axios from '~/http'
             }           
           )
         }
-      },       
+      },  
     },
     computed: {
       reList1: function() {
@@ -131,7 +132,13 @@ import axios from '~/http'
       louzhu: function() {
         return this.$store.state.reply.post.topStorey.uName
       }
-    }
+    },
+    updated() {
+      let input = document.getElementById(this.$store.state.reply.id)
+      if(input){
+        input.focus()
+      }
+    },
   }
 </script>
 
