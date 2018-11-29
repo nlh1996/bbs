@@ -18,7 +18,7 @@
             <div class="row row-foot">
               <span class="item"><p>第{{index1+2}}楼</p></span>
               <span class="item"> 
-                <button class="text-button" @click="()=>{$store.commit('CLOSE_REPLY');item.show = item.show?false:true}">回复</button>
+                <button class="text-button" @click="()=>{let state = item.show; $store.commit('CLOSE_REPLY');if(state == false){item.show = true}}">回复</button>
               </span>
             </div>
 
@@ -42,7 +42,7 @@
 
                 <div class="row row-foot">
                   <span class="item"><p>{{value.createTime}}</p></span>
-                  <span class="item"><button class="text-button" @click="()=>{$store.commit('CLOSE_REPLY');value.show = value.show?false:true}">回复</button></span>
+                  <span class="item"><button class="text-button" @click="()=>{let state = value.show; $store.commit('CLOSE_REPLY');if(state == false){value.show = true}}">回复</button></span>
                 </div>    
               </div>   
               <div class="row row-reply" v-show="value.show">

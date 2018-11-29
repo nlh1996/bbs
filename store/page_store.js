@@ -29,8 +29,8 @@ export default {
         '/v2/isload',
       ).then( response => {
         if(response.status == 200){
-          commit('SWITCH_LOGIN')
           commit('USER_LOGIN', response.data.data)
+          commit('SWITCH_LOGIN')
         }else{
           alert('请先登录！')
         }

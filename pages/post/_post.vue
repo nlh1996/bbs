@@ -32,9 +32,11 @@
       </div>
       <div class="row row-bottom">
         <span class="item"><p>{{post.topStorey.createTime}}</p></span>
-        <nuxt-link to="/post/reply">
-          <span class="item"><p>{{post.replyNum}}评论</p></span>
-        </nuxt-link>
+        <span class="item"><button class="text-button">积分打赏</button></span>
+      </div>
+      <div class="row row-reply">
+        <div spellcheck="false" contenteditable="true" placeholder="说说你的看法..." class="rich-input" id="commit"></div>
+        <button class="text-button" @click="reply">评论</button>
       </div>
     </div>
 
@@ -43,7 +45,7 @@
     </div>
 
     <div class="footer">
-      <reply-footer></reply-footer>
+
     </div>
   </div>
 </template>
@@ -52,11 +54,11 @@
 import coverLayer from '~/components/cover-layer'
 import headerView from '~/components/header'
 import replyList from '~/components/reply-list'
-import replyFooter from '~/components/reply-footer'
 import axios from '~/http/'
   export default {
     data() {
       return {
+        reply_show: false,
         icon_show: true,
         headImg: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58',
       }
@@ -64,7 +66,6 @@ import axios from '~/http/'
     components:{
       headerView,
       replyList,
-      replyFooter,
       coverLayer
     },
     
@@ -77,9 +78,32 @@ import axios from '~/http/'
       this.$store.commit("CLOSE_SHOW")
     },
     methods: {
-      icon_click(){
+      icon_click() {
         this.icon_show = this.icon_show ? false : true
-      }
+      },
+      reply() {
+        let value = document.getElementById('commit').innerText
+        if(value) {
+          axios.post(
+            '/v2/reply1',
+            {
+              tid: this.$route.params.post,
+              uName: this.$store.state.login.userdata.user,
+              content: value,
+              show: false
+            }
+          )
+          .then( response => {
+              document.getElementById('commit').innerText = ''
+              this.$toast({
+                message: '+5经验 +5积分',
+                duration: 1000
+              })
+              this.$store.commit("ADD_REPLY1",response.data.reply)
+            }           
+          )
+        }
+      },
     }
   }
 </script>
@@ -111,11 +135,10 @@ import axios from '~/http/'
   padding-bottom: 0.8rem;
 }
 
-/* 底部吸底效果 */
-.footer{
-  margin-bottom: 0;
-  position: fixed;
-  bottom: 0;
+.row-reply{
+  padding: 0.1rem 0.6rem;
+  background-color:#fafbfc;
+  justify-content: space-between;
 }
 
 .icon{

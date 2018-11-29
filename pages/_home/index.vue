@@ -120,7 +120,7 @@ import axios from '~/http/'
         }, 50);
       },
       shanchu(e) {
-        
+
         e.preventDefault()
       },
     },

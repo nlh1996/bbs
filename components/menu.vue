@@ -1,5 +1,5 @@
 <template>
-  <div class="headlist bg" v-once>
+  <div class="headlist bg">
       <div class="left">                
           <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:0.8rem"/>
       </div>
@@ -8,7 +8,8 @@
 
       <diV class="right">
           <ul>
-              <li><button>签到</button></li>
+              <li v-if="!$store.state.login.isSignin"><button @click="signin">签到</button></li>
+              <li v-else><button disabled="false">已签</button></li>
               <li><button>礼包</button></li>
               <li><button>商城</button></li>
           </ul>
@@ -36,6 +37,16 @@
         user_route: '/user/123',
       }
     },
+    methods: {
+      signin() {
+        this.$store.dispatch("qiandao")
+        this.$toast({
+          message: '签到成功！+10经验 +10积分',
+          duration: 1000
+        })
+      }
+    },
+    
   }
 </script>
 
