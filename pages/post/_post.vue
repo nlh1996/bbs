@@ -8,7 +8,7 @@
           <dt><div class="headImg"><img :src="headImg" style="width:1rem"></div></dt>
           <dd>     
             <div class="text">
-              <h3>楼主:{{post.topStorey.uName}}</h3>
+              <span>{{post.topStorey.uName}}</span><span class="tag-louzhu">楼主</span>
               <p></p>
             </div>
           </dd>
@@ -113,7 +113,7 @@ import axios from '~/http/'
   display: flex;
   flex-wrap: wrap;
   background-color: white;
-  margin: 0.04rem auto;
+  margin: 0 auto;
   padding: 0.08rem;
 }
 

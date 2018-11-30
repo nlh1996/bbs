@@ -80,7 +80,7 @@ axios.defaults.headers = {
     'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': 'application/json; charset=UTF-8',
 }
-axios.defaults.timeout = 10000
+axios.defaults.timeout = 5000
 
 // 跨域是否带cookie
 axios.defaults.withCredentials = true
@@ -118,5 +118,20 @@ export default {
         resolve(res)
       })
     })
-  }
+  },
+
+  //delete请求
+  delete(url, data) {
+    let storage = window.localStorage
+    return new Promise((resolve) => {
+      axios({
+        method: 'delete',
+        url: url,
+        data: JSON.stringify(data),//将post请求的数据转化为json对象
+        headers: { 'Authorization': storage.token },
+      }).then(res => {
+        resolve(res)
+      })
+    })
+  },
 }

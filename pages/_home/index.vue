@@ -30,7 +30,7 @@
             <div class="row">
               <div class="tag">攻略</div>
               <h2>{{item.title}}</h2>
-              <svg class="icon shanchu" aria-hidden="true" @click="shanchu">
+              <svg class="icon shanchu" aria-hidden="true" @click="shanchu(item.tid)" v-if="item.uName == $store.state.login.userdata.user">
                 <use xlink:href="#icon-shanchu"></use>
               </svg>
             </div>
@@ -85,7 +85,7 @@ import axios from '~/http/'
     components: {
       headerView,
       footerView,
-      headMenu
+      headMenu,
     },
     async asyncData ({ params }) {
       let { data } = await axios.get('/v1/posts')
@@ -119,9 +119,26 @@ import axios from '~/http/'
           }
         }, 50);
       },
-      shanchu(e) {
+      shanchu(id) {
+        var r=confirm("贴子一但删除，无法恢复!");
+        if (r==true){
+          axios.delete('/v2/delpost',
+          {
+            tid: id,
+          }).then( res =>{
+            if(res.status == 200) {
+              location.reload()
+              this.$toast({
+                message: '删除成功',
+                duration: 1000
+              })   
+            }         
+          })
+        }
+        else{
 
-        e.preventDefault()
+        }
+        event.preventDefault()
       },
     },
     scrollBehavior (to, from, savedPosition) {

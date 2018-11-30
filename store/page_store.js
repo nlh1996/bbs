@@ -1,7 +1,7 @@
 import axios from '../http'
 export default {
   state: {
-    show: false,
+    zhebi_show: false,
     src: '',
     data: {
     },
@@ -14,12 +14,13 @@ export default {
       state.data = arg
     },
     CHANGE_SHOW(state,arg) {
-      state.show = state.show ? false : true
+      state.zhebi_show = state.zhebi_show ? false : true
       state.src = arg
     },
     CLOSE_SHOW(state) {
-      state.show = false
-    }
+      state.zhebi_show = false
+    },
+
   },
 
   //监听分发事件，可用于处理多个监听事件，方法名与分发名相同

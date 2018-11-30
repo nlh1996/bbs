@@ -6,9 +6,12 @@
       <ul>
         <li v-for="(item,index1) in reList1" :key="index1" :title="item">
           <div class="reply1-box">
-            <div class="row">
+            <div class="flex-container">
               <div class="headImg"><img :src="headImg" style="width:1rem"></div>
-              <span v-if="item.uName==louzhu">楼主:</span>{{item.uName}}<br>{{item.createTime}}
+              <div class="flex-item">
+                <div>{{item.uName}}<span v-if="item.uName==louzhu" class="tag-louzhu">楼主</span></div>
+                <div>{{index1+2}}楼</div>
+              </div>
             </div>
 
             <div class="row row-content">
@@ -16,7 +19,7 @@
             </div>
 
             <div class="row row-foot">
-              <span class="item"><p>第{{index1+2}}楼</p></span>
+              <span class="item"><p>{{item.createTime}}</p></span>
               <span class="item"> 
                 <button class="text-button" @click="()=>{let state = item.show;$store.commit('CLOSE_REPLY','0'+index1);if(state == false){item.show = true}}">回复</button>
               </span>
@@ -46,7 +49,7 @@
                 </div>    
               </div>   
               <div class="row row-reply" v-show="value.show">
-                <div spellcheck="false" contenteditable="true" :placeholder="'回复'+value.uName" class="rich-input" tabindex="-1" :id="'00'+index2"></div>
+                <div spellcheck="false" contenteditable="true" :placeholder="'回复'+value.uName+'...'" class="rich-input" tabindex="-1" :id="'00'+index2"></div>
                 <button class="text-button" @click="()=>{value.show=false;reply(value.uName,item.id,'00'+index2)}">发送</button>
               </div>     
             </li>
@@ -184,6 +187,16 @@ import axios from '~/http'
   justify-content: space-between;
   background-color:#fafbfc;
 }
+
+.flex-container{
+  display: flex;
+}
+.flex-item{
+  margin-top: 0.1rem;
+  margin-left: 0.2rem;
+  flex-direction: column;
+}
+
 
 .reply-name{
   color:#406599;
