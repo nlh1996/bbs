@@ -94,12 +94,14 @@ import axios from '~/http/'
             }
           )
           .then( response => {
-              document.getElementById('commit').innerText = ''
-              this.$toast({
-                message: '+5经验 +5积分',
-                duration: 1000
-              })
-              this.$store.commit("ADD_REPLY1",response.data.reply)
+              if(response.status == 200) {
+                document.getElementById('commit').innerText = ''
+                this.$toast({
+                  message: '+5经验 +5积分',
+                  duration: 1000
+                })
+                this.$store.commit("ADD_REPLY1",response.data.reply)
+              }
             }           
           )
         }

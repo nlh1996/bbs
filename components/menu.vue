@@ -40,10 +40,13 @@
     methods: {
       signin() {
         this.$store.dispatch("qiandao")
-        this.$toast({
+        if(this.$store.state.login.isSignin)
+        {
+          this.$toast({
           message: '签到成功！+10经验 +10积分',
           duration: 1000
         })
+        }
       }
     },
     

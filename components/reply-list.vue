@@ -115,11 +115,13 @@ import axios from '~/http'
           )
           .then( response => {
               document.getElementById(index).innerText = ''
-              this.$toast({
-                message: '+5经验 +5积分',
-                duration: 1000
-              })
-              this.$store.commit("ADD_REPLY2",response.data.reply)
+              if(response.status == 200) {
+                this.$toast({
+                  message: '+5经验 +5积分',
+                  duration: 1000
+                })
+                this.$store.commit("ADD_REPLY2",response.data.reply)
+              }
             }           
           )
         }
