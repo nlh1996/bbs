@@ -47,7 +47,7 @@
       },      
       beforeClose(action, done) {
         if (action === 'confirm') {
-          this.$store.dispatch('register', {username:this.username,password:this.password})
+          this.$store.dispatch('register', {uName:this.username,password:this.password})
           setTimeout(done, 1000);
         } else {
           done();

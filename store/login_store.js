@@ -26,15 +26,15 @@ export default {
       },
       // 初始化登录用户数据
       USER_LOGIN(state, arg) {
-        state.userdata = arg
+        state.userdata = arg.user
         state.isSignin = arg.isSignin
       },
       // 改变签到状态，增加经验和积分（前端显示变化，后端不受影响）
       SIGNIN_CHANGE(state) {
         state.isSignin = true
         state.userdata.exp += 10
-        state.userdata.jifen += 10
-      }
+        state.userdata.integral += 10
+      },
     },
 
     // 监听分发事件，可用于处理多个监听事件，方法名与分发名相同
@@ -43,7 +43,7 @@ export default {
           axios.post(
               '/v1/login',
               {
-                username: arg.username,
+                uName: arg.uName,
                 password: arg.password
               }
           )

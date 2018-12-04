@@ -1,5 +1,6 @@
 //引入axios
 import axios from 'axios'
+import qs from 'qs';
 
 //重复请求取消
 let cancel ,promiseArr = {}
@@ -67,7 +68,7 @@ axios.interceptors.response.use(response => {
       err.message = "连接到服务器失败"
     }
     //alert(err.message)
-    alert(err.message)
+    console.log(err.message)
     return Promise.resolve(err.response)
 })
 
@@ -78,8 +79,9 @@ axios.defaults.baseURL = 'http://192.168.1.11:8000'
  
 axios.defaults.headers = {
     'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': 'application/json; charset=UTF-8',
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 }
+
 axios.defaults.timeout = 5000
 
 // 跨域是否带cookie
@@ -110,7 +112,7 @@ export default {
         method: 'post',
         url: url,
         data: JSON.stringify(data),//将post请求的数据转化为json对象
-        headers: { 'Authorization': storage.token },
+        headers: { 'Authorization': storage.token,'Content-Type': 'application/json; charset=UTF-8'},
         cancelToken: new CancelToken(c => {
           cancel = c
         })
@@ -128,6 +130,21 @@ export default {
         method: 'delete',
         url: url,
         data: JSON.stringify(data),//将post请求的数据转化为json对象
+        headers: { 'Authorization': storage.token, 'Content-Type': 'application/json; charset=UTF-8' }
+      }).then(res => {
+        resolve(res)
+      })
+    })
+  },
+
+  //put请求
+  put(url, data) {
+    let storage = window.localStorage
+    return new Promise((resolve) => {
+      axios({
+        method: 'post',
+        url: url,
+        data: qs.stringify(data),
         headers: { 'Authorization': storage.token },
       }).then(res => {
         resolve(res)

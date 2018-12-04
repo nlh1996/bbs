@@ -30,7 +30,7 @@
             <div class="row">
               <div class="tag">攻略</div>
               <h2>{{item.title}}</h2>
-              <svg class="icon shanchu" aria-hidden="true" @click="shanchu(item.tid)" v-if="item.uName == $store.state.login.userdata.user">
+              <svg class="icon shanchu" aria-hidden="true" @click="shanchu(item.tid)" v-if="item.uName == $store.state.login.userdata.uName">
                 <use xlink:href="#icon-shanchu"></use>
               </svg>
             </div>

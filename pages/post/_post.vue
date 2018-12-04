@@ -13,10 +13,10 @@
             </div>
           </dd>
         </dl>
-        <svg v-if="icon_show" class="icon text-button" aria-hidden="true" @click="icon_click">
+        <svg v-if="$store.state.reply.can_dianzan" class="icon text-button" aria-hidden="true" @click="dianzan">
           <use xlink:href="#icon-dianzan1"></use>
         </svg>
-        <svg v-else class="icon text-button" aria-hidden="true" @click="icon_click">
+        <svg v-else class="icon text-button" aria-hidden="true" @click="cancel">
           <use xlink:href="#icon-dianzan"></use>
         </svg>
       </div>
@@ -58,7 +58,6 @@ import axios from '~/http/'
   export default {
     data() {
       return {
-        reply_show: false,
         icon_show: true,
         headImg: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58',
       }
@@ -73,14 +72,13 @@ import axios from '~/http/'
       let { data } = await axios.get('/v1/post', {tid: params.post})
       return { post: data.post }
     },
+
     mounted() {
       this.$store.commit("POST_SAVE",this.post)
       this.$store.commit("CLOSE_SHOW")
+      this.$store.commit("isDianzan",this.post.tid)
     },
     methods: {
-      icon_click() {
-        this.icon_show = this.icon_show ? false : true
-      },
       reply() {
         let value = document.getElementById('commit').innerText
         if(value) {
@@ -88,7 +86,7 @@ import axios from '~/http/'
             '/v2/reply1',
             {
               tid: this.$route.params.post,
-              uName: this.$store.state.login.userdata.user,
+              uName: this.$store.state.login.userdata.uName,
               content: value,
               show: false
             }
@@ -106,6 +104,34 @@ import axios from '~/http/'
           )
         }
       },
+      dianzan() {
+        axios.put(
+          'v2/support',
+          {
+            tid: this.$route.params.post,
+            name: this.post.topStorey.uName
+          }
+        )
+        .then( res => {
+          if(res.status == 200) {
+            this.$store.state.reply.can_dianzan = false;
+          }
+        })
+      },
+      cancel() {
+        axios.put(
+          'v2/cancel',
+          {
+            tid: this.$route.params.post,
+            name: this.post.topStorey.uName
+          }
+        )
+        .then( res => {
+          if(res.status == 200) {
+            this.$store.state.reply.can_dianzan = true;
+          }
+        })        
+      }
     }
   }
 </script>

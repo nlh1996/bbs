@@ -15,7 +15,7 @@ export default {
         axios.post(
           '/v1/register',
           {
-            username: arg.username,
+            uName: arg.uName,
             password: arg.password
           }
         )

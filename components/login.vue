@@ -40,7 +40,7 @@
       },      
       beforeClose(action, done) {
         if (action === 'confirm') {
-          this.$store.dispatch('login', {username:this.username,password:this.password})
+          this.$store.dispatch('login', {uName:this.username,password:this.password})
           setTimeout(done, 100);
         } else {
           done();

@@ -96,7 +96,7 @@ import axios from '~/http'
           axios.post(
             '/v2/publish',
             {
-              uName: this.$store.state.login.userdata.user,
+              uName: this.$store.state.login.userdata.uName,
               title: this.title,
               content: this.content,
               imgList: this.imgBase64
@@ -155,7 +155,7 @@ import axios from '~/http'
   clear: both;
   position:relative;
   float:left;
-  width: 7.4rem;
+  width: 7.5rem;
   font-size: 0.4rem;
   color:limegreen;
   text-align: center;
