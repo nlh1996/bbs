@@ -8,15 +8,19 @@
     </span>
     <span class="title">{{name}}</span>
     
-    <div class="box" v-if="!$store.state.login.isLoad">
+    <div class="box" v-if="$store.state.login.isLoad == 0">
       <login></login>
       <register></register>
     </div>
-    <div class="box" v-else>
+    <div class="box" v-if="$store.state.login.isLoad == 2">
+      管理员 <nuxt-link to="/admin">进入后台</nuxt-link>
+      <button class="text-button" @click="$store.commit('LOGIN_OUT')">登出</button>
+    </div>
+    <div class="box" v-if="$store.state.login.isLoad == 1">
       <span>{{$store.state.login.userdata.uName}}</span>
       <span>等级:{{level}}</span>
       <span>积分:{{$store.state.login.userdata.integral}}</span>
-      <button class="text-button" @click="$store.commit('LOGIN_OUT')">退出登录</button>
+      <button class="text-button" @click="$store.commit('LOGIN_OUT')">登出</button>
     </div>
   </div>
 </template>
@@ -47,8 +51,8 @@ import register from '~/components/register'
         }
         let temp = parseInt(this.$store.state.login.userdata.exp/15)
         return temp+1
-      }
-    }
+      },
+    },
   }
 </script>
 

@@ -1,32 +1,32 @@
 <template>
   <div class="headlist bg">
-      <div class="left">                
-          <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:0.8rem"/>
-      </div>
+    <div class="left">                
+      <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:0.8rem"/>
+    </div>
+    
+    <div class="text"> {{$route.params.home}}</div>
+
+    <diV class="right">
+      <ul>
+        <li v-if="!$store.state.login.isSignin"><button @click="signin">签到</button></li>
+        <li v-else><button disabled="false">已签</button></li>
+        <li><button>礼包</button></li>
+        <li><button>商城</button></li>
+      </ul>
       
-      <div class="text"> {{$route.params.home}}</div>
+      <nuxt-link :to='user_route'>
+      <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-wode1"></use>
+      </svg>
+      </nuxt-link>
+      
+      <nuxt-link to='/'>
+      <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-sousuo"></use>
+      </svg>
 
-      <diV class="right">
-          <ul>
-              <li v-if="!$store.state.login.isSignin"><button @click="signin">签到</button></li>
-              <li v-else><button disabled="false">已签</button></li>
-              <li><button>礼包</button></li>
-              <li><button>商城</button></li>
-          </ul>
-          
-          <nuxt-link :to='user_route'>
-          <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-wode1"></use>
-          </svg>
-          </nuxt-link>
-          
-          <nuxt-link to='/'>
-          <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-sousuo"></use>
-          </svg>
-
-          </nuxt-link>  
-      </div>            
+      </nuxt-link>  
+    </div>            
   </div>
 </template>
 

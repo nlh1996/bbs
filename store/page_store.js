@@ -32,7 +32,6 @@ export default {
       ).then( response => {
         if(response.status == 200){
           commit('USER_LOGIN', response.data.data)
-          commit('SWITCH_LOGIN')
         }else{
           alert('请先登录！')
         }
