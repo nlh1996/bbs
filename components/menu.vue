@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import axios from '../http'
   export default {
     data() {
       return {
@@ -39,17 +40,21 @@
     },
     methods: {
       signin() {
-        this.$store.dispatch("qiandao")
-        if(this.$store.state.login.isSignin)
-        {
-          this.$toast({
-          message: '签到成功！+10经验 +10积分',
-          duration: 1000
+        axios.post(
+          '/v2/signin',
+          {
+          }
+        ).then( response =>{
+          if(response.status==200){
+            this.$toast({
+            message: '签到成功！+10经验 +10积分',
+            duration: 1000
+            })
+          }
+          this.$store.commit('SIGNIN_CHANGE')
         })
-        }
       }
-    },
-    
+    }
   }
 </script>
 
