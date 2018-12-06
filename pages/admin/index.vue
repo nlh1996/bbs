@@ -1,34 +1,61 @@
 //管理员路由
 <template>
-  <div class="view">
-    <van-tabs v-model="active" sticky color="orange" type="card">
-      <van-tab title="贴子管理"><div class="box">内容 1</div></van-tab>
-      <van-tab title="用户管理"><div class="box">内容 2</div></van-tab>
-      <van-tab title="数据统计"><div class="box">内容 3</div></van-tab>
-      <van-tab title="礼包发放"><div class="box">内容 4</div></van-tab>
+  <div class="view view-admin">
+    <van-tabs v-model="active" sticky color="orange" type="card" @click="onClick">
+      <van-tab title="贴子管理"><div class="box-admin">内容 1</div></van-tab>
+      <van-tab title="用户管理"><div class="box-admin">内容 2</div></van-tab>
+      <van-tab title="数据统计"><div class="box-admin">
+        <van-cell-group>
+          <van-cell title="今日访问量:" :value="value1+'次'" /> 
+          <van-cell title="本日登录人数:" :value="value2+'人'" /> 
+          <van-cell title="本日新注册人数:" :value="value3+'人'" /> 
+          <van-cell title="累计注册人数:" :value="value4+'人'" /> 
+        </van-cell-group>  
+      </div></van-tab>
+      <van-tab title="礼包发放"><div class="box-admin">内容 4</div></van-tab>
     </van-tabs>
   </div>
 </template>
 
 <script>
-
+import axios from '../../http'
   export default {
     data() {
       return {
         active: 0,
-
+        value1: '',
+        value2: '',
+        value3: '',
+        value4: '',
       }
     },
-
+    methods: {
+      onClick(index) {
+        if(index == 2){
+          var route = '/admin/count'
+        }
+        axios.post(
+          route,
+          { }
+        ).then( res => {
+          if(res.status == 200) {
+            this.value1 = res.data.count.TodayAccess
+            this.value2 = res.data.count.TodayLogin
+            this.value3 = res.data.count.TodayRegister
+            this.value4 = res.data.userNum
+          }
+        })
+      }
+    }
   }
 </script>
 
-<style scoped>
-.view{
+<style>
+.view-admin{
   margin-top: 0.2rem;
   background-color: white
 }
-.box{
+.box-admin{
   width: 6rem;
   height: 7rem;
   background-color: white;
@@ -37,4 +64,7 @@
   margin-top: 0.2rem;
 }
 
+.van-cell {
+  line-height: 30px;
+}
 </style>

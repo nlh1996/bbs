@@ -55,9 +55,10 @@ import axios from '../http'
                 this.$router.push("/admin")
               }
             })            
+          }else{
+            this.$store.dispatch('login', {uName:this.username,password:this.password})
           }
-          this.$store.dispatch('login', {uName:this.username,password:this.password})
-          setTimeout(done, 10000);
+          setTimeout(done, 1000);
         } else {
           done();
         }
