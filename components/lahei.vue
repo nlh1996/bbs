@@ -9,7 +9,7 @@
       <tr v-for="(index) in 5" bgcolor='white' class="text" :key="index">
         <td class="name"><div class="text"></div></td>
         <td class="time"><div class="text"></div></td>
-        <td class="action"><div class="text text-button" @click="yichu">移出</div></td>
+        <td class="action"><div class="text text-style" @click="yichu">移出</div></td>
       </tr>
     </table>
 
@@ -41,7 +41,7 @@
         <td><div class="text"></div></td>
         <td><div class="text"></div></td>
         <td><div class="text"></div></td>
-        <td><div class="text text-button" @click="jiaru">加入</div></td>
+        <td><div class="text text-style" @click="jiaru">加入</div></td>
       </tr>
     </table>
   </div>
@@ -96,7 +96,7 @@
 .text{
   font-size: 0.26rem
 }
-.text-button{
+.text-style{
   color: red;
 }
 

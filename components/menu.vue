@@ -50,8 +50,8 @@ import axios from '../http'
             message: '签到成功！+10经验 +10积分',
             duration: 1000
             })
+            this.$store.commit('SIGNIN_CHANGE')
           }
-          this.$store.commit('SIGNIN_CHANGE')
         })
       }
     }
