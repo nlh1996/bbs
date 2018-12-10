@@ -25,6 +25,9 @@ axios.interceptors.response.use(response => {
 }, err => {
     if (err && err.response) {
       switch (err.response.status) {
+        case 202:
+          err.message = '该账号已被封禁' 
+          break;
         case 400:
           err.message = '错误请求'
           break;

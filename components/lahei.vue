@@ -6,10 +6,10 @@
         <td class="time">拉黑日期</td>
         <td class="action">操作</td>
       </tr>
-      <tr v-for="(index) in 5" bgcolor='white' class="text" :key="index">
-        <td class="name"><div class="text"></div></td>
-        <td class="time"><div class="text"></div></td>
-        <td class="action"><div class="text text-style" @click="yichu">移出</div></td>
+      <tr v-for="(item,index) in list2" bgcolor='white' class="text" :key="index">
+        <td class="name"><div class="text">{{item.UName}}</div></td>
+        <td class="time"><div class="text">{{item.Time}}</div></td>
+        <td class="action"><div class="text text-style" @click="yichu(index)">移出</div></td>
       </tr>
     </table>
 
@@ -37,10 +37,10 @@
         <td>操作</td>
       </tr>
       <tr bgcolor='white'>
-        <td class="name"><div class="text">窃@格瓦拉</div></td>
-        <td><div class="text"></div></td>
-        <td><div class="text"></div></td>
-        <td><div class="text"></div></td>
+        <td class="name"><div class="text">{{user.name}}</div></td>
+        <td><div class="text">{{user.level}}</div></td>
+        <td><div class="text">{{user.jifen}}</div></td>
+        <td><div class="text">{{user.time}}</div></td>
         <td><div class="text text-style" @click="jiaru">加入</div></td>
       </tr>
     </table>
@@ -48,24 +48,85 @@
 </template>
 
 <script>
+import axios from '../http'
   export default {
     data() {
       return {
         currentPage: 1,
-        value: ''
+        value: '',
+        user: {},
+        list1: [
+          {UName: '',Time: ''},
+          {UName: '',Time: ''},
+          {UName: '',Time: ''},
+          {UName: '',Time: ''},
+          {UName: '',Time: ''},
+        ],
+        list2: [],
+        result: []
       }
     },
+    mounted() {
+      axios.post(
+        '/admin/getBlackList'
+      )
+      .then( res => {
+        if(res.status == 200) {
+          this.result = res.data.list
+          for(let i=0; i<this.list1.length; i++) {
+            if(this.result[i]) {
+              this.list1[i] = this.result[i] 
+            }
+          }
+          this.list2 = this.list1
+          this.list1 = ''
+        }
+      })
+    },
     methods: {
-      yichu() {
-        console.log(111)
+      yichu(index) {
+        if(this.list2[index]) {
+          axios.put(
+            '/admin/removeBlackList',
+            {name: this.list2[index].UName}
+          )
+          .then( res => {
+            if(res.status == 200) {
+              location.reload()
+            }
+          })
+        }
       },
       jiaru() {
-        console.log(222)
+        if(this.user) {
+          axios.put(
+            '/admin/addBlackList',
+            {name: this.user.name}
+          )
+          .then( res => {
+            if(res.status == 200) {
+              location.reload()
+            }else{
+              alert("用户已经拉黑！")
+            }
+          })
+        }
       },
       onSearch() {
-        this.value = ''
+        if(this.value) {
+          axios.put(
+            '/admin/search',
+            {name: this.value}
+          )
+          .then( res => {
+            if(res.status == 200) {
+              this.user = res.data
+            }
+          })
+        }
       },
-    }
+    },
+
   }
 </script>
 

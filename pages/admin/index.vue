@@ -58,19 +58,18 @@ import lahei from '@/components/lahei'
     methods: {
       onClick(index) {
         if(index == 2){
-          var route = '/admin/count'
+          axios.post(
+            '/admin/count',
+            { }
+          ).then( res => {
+            if(res.status == 200) {
+              this.value1 = res.data.count.TodayAccess
+              this.value2 = res.data.count.TodayLogin
+              this.value3 = res.data.count.TodayRegister
+              this.value4 = res.data.userNum
+            }
+          })
         }
-        axios.post(
-          route,
-          { }
-        ).then( res => {
-          if(res.status == 200) {
-            this.value1 = res.data.count.TodayAccess
-            this.value2 = res.data.count.TodayLogin
-            this.value3 = res.data.count.TodayRegister
-            this.value4 = res.data.userNum
-          }
-        })
       }
     }
   }
