@@ -15,8 +15,9 @@
 
     <van-pagination 
       v-model="currentPage" 
-      :page-count="12"
+      :page-count="pageNum"
       mode="simple" 
+      @change="pageChange"
     />
 
     <van-search
@@ -53,6 +54,7 @@ import axios from '../http'
     data() {
       return {
         currentPage: 1,
+        pageNum: 1,
         value: '',
         user: {},
         list1: [
@@ -63,7 +65,7 @@ import axios from '../http'
           {UName: '',Time: ''},
         ],
         list2: [],
-        result: []
+        result: [],
       }
     },
     mounted() {
@@ -73,19 +75,19 @@ import axios from '../http'
       .then( res => {
         if(res.status == 200) {
           this.result = res.data.list
+          this.pageNum = parseInt(this.result.length/5)+1
           for(let i=0; i<this.list1.length; i++) {
             if(this.result[i]) {
               this.list1[i] = this.result[i] 
             }
           }
           this.list2 = this.list1
-          this.list1 = ''
         }
       })
     },
     methods: {
       yichu(index) {
-        if(this.list2[index]) {
+        if(this.list2[index].UName) {
           axios.put(
             '/admin/removeBlackList',
             {name: this.list2[index].UName}
@@ -98,7 +100,7 @@ import axios from '../http'
         }
       },
       jiaru() {
-        if(this.user) {
+        if(this.user.name) {
           axios.put(
             '/admin/addBlackList',
             {name: this.user.name}
@@ -125,6 +127,19 @@ import axios from '../http'
           })
         }
       },
+      pageChange() {
+        let temp = (this.currentPage-1)*5
+        let index = 0
+        for(let i=0+temp; i<this.list1.length+temp; i++) {
+          if(this.result[i]) {
+            this.list1[index] = this.result[i] 
+          }else{
+            this.list1[index] = {UName: '',Time: ''}
+          }
+          index++
+        }
+        this.list2 = this.list1
+      }
     },
 
   }
