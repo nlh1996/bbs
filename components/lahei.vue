@@ -123,10 +123,12 @@ import axios from '../http'
           .then( res => {
             if(res.status == 200) {
               this.user = res.data
+              this.value = ''
             }
           })
         }
       },
+
       pageChange() {
         let temp = (this.currentPage-1)*5
         let index = 0

@@ -52,6 +52,11 @@ import lahei from '@/components/lahei'
         value4: '',
       }
     },
+    beforeMount() {
+      if(this.$store.state.login.userdata.uName!='admin') {
+        history.go('-1')
+      }
+    },
     components: {
       lahei: lahei
     },

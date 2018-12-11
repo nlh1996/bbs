@@ -24,33 +24,51 @@
     <div class="list">
     <van-list v-model="loading" :finished="finished" @load="onLoad">
       <ul>
-        <li v-for="(item,index) in list" :key="index" :title="item">
+        <li v-for="(item,index1) in list" :key="index1" :title="item">
           <nuxt-link :to="'/post/'+item.tid" id="link">
           <div class="box">
             <div class="row">
               <div class="tag">攻略</div>
               <h2>{{item.title}}</h2>
-              <svg class="icon shanchu" aria-hidden="true" @click="shanchu(item.tid)" v-if="item.uName == $store.state.login.userdata.uName">
+              <svg class="icon shanchu" aria-hidden="true" @click="shanchu(item.tid)"
+              v-if="item.uName == $store.state.login.userdata.uName || $store.state.login.userdata.uName == 'admin'">
                 <use xlink:href="#icon-shanchu"></use>
               </svg>
             </div>
             <div class="row">
               <p>{{item.content}}</p>
             </div>
-            <div class="row-img" v-for="(imgSrc,index) in item.imgList" :key="index">
-              <img :src=imgSrc style="width:1.8rem;height:1.8rem;"/>
+            <div class="row-img" v-for="(imgSrc,index2) in item.imgList" :key="index2">
+              <img :src=imgSrc style="width:2.2rem;height:2rem;"/>
             </div>
-            <div class="row row-bottom">
-              <span class="item"><p>{{item.uName}}</p></span>
-              <span class="item"><p>{{item.createTime}}</p></span>
-              <span class="item"><p>评论{{item.replyNum}} 赞{{item.support}}</p></span>
-            </div>
+            <div class="row"><span style="color:white;margin:0.1rem;">111</span></div>
+            <span class="item-left"><p>{{item.uName}}</p></span>
+            <!-- <span class="item"><p>{{item.createTime}}</p></span> -->
+            <span class="item-center">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-pinglun"></use>
+              </svg>{{item.replyNum}}
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-dianzan1"></use>
+              </svg>{{item.support}}
+            </span>
+            <span class="item-right text-button" style="padding:0.1rem;" @click="extend(item)">...</span>
           </div>
           </nuxt-link>
         </li>
       </ul>
     </van-list>
     </div>
+    <!-- 底部弹出层 -->
+    <van-popup
+      v-model="show"
+      position="bottom"
+      :overlay="true"
+      @click-overlay="closeOverlay"
+    >
+      <van-button size="large" @click="jubao">举报</van-button>
+      <van-button size="large" @click="zhiding">申请置顶</van-button>
+    </van-popup>
 
     <nuxt-link :to="publish_route">
       <div class="footer bg">
@@ -78,7 +96,9 @@ import axios from '~/http/'
         loading: false,
         finished: false,
         list: [],
-        index: 0
+        index: 0,
+        show: false,
+        post: {}
       }
     },
     props: ["tid"],
@@ -136,10 +156,41 @@ import axios from '~/http/'
           })
         }
         else{
-
         }
         event.preventDefault()
       },
+      extend(post) {
+        this.show = true
+        this.post = post
+        event.preventDefault()
+      },
+      closeOverlay() {
+        event.preventDefault()
+      },
+      jubao() {
+        this.$router.push({
+          name: 'home-complaint',
+          params: {
+            title: '举报贴子',
+            tag: '举报',
+            post: this.post,
+            name: this.$store.state.login.userdata.uName
+          }
+        })
+        event.preventDefault()
+      },
+      zhiding() {
+        this.$router.push({
+          name: 'home-complaint',
+          params: {
+            title: '申请置顶',
+            tag: '申请',
+            post: this.post,
+            name: this.$store.state.login.userdata.uName
+          }
+        })
+        event.preventDefault()
+      }
     },
     scrollBehavior (to, from, savedPosition) {
       return { x: 0 , y: 0 }
@@ -195,6 +246,7 @@ import axios from '~/http/'
 }
 
 .list li{
+  position: relative;
   width: 7.5rem;
   margin: 0.04rem auto; 
 }
@@ -210,14 +262,36 @@ import axios from '~/http/'
 }
 
 .row-img{
-  display: flex;
+  float: left;
   margin-right: 0.1rem;
 }
 
-.row-bottom{
-  justify-content: space-between;
+.item-right{
+  position: absolute;
+  left: 92%;
+  bottom: 0%;
+  font-size: 0.35rem;
+  font-weight: bold;
+  color: black;
 }
-
+.item-left{
+  position: absolute;
+  left: 2%;
+  bottom: 0%;
+}
+.item-center{
+  position: absolute;
+  left: 50%;
+  margin-left: -0.8rem;
+  bottom: 0%;
+  color: black;
+}
+.item-center .icon:nth-child(1){
+  width: 0.3rem;
+}
+.item-center .icon:nth-child(2){
+  width: 0.35rem;
+}
 .shanchu{
   color: lightgray;
   position:absolute;

@@ -4,7 +4,7 @@
     <div class="header">
       <span @click="close" class="clink">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-close"></use>
+          <use xlink:href="#icon-fanhui"></use>
         </svg>
       </span>
       <span class="title">发表话题</span>
@@ -121,6 +121,9 @@ import axios from '~/http'
 </script>
 
 <style scoped>
+.icon{
+  width: 0.3rem;
+}
 .item {
   position:relative;
   float:left;
@@ -176,7 +179,7 @@ import axios from '~/http'
 }
 
 .header{
-  width: 7.4rem;
+  width: 7.5rem;
   height: 0.45rem;
   margin: 0.1rem;
   line-height: 0.5rem;
