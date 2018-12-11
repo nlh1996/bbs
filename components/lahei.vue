@@ -86,6 +86,7 @@ import axios from '../http'
       })
     },
     methods: {
+      // 移出黑名单
       yichu(index) {
         if(this.list2[index].UName) {
           axios.put(
@@ -99,6 +100,7 @@ import axios from '../http'
           })
         }
       },
+      // 加入到黑名单
       jiaru() {
         if(this.user.name) {
           axios.put(
@@ -114,6 +116,7 @@ import axios from '../http'
           })
         }
       },
+      // 用户查找
       onSearch() {
         if(this.value) {
           axios.put(
@@ -128,7 +131,7 @@ import axios from '../http'
           })
         }
       },
-
+      // 翻页事件
       pageChange() {
         let temp = (this.currentPage-1)*5
         let index = 0

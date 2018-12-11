@@ -65,10 +65,11 @@ import axios from '~/http'
     },
 
     methods: {
+      // 返回上一页面
       close() {
         history.go('-1')
       },
-      //添加图片，自动base64编码
+      //添加图片到数组，自动base64编码
       uploadImg(file) {
         if(this.imgBase64.length < 6) {
           this.imgBase64.push(file.content)
@@ -77,15 +78,15 @@ import axios from '~/http'
         }
       },
 
-      //删除图片
+      // 从数组中删除图片
       delImg(index){
         this.imgBase64.splice(index,1);
       },
-      //图片上传尺寸大于限制时触发
+      // 图片上传尺寸大于限制时触发
       overSize(){
         alert("图片大小超出上传限制啦！")
       },
-
+      // 发布事件
       publish() {
         this.show = false
         if(this.title == ''&& this.content == ''){

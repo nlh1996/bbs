@@ -51,6 +51,7 @@ import axios from '../../http'
         content: typeof(this.$route.params.post) != "undefined"?this.$route.params.post.title:'',
       }
     },
+    // 刷新数据丢失，强制用户返回上一页面。
     beforeMount() {
       if(!this.title) {
         history.go('-1')
@@ -58,9 +59,11 @@ import axios from '../../http'
       console.log(this.$route.params)
     },
     methods: {
+      // 页面返回
       close() {
         history.go('-1')
       },
+      // 确认事件
       confirm() {
         this.show = false
         if(this.value3 == ''){
