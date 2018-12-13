@@ -47,8 +47,8 @@ import axios from '../http'
         ).then( response =>{
           if(response.status==200){
             this.$toast({
-            message: '签到成功！+10经验 +10积分',
-            duration: 1000
+              message: '签到成功！+10经验 +10积分',
+              duration: 1000
             })
             this.$store.commit('SIGNIN_CHANGE')
           }

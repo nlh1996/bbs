@@ -2,7 +2,11 @@
 <template>
   <div class="view view-admin">
     <van-tabs v-model="active" sticky color="orange" type="card" @click="onClick">
-      <van-tab title="贴子管理"><div class="box-admin">内容 1</div></van-tab>
+      <van-tab title="贴子管理">
+        <div class="box-admin">
+          <post-manage></post-manage>
+        </div>
+      </van-tab>
       <van-tab title="用户管理">
         <div class="box-admin">
           <van-tabs v-model="active2">
@@ -41,6 +45,7 @@
 <script>
 import axios from '../../http'
 import lahei from '@/components/lahei'
+import postManage from '@/components/post-manage'
   export default {
     data() {
       return {
@@ -52,13 +57,10 @@ import lahei from '@/components/lahei'
         value4: '',
       }
     },
-    beforeMount() {
-      if(this.$store.state.login.userdata.uName!='admin') {
-        history.go('-1')
-      }
-    },
+
     components: {
-      lahei: lahei
+      lahei: lahei,
+      postManage: postManage
     },
     methods: {
       onClick(index) {
@@ -87,7 +89,7 @@ import lahei from '@/components/lahei'
 }
 .box-admin{
   width: 6.9rem;
-  height: 10rem;
+  height: 11.5rem;
   background-color: white;
   margin: 0 auto;
   padding: 0.3rem;

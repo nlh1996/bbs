@@ -111,7 +111,10 @@ import axios from '../http'
             if(res.status == 200) {
               location.reload()
             }else{
-              alert("用户已经拉黑！")
+              this.$toast({
+                message: '该用户已拉黑！',
+                duration: 500
+              })
             }
           })
         }
@@ -127,6 +130,11 @@ import axios from '../http'
             if(res.status == 200) {
               this.user = res.data
               this.value = ''
+            }else{
+              this.$toast({
+                message: '该用户不存在！',
+                duration: 500
+              })
             }
           })
         }
@@ -169,7 +177,6 @@ import axios from '../http'
 }
 .time{
   width: 3rem;
-
 }
 .action{
   width: 1rem;

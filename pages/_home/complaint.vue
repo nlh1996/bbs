@@ -45,7 +45,7 @@ import axios from '../../http'
         show: true,
         title: this.$route.params.title,
         value1: this.$route.params.tag + '人',
-        value2: this.$route.params.tag + '贴子',
+        value2: this.$route.params.tag + '贴',
         value3: '',
         name: this.$route.params.name,
         content: typeof(this.$route.params.post) != "undefined"?this.$route.params.post.title:'',
