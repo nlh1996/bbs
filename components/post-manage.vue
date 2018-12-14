@@ -2,10 +2,10 @@
   <div>
     <h1>用户反馈处理：</h1>
     <div class="select">
-      <input type="radio" checked="checked" name="1" @click="undeal"/>未处理
-      <input type="radio"  name="1" @click="dealed"/>已处理
+      <input type="radio" checked name="1" @click="deal('0')"/>未处理
+      <input type="radio"  name="1" @click="deal('1')"/>已处理
     </div>
-
+    
     <table bgcolor='black' spellcheck="1px" class="table1">
       <tr bgcolor='white'>
         <td class="name">用户</td>
@@ -20,10 +20,16 @@
         <td class="time"><div class="text">{{item.createTime}}</div></td>
         <td class="action">
           <div class="text text-style text-button" @click="show(item.commit)">用户描述</div>
-          <div class="text text-style text-button" @click="goto(item.tid)">查看原帖</div>
-          <div class="text text-style text-button" @click="agree(index)">同意处理</div>
+          <div class="text text-style text-button" @click="goto(item.tid)" v-if="item.status==0">查看原帖</div>
+          <div>
+            <div v-if="item.status==0" class="text text-style text-button"  @click="agree(item.tid,item.theme)">同意处理</div>
+            <div v-if="item.status==1" class="text">已处理</div>
+            <div v-if="item.status==-1"></div>
+          </div>
         </td>
-        <td class="status text text-button " @click="del(index)">删除</td>
+        <td class="status">
+          <div class=" text text-button" style="color:red"  @click="del(item.tid)">删除</div>
+        </td>
       </tr>
     </table>
     <div class="page">
@@ -47,7 +53,7 @@
           autosize
         />
       </van-cell-group>
-      <button>发布</button>
+      <button @click="publish">发布</button>
     </div>
 
   </div>
@@ -62,11 +68,11 @@ import axios from '../http'
         pageNum: 1,
         message: '',
         list1: [
-          {name: '',createTime: '',theme:'',tid:'',commit:''},
-          {name: '',createTime: '',theme:'',tid:'',commit:''},
-          {name: '',createTime: '',theme:'',tid:'',commit:''},
-          {name: '',createTime: '',theme:'',tid:'',commit:''},
-          {name: '',createTime: '',theme:'',tid:'',commit:''},
+          {name: '',createTime: '',theme:'',tid:'',commit:'',status: -1},
+          {name: '',createTime: '',theme:'',tid:'',commit:'',status: -1},
+          {name: '',createTime: '',theme:'',tid:'',commit:'',status: -1},
+          {name: '',createTime: '',theme:'',tid:'',commit:'',status: -1},
+          {name: '',createTime: '',theme:'',tid:'',commit:'',status: -1},
         ],
         list2: [],
         result: [],
@@ -79,10 +85,13 @@ import axios from '../http'
       .then( res => {
         if(res.status == 200) {
           this.result = res.data.list
-          this.pageNum = parseInt(this.result.length/5)+1
+          this.pageNum = parseInt(this.result.length/6)+1
+          this.currentPage = 1
           for(let i=0; i<this.list1.length; i++) {
             if(this.result[i]) {
               this.list1[i] = this.result[i] 
+            }else{
+              this.list1[i] = {name: '',createTime: '',theme:'',tid:'',commit:'',status: -1}
             }
           }
           this.list2 = this.list1
@@ -90,27 +99,126 @@ import axios from '../http'
       })
     },
     methods: {
-      dealed() {
-        console.log(111)
-      },
-      undeal() {
-        console.log(222)
+      deal(num) {
+        let router = '/admin/getFeedList'+num
+        axios.post(
+          router
+        )
+        .then( res => {
+          if(res.status == 200) {
+            this.result = res.data.list
+            this.currentPage = 1
+            for(let i=0; i<this.list1.length; i++) {
+              if(this.result[i]) {
+                this.list1[i] = this.result[i] 
+              }else{
+                this.list1[i] = {name: '',createTime: '',theme:'',tid:'',commit:'',status: -1}
+              }
+            }
+            this.list2 = this.list1
+            if(num == 0) {
+              this.pageNum = parseInt(this.result.length/6)+1
+            }
+            if(num == 1) {
+              this.pageNum = 999
+            }
+          }
+        })
       },
       show(commit) {
-        console.log(commit)
+        if(commit) {
+          console.log(commit)
+        }
       },
       goto(tid) {
-        let route = '/post/'+ tid
-        this.$router.push(route)
+        if(tid) {
+          let route = '/post/'+ tid
+          this.$router.push(route)
+        }
       },
-      agree(index) {
-        console.log(3)
+      agree(tid,theme) {
+        console.log(theme)
+        if(theme == '举报贴子') {
+          axios.put(
+            '/admin/agreeFeedBack',
+            {tid: tid}
+          ).then(res => {
+            if(res.status == 200) {
+              location.reload()            
+            }else{
+              this.$toast({
+                message: '删除失败！',
+                duration: 500
+              })             
+            }
+          })
+        }else{
+          axios.put(
+            '/admin/zhiding',
+            {tid: tid}
+          ).then( res => {
+            if(res.status == 200) {
+              location.reload()            
+            }else{
+              this.$toast({
+                message: '内部出错！',
+                duration: 500
+              })             
+            }
+          })
+        }
       },
+      // 翻页事件
       pageChange() {
-
+        let temp = (this.currentPage-1)*5
+        let index = 0
+        for(let i=0+temp; i<this.list1.length+temp; i++) {
+          if(this.result[i]) {
+            this.list1[index] = this.result[i] 
+          }else{
+            this.list1[index] = {name: '',createTime: '',theme:'',tid:'',commit:'',status: -1}
+          }
+          index++
+        }
+        this.list2 = this.list1
       },
-      del(index) {
-
+      del(tid,index) {
+        if(tid) {
+          axios.put(
+            '/admin/delFeedBack',
+            {tid: tid}
+          ).then(res => {
+            if(res.status == 200) {
+              location.reload()            
+            }else{
+              this.$toast({
+                message: '内部出错！',
+                duration: 500
+              })             
+            }
+          })
+        }
+      },
+      publish() {
+        if(this.message) {
+          axios.post(
+            '/admin/notices/save',
+            {msg: this.message}
+          ).then(res => {
+            if(res.status == 200) {
+              this.message = ''  
+              this.$toast({
+                message: '发布成功！',
+                duration: 500
+              })        
+            }else{
+              this.$toast({
+                message: '内部出错！',
+                duration: 500
+              })             
+            }
+          })          
+        }
       }
     }
   }
@@ -127,7 +235,6 @@ import axios from '../http'
 }
 .table1{
   width: 7rem;
-  height: 3rem;
   margin: 0 auto;
   margin-top: 0.2rem;
 }

@@ -85,7 +85,7 @@ axios.defaults.headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 }
 
-axios.defaults.timeout = 5000
+axios.defaults.timeout = 10000
 
 // 跨域是否带cookie
 axios.defaults.withCredentials = true

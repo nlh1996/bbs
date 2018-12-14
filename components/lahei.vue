@@ -75,7 +75,7 @@ import axios from '../http'
       .then( res => {
         if(res.status == 200) {
           this.result = res.data.list
-          this.pageNum = parseInt(this.result.length/5)+1
+          this.pageNum = parseInt(this.result.length/6)+1
           for(let i=0; i<this.list1.length; i++) {
             if(this.result[i]) {
               this.list1[i] = this.result[i] 
