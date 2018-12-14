@@ -27,7 +27,7 @@
 
             <div class="row row-reply" v-show="item.show">
               <div spellcheck="false" contenteditable="true" :placeholder="'回复'+item.uName+'...'" tabindex="-1" class="rich-input" :id="'0'+index1"></div>
-              <button class="text-button" @click="()=>{item.show=false;reply('',item.id,'0'+index1)}">发送</button>
+              <button class="text-button" @click="()=>{item.show=false;reply(item.uName,item.id,'0'+index1)}">发送</button>
             </div>
           </div>
 

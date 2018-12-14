@@ -11,7 +11,7 @@
           <div class="item jifen">当前积分:{{form.integral}}</div>
         </div>
         <div class="row2">
-          <div>获得的阅读<div class="num">0</div></div>
+          <div>获得的阅读<div class="num">{{form.readNum}}</div></div>
           <div class="left-border">获得的回复<div class="num">{{form.replyNum}}</div></div>
           <div class="left-border">获得的赞<div class="num">{{form.support}}</div></div>
         </div>
@@ -98,7 +98,7 @@ import headerView from '~/components/header'
 }
 
 .name{
-  font-size: 0.5rem;
+  font-size: 0.4rem;
   font-weight: bold;
 }
 .jifen{

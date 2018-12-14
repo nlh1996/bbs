@@ -36,7 +36,7 @@
       </div>
       <div class="row row-reply">
         <div spellcheck="false" contenteditable="true" placeholder="说说你的看法..." class="rich-input" id="commit"></div>
-        <button class="text-button" @click="reply">评论</button>
+        <button class="text-button" @click="reply(post.topStorey.uName)">评论</button>
       </div>
     </div>
 
@@ -79,7 +79,7 @@ import axios from '~/http/'
       this.$store.commit("isDianzan",this.post.tid)
     },
     methods: {
-      reply() {
+      reply(name) {
         let value = document.getElementById('commit').innerText
         if(value) {
           axios.post(
@@ -88,7 +88,8 @@ import axios from '~/http/'
               tid: this.$route.params.post,
               uName: this.$store.state.login.userdata.uName,
               content: value,
-              show: false
+              show: false,
+              rName: name
             }
           )
           .then( response => {
