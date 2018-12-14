@@ -23,10 +23,14 @@
         left-icon="//img.yzcdn.cn/vant/volume.png"
       />
     </div>
-    
-    <div class="notice bg">
-      <div class="tag">置顶</div>
+
+    <div class="notice bg" v-for="(item,index) in list2" :key="index">
+      <div class="tag title">置顶</div>
+      <nuxt-link :to="'/post/'+item.tid" id="link">
+        <div class="title" style="width:80%">{{item.title}}</div>
+      </nuxt-link>
     </div>
+
 
     <div class="list">
     <van-list v-model="loading" :finished="finished" @load="onLoad">
@@ -105,7 +109,7 @@ import axios from '~/http/'
         list: [],
         index: 0,
         show: false,
-        post: {}
+        post: {},
       }
     },
     props: ["tid"],
@@ -115,13 +119,15 @@ import axios from '~/http/'
       headMenu,
     },
     async asyncData ({ params }) {
-      let [ request1Data, request2Data ] = await Promise.all([
+      let [ request1Data, request2Data, request3Data ] = await Promise.all([
         axios.get('/v1/posts'),
         axios.get('/v1/notices/get'),
+        axios.get('/v1/zhiding/get')
       ])
       return { 
         posts: request1Data.data.posts,
         notice: request2Data.data.msg,
+        list2: request3Data.data.list
       }
     },
     mounted() {
@@ -143,7 +149,7 @@ import axios from '~/http/'
           this.loading = false;
           if(!this.loading)
           {
-            console.log(this.list.length)
+            // console.log(this.list.length)
           }
 
           // 数据全部加载完成
@@ -309,5 +315,10 @@ import axios from '~/http/'
   color: lightgray;
   position:absolute;
   right: 0rem;
+}
+
+.title{
+  display: inline-block;
+  margin-left: 0.1rem;
 }
 </style>

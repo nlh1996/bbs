@@ -22,16 +22,17 @@
           <div class="text text-style text-button" @click="show(item.commit)">用户描述</div>
           <div class="text text-style text-button" @click="goto(item.tid)" v-if="item.status==0">查看原帖</div>
           <div>
-            <div v-if="item.status==0" class="text text-style text-button"  @click="agree(item.tid,item.theme)">同意处理</div>
+            <div v-if="item.status==0" class="text text-style text-button" @click="agree(item.tid,item.theme)">同意处理</div>
             <div v-if="item.status==1" class="text">已处理</div>
             <div v-if="item.status==-1"></div>
           </div>
         </td>
         <td class="status">
-          <div class=" text text-button" style="color:red"  @click="del(item.tid)">删除</div>
+          <div class=" text text-button" style="color:red" @click="del(item.tid)">删除</div>
         </td>
       </tr>
     </table>
+    <!-- 翻页组件 -->
     <div class="page">
       <van-pagination 
         v-model="currentPage" 
@@ -99,6 +100,7 @@ import axios from '../http'
       })
     },
     methods: {
+      // 显示处理和未处理的数据
       deal(num) {
         let router = '/admin/getFeedList'+num
         axios.post(
@@ -125,17 +127,20 @@ import axios from '../http'
           }
         })
       },
+      // 显示用户反馈描述
       show(commit) {
         if(commit) {
           console.log(commit)
         }
       },
+      // 跳转至贴子
       goto(tid) {
         if(tid) {
           let route = '/post/'+ tid
           this.$router.push(route)
         }
       },
+      // 同意处理
       agree(tid,theme) {
         console.log(theme)
         if(theme == '举报贴子') {
@@ -182,6 +187,7 @@ import axios from '../http'
         }
         this.list2 = this.list1
       },
+      // 删除
       del(tid,index) {
         if(tid) {
           axios.put(
@@ -199,6 +205,7 @@ import axios from '../http'
           })
         }
       },
+      // 发布公告
       publish() {
         if(this.message) {
           axios.post(
