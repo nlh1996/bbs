@@ -127,7 +127,7 @@ import axios from '~/http/'
       return { 
         posts: request1Data.data.posts,
         notice: request2Data.data.msg,
-        list2: request3Data.data.list
+        list2: request3Data.data.list 
       }
     },
     mounted() {

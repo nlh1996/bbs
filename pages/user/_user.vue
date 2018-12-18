@@ -46,7 +46,6 @@ import headerView from '~/components/header'
     },
     computed: {
       form: function() {
-        console.log(this.$store.state.login.userdata)
         return this.$store.state.login.userdata || ''
       }
     },

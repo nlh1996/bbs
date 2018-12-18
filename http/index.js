@@ -74,15 +74,14 @@ axios.interceptors.response.use(response => {
     console.log(err.message)
     return Promise.resolve(err.response)
 })
-
 //抽离get,post公共配置
 
 axios.defaults.baseURL = 'http://192.168.1.11:8000'
 //axios.defaults.baseURL = 'http://115.159.77.155:11400'
  
 axios.defaults.headers = {
-    'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+  'X-Requested-With': 'XMLHttpRequest',
+  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 }
 
 axios.defaults.timeout = 10000

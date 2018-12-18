@@ -32,7 +32,12 @@
       </div>
       <div class="row row-bottom">
         <span class="item"><p>{{post.topStorey.createTime}}</p></span>
-        <span class="item"><button class="text-button">积分打赏</button></span>
+        <span class="item"><button class="text-button" @click="daShangShow">积分打赏</button></span>
+        <van-popup v-model="show" class="daShang">
+          <div>请选择打赏积分</div>
+          <button @click="daShang">5积分</button>
+          <button @click="daShang">10积分</button>
+        </van-popup>
       </div>
       <div class="row row-reply">
         <div spellcheck="false" contenteditable="true" placeholder="说说你的看法..." class="rich-input" id="commit"></div>
@@ -60,6 +65,7 @@ import axios from '~/http/'
       return {
         icon_show: true,
         headImg: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58',
+        show: false,
       }
     },
     components:{
@@ -132,7 +138,13 @@ import axios from '~/http/'
             this.$store.state.reply.can_dianzan = true;
           }
         })        
-      }
+      },
+      daShangShow() {
+        this.show = true
+      },
+      daShang() {
+        this.show = false
+      },
     }
   }
 </script>
@@ -172,5 +184,9 @@ import axios from '~/http/'
 
 .icon{
   margin: 0.3rem 0.5rem;
+}
+.daShang{
+  text-align: center;
+  padding: 0.1rem;
 }
 </style>
