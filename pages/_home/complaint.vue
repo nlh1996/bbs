@@ -56,7 +56,6 @@ import axios from '../../http'
       if(!this.title) {
         history.go('-1')
       }
-      console.log(this.$route.params)
     },
     methods: {
       // 页面返回

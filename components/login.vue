@@ -42,19 +42,7 @@ import axios from '../http'
       beforeClose(action, done) {
         if (action === 'confirm') {
           if(this.username === 'admin') {
-            axios.post(
-              '/v1/admin',
-              {
-                uName: this.username,
-                password: this.password
-              }
-            ).then( res => {
-              if(res.status == 200) {
-                var storage = window.localStorage
-                storage.token = res.data.data.token
-                this.$router.push("/admin")
-              }
-            })            
+            this.$store.dispatch('adminLogin', {uName:this.username,password:this.password})
           }else{
             this.$store.dispatch('login', {uName:this.username,password:this.password})
           }

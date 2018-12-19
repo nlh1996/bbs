@@ -57,6 +57,7 @@ import postManage from '@/components/post-manage'
         value4: '',
       }
     },
+    middleware: 'auth',
 
     components: {
       lahei: lahei,

@@ -59,5 +59,21 @@ export default {
         }           
       })                  
     },
+
+    adminLogin({ commit },arg) {       
+      axios.post(
+      '/v1/admin',
+      {
+        uName: arg.uName,
+        password: arg.password
+      }
+      ).then( res => {
+        if(res.status == 200) {
+          commit('USER_LOGIN', res.data)
+          var storage = window.localStorage
+          storage.token = res.data.token
+        }
+      }) 
+    }, 
   }
 }

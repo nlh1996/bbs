@@ -7,7 +7,7 @@
     <div class="classify bg">
       <ul v-for="(item,index) in icons" :key="index">
         <li>
-          <div class="icon-box">
+          <div class="icon-box" @click="select(item.msg)" :id="item.msg">
             <svg class="icon" aria-hidden="true">
               <use :xlink:href=item.name></use>
             </svg>
@@ -209,6 +209,14 @@ import axios from '~/http/'
           }
         })
         event.preventDefault()
+      },
+      select(id) {
+        let icon = document.getElementById(id)
+        let icons = document.getElementsByClassName('icon-box')
+        for(let i=0; i<icons.length; i++) {
+          icons[i].style.setProperty("background-color","white")
+        }
+        icon.style.setProperty("background-color","darkorange")       
       }
     },
     scrollBehavior (to, from, savedPosition) {
@@ -241,9 +249,13 @@ import axios from '~/http/'
 .icon-box{
   padding-right: 0.1rem;
 }
+
 .icon-box:hover{
   cursor: pointer;
-  background-color:darkorange;
+}
+
+#最新{
+  background-color:darkorange
 }
 
 .list{
