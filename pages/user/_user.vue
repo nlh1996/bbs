@@ -1,3 +1,4 @@
+// 用户详情
 <template>
   <div class="view">
     <header-view :name="title"></header-view>
@@ -24,7 +25,7 @@
     </van-cell-group>
 
     <van-tabs v-model="active" color="green">
-      <van-tab title="我的话题"><div class="content">暂无数据</div></van-tab>
+      <van-tab title="我的贴子"><div class="content">暂无数据</div></van-tab>
       <van-tab title="我的回复"><div class="content">暂无数据</div></van-tab>
       <van-tab title="我赞过"><div class="content">暂无数据</div></van-tab>
     </van-tabs>
@@ -38,7 +39,6 @@ import headerView from '~/components/header'
       return {
         title: "个人信息",
         active: 0,
-
       }
     },
     components: {
@@ -69,7 +69,7 @@ import headerView from '~/components/header'
 
 .content{
   text-align: center;
-  min-height: 40vh;
+  min-height: 60vh;
 }
 
 .d1,.d2{

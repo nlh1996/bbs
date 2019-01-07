@@ -130,7 +130,7 @@ import axios from '../http'
       // 显示用户反馈描述
       show(commit) {
         if(commit) {
-          console.log(commit)
+          alert(commit)
         }
       },
       // 跳转至贴子
@@ -142,7 +142,6 @@ import axios from '../http'
       },
       // 同意处理
       agree(tid,theme) {
-        console.log(theme)
         if(theme == '举报贴子') {
           axios.put(
             '/admin/agreeFeedBack',

@@ -30,9 +30,11 @@
               <button class="text-button" @click="()=>{item.show=false;reply(item.uName,item.id,'0'+index1)}">发送</button>
             </div>
           </div>
-
+          <!-- 二级回复 -->
           <ul>
-            <li v-if="value.rid==item.id" v-for="(value,index2) in reList2" :key="index2">
+            <li v-for="(value,index2) in reList2" :key="index2">
+              <!-- 筛选本层的二级回复 -->
+              <div v-if="value.rid==item.id">
               <div class="reply2-box">
                 <div class="row">
                   <div class="headImg"><img :src="headImg" style="width:0.6rem"></div>
@@ -51,7 +53,8 @@
               <div class="row row-reply" v-show="value.show">
                 <div spellcheck="false" contenteditable="true" :placeholder="'回复'+value.uName+'...'" class="rich-input" tabindex="-1" :id="'00'+index2"></div>
                 <button class="text-button" @click="()=>{value.show=false;reply(value.uName,item.id,'00'+index2)}">发送</button>
-              </div>     
+              </div>  
+              </div>   
             </li>
           </ul>
         </li>
@@ -138,6 +141,7 @@ import axios from '~/http'
         return this.$store.state.reply.post.topStorey.uName
       }
     },
+    // 更新的钩子函数用来使输入框自动获取焦点
     updated() {
       let input = document.getElementById(this.$store.state.reply.id)
       if(input){

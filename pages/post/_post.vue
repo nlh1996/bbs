@@ -1,4 +1,4 @@
-//动态路由，贴子详情
+// 动态路由，贴子详情
 <template>
   <div class="view">
     <cover-layer></cover-layer>
@@ -34,7 +34,7 @@
         <span class="item"><p>{{post.topStorey.createTime}}</p></span>
         <span class="item"><button class="text-button" @click="daShangShow">积分打赏</button></span>
         <van-popup v-model="show" class="daShang">
-          <div>请选择打赏积分</div>
+          <div style="font-size:0.35rem;color:green;">请选择打赏积分</div>
           <button @click="daShang">5积分</button>
           <button @click="daShang">10积分</button>
         </van-popup>
@@ -45,6 +45,7 @@
       </div>
     </div>
 
+    <!-- 回复列表 -->
     <div class="list">
       <reply-list></reply-list>
     </div>
@@ -68,7 +69,7 @@ import axios from '~/http/'
         show: false,
       }
     },
-    components:{
+    components: {
       headerView,
       replyList,
       coverLayer
@@ -185,8 +186,18 @@ import axios from '~/http/'
 .icon{
   margin: 0.3rem 0.5rem;
 }
+
 .daShang{
   text-align: center;
   padding: 0.1rem;
+  width: 3.5rem;
+  height: 2rem;
+  font-size: 0.4rem;
+}
+
+.daShang button{
+  width: 1.5rem;
+  height: 0.6rem;
+  margin-top: 0.6rem;
 }
 </style>

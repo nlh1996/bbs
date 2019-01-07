@@ -1,4 +1,4 @@
-//管理员路由
+// 管理员路由
 <template>
   <div class="view view-admin">
     <van-tabs v-model="active" sticky color="orange" type="card" @click="onClick">
