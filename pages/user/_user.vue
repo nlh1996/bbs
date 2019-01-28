@@ -25,7 +25,18 @@
     </van-cell-group>
 
     <van-tabs v-model="active" color="green">
-      <van-tab title="我的贴子"><div class="content">暂无数据</div></van-tab>
+      <van-tab title="我的贴子">
+        <div class="content">
+          <ul><li v-for="(item,index) in myposts" :key="index">
+            <nuxt-link :to="'/post/'+item.tid">
+              <div class="post-box">
+                <div class="post-title">{{item.title}}</div>
+                <div class="post-time">{{item.createTime}}</div>
+              </div>
+            </nuxt-link>
+          </li></ul>
+        </div>
+      </van-tab>
       <van-tab title="我的回复"><div class="content">暂无数据</div></van-tab>
       <van-tab title="我赞过"><div class="content">暂无数据</div></van-tab>
     </van-tabs>
@@ -33,12 +44,14 @@
 </template>
 
 <script>
+import axios from '../../http'
 import headerView from '~/components/header'
   export default {
     data() {
       return {
         title: "个人信息",
         active: 0,
+        myposts: [],
       }
     },
     components: {
@@ -51,6 +64,13 @@ import headerView from '~/components/header'
     },
     beforeMount() {
       this.$store.dispatch("isLoad")
+    },
+    mounted() {
+      axios.post('v2/user/myposts').then( res => {
+        if (res.status == 200) {
+          this.myposts = res.data.myposts
+        }
+      })
     },
   }
 </script>

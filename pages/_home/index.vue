@@ -119,14 +119,14 @@ import axios from '~/http/'
       headMenu,
     },
     async asyncData ({ params }) {
-      // let [ request1Data, request2Data, request3Data ] = await Promise.all([
-      //   axios.get('/v1/posts'),
-      //   axios.get('/v1/notices/get'),
-      //   axios.get('/v1/zhiding/get')
-      // ])
-      let data1 = await axios.get('/v1/posts')
-      let data2 = await axios.get('/v1/notices/get')
-      let data3 = await axios.get('/v1/zhiding/get')
+      let [ data1, data2, data3 ] = await Promise.all([
+        axios.get('/v1/posts'),
+        axios.get('/v1/notices/get'),
+        axios.get('/v1/zhiding/get')
+      ])
+      // let data1 = await axios.get('/v1/posts')
+      // let data2 = await axios.get('/v1/notices/get')
+      // let data3 = await axios.get('/v1/zhiding/get')
       return { 
         posts: data1.data.posts,
         notice: data2.data.msg,
