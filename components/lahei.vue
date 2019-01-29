@@ -129,6 +129,8 @@ import axios from '../http'
           .then( res => {
             if(res.status == 200) {
               this.user = res.data
+              let temp = parseInt(this.user.level/50)
+              this.user.level = temp+1
               this.value = ''
             }else{
               this.$toast({

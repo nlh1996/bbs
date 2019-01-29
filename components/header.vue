@@ -50,10 +50,7 @@ import register from '~/components/register'
     },
     computed: {
       level: function() {
-        if(this.$store.state.login.userdata.exp<31){
-          return 1
-        }
-        let temp = parseInt(this.$store.state.login.userdata.exp/15)
+        let temp = parseInt(this.$store.state.login.userdata.exp/50)
         return temp+1
       },
     },
