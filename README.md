@@ -17,7 +17,6 @@ $ npm start
 # generate static project
 $ npm run generate
 # app.html         ----  定义rem
-# nuxt.config.js   ----  定义api(跨域解决)
 # http/index.js    ----  封装了axios
 # pages            ----  路由页面
 # components       ----  可复用的公共组件
