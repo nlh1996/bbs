@@ -96,7 +96,7 @@ import axios from '~/http/'
               uName: this.$store.state.login.userdata.uName,
               content: value,
               show: false,
-              rName: name
+              rName: name,
             }
           )
           .then( response => {
@@ -122,7 +122,7 @@ import axios from '~/http/'
         )
         .then( res => {
           if(res.status == 200) {
-            this.$store.state.reply.can_dianzan = false;
+            this.$store.state.reply.can_dianzan = false
           }
         })
       },
@@ -136,7 +136,7 @@ import axios from '~/http/'
         )
         .then( res => {
           if(res.status == 200) {
-            this.$store.state.reply.can_dianzan = true;
+            this.$store.state.reply.can_dianzan = true
           }
         })        
       },

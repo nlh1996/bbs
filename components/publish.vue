@@ -107,11 +107,11 @@ import axios from '~/http'
         }
       },
       // 从数组中删除图片
-      delImg(index){
-        this.imgBase64.splice(index,1);
+      delImg(index) {
+        this.imgBase64.splice(index,1)
       },
       // 图片上传尺寸大于限制时触发
-      overSize(){
+      overSize() {
         alert("图片大小超出上传限制啦！")
       },
       // 发布事件

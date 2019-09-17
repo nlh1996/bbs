@@ -31,7 +31,6 @@
       </nuxt-link>
     </div>
 
-
     <div class="list">
     <van-list v-model="loading" :finished="finished" @load="onLoad">
       <ul>
@@ -39,21 +38,21 @@
           <nuxt-link :to="'/post/'+item.tid" id="link">
           <div class="box">
             <div class="row">
-              <div class="tag">攻略</div>
-              <h2>{{item.title}}</h2>
+              <div class="tag" style="margin-right:0.2rem;">攻略</div>
+                <h2>{{item.title}}</h2>
               <svg class="icon shanchu" aria-hidden="true" @click="shanchu(item.tid)"
               v-if="item.uName == $store.state.login.userdata.uName || $store.state.login.userdata.uName == 'admin'">
                 <use xlink:href="#icon-shanchu"></use>
               </svg>
             </div>
-            <div class="row">
+            <div class="row" style="margin-left:0.4rem;">
               <p>{{item.content}}</p>
             </div>
             <div class="row-img" v-for="(imgSrc,index2) in item.imgList" :key="index2">
               <img :src=imgSrc style="width:2.2rem;height:2rem;"/>
             </div>
-            <div class="row"><span style="color:white;margin:0.1rem;">111</span></div>
-            <span class="item-left"><p>{{item.uName}}</p></span>
+            <div class="row" style="margin:0.3rem;"></div>
+            <span class="item-left"><span style="color:gray;">{{item.uName}}</span></span>
             <!-- <span class="item"><p>{{item.createTime}}</p></span> -->
             <span class="item-center">
               <svg class="icon" aria-hidden="true">
@@ -124,9 +123,6 @@ import axios from '~/http/'
         axios.get('/v1/notices/get'),
         axios.get('/v1/zhiding/get')
       ])
-      // let data1 = await axios.get('/v1/posts')
-      // let data2 = await axios.get('/v1/notices/get')
-      // let data3 = await axios.get('/v1/zhiding/get')
       return { 
         posts: data1.data.posts,
         notice: data2.data.msg,
@@ -267,7 +263,7 @@ import axios from '~/http/'
 .footer{
   margin-bottom: 0;
   position: fixed;
-  bottom: 0;
+  bottom: -0.01rem;
 }
 
 .box{
@@ -291,6 +287,7 @@ import axios from '~/http/'
 
 .row{
   flex-basis: 100%;
+  margin-bottom: 0.2rem;
   display:flex;
 }
 

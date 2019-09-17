@@ -5,7 +5,6 @@ export default {
     src: '',
     data: {
     },
-
   },
 
   //官方建议mutations中事件名称大写，state属性只允许在mutations中处理 

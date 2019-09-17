@@ -23,17 +23,6 @@ export default {
             //此处数据模拟从后端获取，正确处理用response.data替换下面的数据
             console.log(response.data)
             commit('USER_REGISTER', response.data)
-            // var storage = window.localStorage
-            // console.log(storage)
-            //将对象转换为JSON字符串存储
-            // let form = JSON.stringify(this.form)
-            // storage.data = form
-            // console.log(typeof storage.data)
-            //storage.username = '萌妹子'
-            //将JSON字符串转换成为对象输出
-            // let json = storage.data
-            // let jsonObj = JSON.parse(json)
-            // console.log(typeof jsonObj)
           })
     },
   }

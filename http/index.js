@@ -113,7 +113,7 @@ export default {
       axios({
         method: 'post',
         url: url,
-        data: JSON.stringify(data),//将post请求的数据转化为json对象
+        data: JSON.stringify(data),//将post请求的数据转化为json字符串
         headers: { 'Authorization': storage.token,'Content-Type': 'application/json; charset=UTF-8'},
         cancelToken: new CancelToken(c => {
           cancel = c
