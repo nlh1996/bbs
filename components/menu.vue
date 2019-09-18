@@ -10,21 +10,20 @@
       <ul>
         <li v-if="!$store.state.login.isSignin"><button @click="signin">签到</button></li>
         <li v-else><button disabled="false">已签</button></li>
-        <li><button>礼包</button></li>
-        <li><button>商城</button></li>
+        <li><nuxt-link to='giftpack'><button>礼包</button></nuxt-link> </li>
+        <li><nuxt-link to='shoppingmall'><button>商城</button></nuxt-link> </li>
       </ul>
       
       <nuxt-link :to='user_route'>
-      <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-wode1"></use>
-      </svg>
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-wode1"></use>
+        </svg>
       </nuxt-link>
       
       <nuxt-link to='/'>
-      <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-sousuo"></use>
-      </svg>
-
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-sousuo"></use>
+        </svg>
       </nuxt-link>  
     </div>            
   </div>
@@ -83,7 +82,9 @@ ul,li{
   list-style: none;
   margin-left: 0.15rem;
 }
+
 button{
+  color: black;
   outline: none;
   font-size: 0.3rem;
   background-color: white;

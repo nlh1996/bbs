@@ -53,6 +53,7 @@
 
 <script>
 import axios from '~/http'
+
   export default {
     data() {
       return {
@@ -117,9 +118,9 @@ import axios from '~/http'
       // 发布事件
       publish() {
         this.show = false
-        if(this.title == ''&& this.content == ''){
+        if(this.title == ''|| this.content == ''){
           this.show = true
-          alert("标题和内容不能为空")
+          this.$toast("标题和内容不能为空")
         }
         else{
           axios.post(
