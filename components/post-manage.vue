@@ -54,7 +54,7 @@
           autosize
         />
       </van-cell-group>
-      <button @click="publish">发布</button>
+      <van-button type="primary" @click="publish">发布</van-button>
     </div>
 
   </div>
@@ -224,6 +224,11 @@ import axios from '../http'
               })             
             }
           })          
+        }else {
+          this.$toast({
+            message: '不能为空！',
+            duration: 500
+          }) 
         }
       }
     }

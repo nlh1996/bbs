@@ -71,7 +71,10 @@ axios.interceptors.response.use(response => {
   } else {
     err.message = "连接到服务器失败"
   }
-  Toast(err.message)
+  Toast({
+    message: err.message,
+    duration: 1000
+  })
   return Promise.resolve(err.response)
 })
 //抽离get,post公共配置
@@ -87,7 +90,7 @@ axios.defaults.headers = {
 axios.defaults.timeout = 30000
 
 // 跨域是否带cookie
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = false
 
 export default {
   //get请求
