@@ -17,7 +17,7 @@ module.exports = {
 
   css: [
     {src: '~/assets/css/common.css'},
-    {src: 'vant/lib/vant-css/index.css'},
+    {src: 'vant/lib/index.css'},
 
   ],
   plugins: [{
@@ -53,12 +53,6 @@ module.exports = {
   axios: {
     proxy: true
     // See https://github.com/nuxt-community/axios-module#options
-  },
-  proxy: {
-    '/api': {
-      target: 'http://localhost:8000',
-      pathRewrite: { '^/api': '' }
-    },
   },
 }
 

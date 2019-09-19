@@ -29,15 +29,21 @@
           </van-tabs>
         </div>
       </van-tab>
-      <van-tab title="数据统计"><div class="box-admin">
-        <van-cell-group>
-          <van-cell title="今日访问量:" :value="value1+'次'" /> 
-          <van-cell title="本日登录人数:" :value="value2+'人'" /> 
-          <van-cell title="本日新注册人数:" :value="value3+'人'" /> 
-          <van-cell title="累计注册人数:" :value="value4+'人'" /> 
-        </van-cell-group>  
-      </div></van-tab>
-      <van-tab title="礼包发放"><div class="box-admin">内容 4</div></van-tab>
+      <van-tab title="数据统计">
+        <div class="box-admin">
+          <van-cell-group>
+            <van-cell title="今日访问量:" :value="value1+'次'" /> 
+            <van-cell title="本日登录人数:" :value="value2+'人'" /> 
+            <van-cell title="本日新注册人数:" :value="value3+'人'" /> 
+            <van-cell title="累计注册人数:" :value="value4+'人'" /> 
+          </van-cell-group>  
+        </div>
+      </van-tab>
+      <van-tab title="礼包发放">
+        <div class="box-admin">
+          <giftpack></giftpack>
+        </div>
+      </van-tab>
     </van-tabs>
   </div>
 </template>
@@ -46,6 +52,7 @@
 import axios from '../../http'
 import lahei from '@/components/lahei'
 import postManage from '@/components/post-manage'
+import giftpack from '@/components/giftpack'
   export default {
     data() {
       return {
@@ -61,7 +68,8 @@ import postManage from '@/components/post-manage'
 
     components: {
       lahei: lahei,
-      postManage: postManage
+      postManage: postManage,
+      giftpack: giftpack
     },
     methods: {
       onClick(index) {
