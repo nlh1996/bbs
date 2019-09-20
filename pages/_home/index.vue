@@ -159,7 +159,7 @@ import axios from '~/http/'
       },
       shanchu(id) {
         var r=confirm("贴子一但删除，无法恢复!");
-        if (r==true){
+        if (r==true) {
           axios.delete('/v2/delpost',
           {
             tid: id,
@@ -173,8 +173,7 @@ import axios from '~/http/'
             }         
           })
         }
-        else{
-        }
+
         event.preventDefault()
       },
       extend(post) {

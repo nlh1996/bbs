@@ -29,7 +29,8 @@
 
     <div class="row">
       <span>发放数量：</span>
-      <input type="text">
+      <input type="text" style="width:1.2rem;" @focus="count" v-model="num">
+      <span>可发放数量：</span>{{value4}}
     </div>
     <van-row type="flex" justify="center">
       <van-button type="primary" @click="seed" class="btn">发放</van-button>
@@ -45,28 +46,33 @@ import axios from '../http'
         value1: '',
         value2: '',
         value3: '',
+        value4: 0,
+        num: null,
         option1: [],
         option2: [],
-        option3: []
+        option3: [],
+        url: 'https://www.yinghuo2018.com:20000/gm'
       }
     },
     mounted() {
-      axios.get('https://www.yinghuo2018.com:20000/gm/getChannels').then (
+      axios.get(this.url + '/getChannels').then (
         res => {
           if(res.status == 200) {
             this.option1 = res.data.data
           }
         }
       )
-      axios.get('https://www.yinghuo2018.com:20000/gm/getGiftPacks').then( 
+      axios.get(this.url + '/getGiftPacks').then( 
         res=> {
-          this.option3 = res.data.data
+          if(res.status == 200) {
+            this.option3 = res.data.data
+          }
         }
-      ) 
+      )
     },
     methods: {
       filter() {
-        axios.get('https://www.yinghuo2018.com:20000/gm/getAreas', {"ChannelName": this.value1})
+        axios.get(this.url + '/getAreas', {"ChannelName": this.value1})
         .then( res => {
           if (res.status == 200) {
             this.option2 = res.data.data
@@ -75,7 +81,7 @@ import axios from '../http'
       },
       clean() {
         this.option2 = []
-        axios.get('https://www.yinghuo2018.com:20000/gm/getChannels').then (
+        axios.get(this.url + '/getChannels').then (
           res => {
             if(res.status == 200) {
               this.option1 = res.data.data
@@ -84,8 +90,27 @@ import axios from '../http'
           }
         )
       },
+      count() {
+        if (this.value1 != ''&& this.value2 != ''&& this.value3 != '') {
+          axios.get(this.url + '/countRedeemCodes',{"Channel": this.value1,"Area": this.value2,"GiftPackName": this.value3}).then(
+            res => {
+              if(res.status == 200) {
+                this.value4 = res.data.num
+              }
+            }
+          )
+        }
+      },
       seed() {
-
+        if (this.value1 == ''|| this.value2 == ''|| this.value3 == '') {
+          console.log('请填写完整')
+          return
+        }
+        if(this.num <= this.value4 && this.num != null) {
+          console.log(this.num)
+        }else {
+          console.log('请输入正确数量')
+        }
       }
     }
   }

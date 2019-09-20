@@ -71,6 +71,14 @@ import giftpack from '@/components/giftpack'
       postManage: postManage,
       giftpack: giftpack
     },
+    mounted() {
+      if(this.$store.state.login.userdata.uName != 'admin') {
+        this.$router.push({
+          name: 'index',
+        })
+      }
+    },
+
     methods: {
       onClick(index) {
         if(index == 2){
