@@ -153,12 +153,12 @@ import axios from '~/http/'
 
           // 数据全部加载完成
           if (this.index >= this.posts.length) {
-            this.finished = true;
+            this.finished = true
           }
         }, 50);
       },
       shanchu(id) {
-        var r=confirm("贴子一但删除，无法恢复!");
+        var r=confirm("贴子一但删除，无法恢复!")
         if (r==true) {
           axios.delete('/v2/delpost',
           {

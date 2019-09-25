@@ -45,14 +45,12 @@ export default {
           }
           state.can_dianzan = true
         }
-
       })
     },
   },
 
   //监听分发事件，可用于处理多个监听事件，方法名与分发名相同
   actions: {
-
 
   }
 }
