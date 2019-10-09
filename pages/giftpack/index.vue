@@ -5,7 +5,7 @@
     <div>
       <div class="row">
         <span>选择渠道：</span>
-        <select v-model="value1" @click="clean">
+        <select v-model="Channel" @click="clean">
           <option  v-for="(item,index) in option1" :key="index">
             {{item.ChannelName}}
           </option>
@@ -14,7 +14,7 @@
 
       <div class="row">
         <span>选择区服：</span>
-        <select v-model="value2">
+        <select v-model="Area" @click="showGiftPack">
           <option  v-for="(item,index) in option2" :key="index">
             {{item.ServerName}}
           </option>
@@ -22,14 +22,14 @@
       </div>
     </div>
 
-    <div>
+    <div v-for="(item,index) in gifts" :key="index">
       <van-card
-        num="2"
+        :num="item.GiftPackNum"
         desc="描述信息"  
-        title="节日礼包"
+        :title="item.GiftPackName"
         thumb="timg.jpg"
       >
-        <div slot="tags">
+        <div slot="tags" class="tag">
           <van-tag plain type="danger">20积分</van-tag>
         </div>
         <div slot="footer">
@@ -50,8 +50,9 @@ import axios from '../../http'
         title: "礼包",
         option1: [],
         option2: [],
-        value1: '',
-        value2: '',
+        gifts: [],
+        Channel: '',
+        Area: '',
         url: 'https://www.yinghuo2018.com:20000/gm'
       }
     },
@@ -72,7 +73,7 @@ import axios from '../../http'
     },
     methods: {
       filter() {
-        axios.get(this.url + '/getAreas', {"ChannelName": this.value1}).then( res => {
+        axios.get(this.url + '/getAreas', {"ChannelName": this.Channel}).then( res => {
           if (res.status == 200) {
             this.option2 = res.data.data
           }
@@ -88,7 +89,15 @@ import axios from '../../http'
             }
           }
         )
-      },     
+      },  
+      showGiftPack() {
+        axios.post("/v2/gift/showGiftPack", {Channel: this.Channel, Area: this.Area}).then( res => {
+          if(res.status == 200) {
+            this.gifts = res.data.gift
+            console.log(this.gifts)
+          }
+        })
+      }   
     }
   }
 </script>
@@ -114,5 +123,9 @@ select {
   margin-top: 0.1rem;
   height: 0.5rem;
   line-height: 0.3rem;
+}
+.tag {
+  margin-top: 0.1rem;
+  width: 1.5rem;
 }
 </style>

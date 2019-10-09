@@ -16,13 +16,13 @@
       
       <nuxt-link :to='user_route'>
         <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wode1"></use>
+          <use xlink:href="#icon-wode1"></use>
         </svg>
       </nuxt-link>
       
       <nuxt-link to='/'>
         <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-sousuo"></use>
+          <use xlink:href="#icon-sousuo"></use>
         </svg>
       </nuxt-link>  
     </div>            
@@ -66,7 +66,6 @@ import axios from '../http'
 .left{
   float: left;
   margin-left: 0.1rem;
-
 }
 
 .right{

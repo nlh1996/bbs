@@ -64,17 +64,18 @@ import register from '~/components/register'
   margin: 0.1rem;
   line-height: 0.5rem;
 }
+
 .box{
   float: right;
   padding-right: 0.3rem;
 }
+
 .close{
   font-size: 0.4rem;
 }
+
 .title{
   font-size:  0.35rem;
   font-weight: bold;
 }
-
-
 </style>

@@ -32,6 +32,7 @@
       <input type="text" @focus="count" v-model.number="GiftPackNum">
       <span>可发放数量：</span>{{AccessNum}}
     </div>
+    
     <van-row type="flex" justify="center">
       <van-button type="primary" @click="seed" class="btn">发放</van-button>
     </van-row>
@@ -48,6 +49,7 @@ import axios from '../http'
         GiftPackName: '',
         AccessNum: 0,
         GiftPackNum: null,
+        Comment: '',
         option1: [],
         option2: [],
         option3: [],
@@ -103,15 +105,21 @@ import axios from '../http'
       },
       seed() {
         if (this.Channel == ''|| this.Area == ''|| this.GiftPackName == '') {
-          console.log('请填写完整')
+          this.$toast('请填写完整')
           return
         }
-        if(this.GiftPackNum <= this.AccessNum && this.GiftPackNum != null) {
+        if(/*this.GiftPackNum <= this.AccessNum && */this.GiftPackNum != null) {
+          for(let i of this.option3) {
+            if(i.GiftPackName == this.GiftPackName) {
+              this.Comment = i.Comment
+            }
+          }
           axios.post('/admin/sendGiftPack',{
             Channel: this.Channel,
             Area: this.Area,
             GiftPackName: this.GiftPackName,
-            GiftPackNum: this.GiftPackNum
+            GiftPackNum: this.GiftPackNum,
+            Comment: this.Comment
           }).then( res => {
             if(res.status == 200) {
               this.$toast({message: "发送成功！"})
@@ -120,7 +128,7 @@ import axios from '../http'
             }
           })
         }else {
-          console.log('请输入正确数量')
+          this.$toast({message: "请输入正确数量"})
         }
       }
     }
@@ -155,5 +163,4 @@ select {
   padding: 0.06rem;
   height: 0.6rem;
 }
-
 </style>
