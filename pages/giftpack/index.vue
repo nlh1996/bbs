@@ -33,11 +33,10 @@
           <van-tag plain type="danger">20积分</van-tag>
         </div>
         <div slot="footer">
-          <van-button size="mini">领取</van-button>
+          <van-button size="mini" @click="getGift(item)">领取</van-button>
         </div>
       </van-card>
     </div>
-
   </div>
 </template>
 
@@ -53,7 +52,8 @@ import axios from '../../http'
         gifts: [],
         Channel: '',
         Area: '',
-        url: 'https://www.yinghuo2018.com:20000/gm'
+        url: 'https://www.yinghuo2018.com:20000/gm',
+        code: {}
       }
     },
     components: {
@@ -97,7 +97,15 @@ import axios from '../../http'
             console.log(this.gifts)
           }
         })
-      }   
+      },
+      getGift(data) {
+        axios.post("/v2/gift/getGiftPack", data).then( res => {
+          if(res.status == 200) {
+            this.code = res.data
+            console.log(this.code)
+          }
+        })
+      }
     }
   }
 </script>
@@ -118,12 +126,15 @@ select {
   padding: 0.06rem;
   height: 0.6rem;
 }
+
 .van-card__title {
+  padding: 0.1rem;
   font-size: 0.35rem;
   margin-top: 0.1rem;
   height: 0.5rem;
   line-height: 0.3rem;
 }
+
 .tag {
   margin-top: 0.1rem;
   width: 1.5rem;
