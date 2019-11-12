@@ -93,7 +93,7 @@ import axios from '../http'
         )
       },
       count() {
-        if (this.Channel != ''&& this.Area != ''&& this.GiftPackName != '') {
+        if(this.Channel != ''&& this.Area != ''&& this.GiftPackName != '') {
           axios.get(this.url + '/countRedeemCodes',{"Channel": this.Channel,"Area": this.Area,"GiftPackName": this.GiftPackName}).then(
             res => {
               if(res.status == 200) {
@@ -104,7 +104,7 @@ import axios from '../http'
         }
       },
       seed() {
-        if (this.Channel == ''|| this.Area == ''|| this.GiftPackName == '') {
+        if(this.Channel == ''|| this.Area == ''|| this.GiftPackName == '') {
           this.$toast('请填写完整')
           return
         }

@@ -21,7 +21,7 @@ module.exports = {
 
   ],
   plugins: [{
-    src:'~plugins/vant',
+    src:'~/plugins/vant',
     ssr: true //是能在服务端运行
   }],
   /*

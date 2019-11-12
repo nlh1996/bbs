@@ -101,12 +101,11 @@ import giftpack from '@/components/giftpack'
 
 <style>
 .view-admin{
-  margin-top: 0.2rem;
   background-color: white
 }
 .box-admin{
   width: 6.9rem;
-  height: 11.5rem;
+  height: 100%;
   background-color: white;
   margin: 0 auto;
   padding: 0.3rem;

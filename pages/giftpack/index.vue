@@ -94,7 +94,6 @@ import axios from '../../http'
         axios.post("/v2/gift/showGiftPack", {Channel: this.Channel, Area: this.Area}).then( res => {
           if(res.status == 200) {
             this.gifts = res.data.gift
-            console.log(this.gifts)
           }
         })
       },
@@ -102,6 +101,7 @@ import axios from '../../http'
         axios.post("/v2/gift/getGiftPack", data).then( res => {
           if(res.status == 200) {
             this.code = res.data
+            data.GiftPackNum --
             console.log(this.code)
           }
         })
@@ -139,4 +139,5 @@ select {
   margin-top: 0.1rem;
   width: 1.5rem;
 }
+
 </style>

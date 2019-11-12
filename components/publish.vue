@@ -43,6 +43,13 @@
       </div>
     </div>
 
+    <div class="clean"></div>
+
+    <van-dropdown-menu>
+      <van-dropdown-item v-model="value1" :options="option1" @change="choose" :title="title1"/>
+      <van-dropdown-item v-model="value2" :options="option2" @change="choose" :title="title2"/>
+    </van-dropdown-menu>
+
     <div class="publish-btn" @click="publish">
       <div v-show="show">发表</div>
       <div class="loading" v-show="!show"><van-loading color="green" /></div>
@@ -61,10 +68,20 @@ import axios from '~/http'
         title: "",
         content: "",
         imgBase64: [],
-        show: true
+        show: true,
+        value1: null,
+        value2: null,
+        option1: [
+          { text: '玩家交流', value: 0 },
+          { text: '玩家交易', value: 1 },
+          { text: '意见采集', value: 2 }
+        ],
+        option2: [],
+        title1: "选择版块",
+        title2: "选择标签",
+
       }
     },
-
     methods: {
       // 返回上一页面
       close() {
@@ -115,36 +132,80 @@ import axios from '~/http'
       overSize() {
         alert("图片大小超出上传限制啦！")
       },
+      choose(v) {
+        if (v < 3) {
+          this.option2 = []
+          this.title2 = "选择标签"
+          this.value2 = null
+        }
+        for(let item of this.option1) {
+          if(item.value == v) {
+            this.title1 = item.text
+          } 
+        }
+        for(let item of this.option2) {
+          if(item.value == v) {
+            this.title2 = item.text
+          } 
+        }
+        if(v == 0) {
+          this.option2 = [
+            {text: '求助', value: 3 },
+            {text: '攻略', value: 4 },
+            {text: '广告', value: 5 },
+          ]
+        }
+        if(v == 1) {
+          this.option2 = [
+            {text: '交易', value: 9 },
+          ]
+        }
+        if(v == 2) {
+          this.option2 = [
+            {text: 'BUG', value: 6 },
+            {text: '举报', value: 7 },
+            {text: '建议', value: 8 },
+          ]          
+        }
+      },
       // 发布事件
       publish() {
         this.show = false
         if(this.title == ''|| this.content == ''){
           this.show = true
           this.$toast("标题和内容不能为空")
+          return
         }
-        else{
-          axios.post(
-            '/v2/publish',
-            {
-              uName: this.$store.state.login.userdata.uName,
-              title: this.title,
-              content: this.content,
-              imgList: this.imgBase64
+        if(this.value1 == null || this.value2 == null) {
+          this.show = true
+          this.$toast("请选择发布版块和标签")
+          return
+        }
+
+        axios.post(
+          '/v2/publish',
+          {
+            uName: this.$store.state.login.userdata.uName,
+            title: this.title,
+            content: this.content,
+            imgList: this.imgBase64,
+            type: this.value1,
+            tag: this.value2,
+            topic: this.$route.params.home
+          }
+        )
+        .then( response => {
+            this.show = true
+            if(response.status == 200) {
+              this.$toast({
+                message: '+15经验 +15积分',
+                duration: 1000
+              })
+              this.imgBase64 = []
+              history.go('-1')
             }
-          )
-          .then( response => {
-              this.show = true
-              if(response.status == 200) {
-                this.$toast({
-                  message: '+15经验 +15积分',
-                  duration: 1000
-                })
-                this.imgBase64 = []
-                history.go('-1')
-              }
-            }           
-          )
-        }
+          }           
+        )
       }
     }
   }
@@ -201,11 +262,6 @@ import axios from '~/http'
 .publish-btn:active {
   box-shadow: 0 1px white;
   transform: translateY(3px);
-}
-
-.loading{
-  margin-top: 0.1rem;
-  margin-left: 3.5rem;
 }
 
 .header{

@@ -54,9 +54,29 @@
           autosize
         />
       </van-cell-group>
-      <van-button type="primary" @click="publish">发布</van-button>
+      
+      <van-button round  type="primary" size="small" @click="publish">发布</van-button>
     </div>
+  
+    <div class="clean"></div>
+    <!-- 游戏圈创建 -->
 
+    <h2 style="margin-top: 0.3rem;">创建游戏圈</h2>
+    <hr>
+    <div class="game" style="padding: 0.3rem;">
+      <div>
+        <div>
+          <span>名称：</span>
+          <input type="text" v-model="name">
+        </div>
+        <div class="upload">
+          <span>图像：</span> 
+          <van-uploader v-model="img" :max-count="1"/>
+        </div>
+        <van-button round type="primary" size="small" @click="create">创建</van-button>
+      </div>
+
+    </div>
   </div>
 </template>
 
@@ -65,6 +85,8 @@ import axios from '../http'
   export default {
     data() {
       return {
+        img: [],
+        name: '',
         currentPage: 1,
         pageNum: 1,
         message: '',
@@ -230,7 +252,28 @@ import axios from '../http'
             duration: 500
           }) 
         }
-      }
+      },
+      create() {
+        if(this.name != '' && this.img.length != 0) {
+          axios.post('/admin/addTopic', {name: this.name, imgurl: this.img[0].content}).then(
+            res => {
+              if(res.status == 200) {
+                this.img = []
+                this.name = '' 
+                this.$toast({
+                  message: '创建成功！',
+                  duration: 500
+                }) 
+              }else {
+                this.$toast({
+                  message: res.data,
+                  duration: 500
+                }) 
+              }
+            }
+          )
+        }
+      },
     }
   }
 </script>
@@ -284,7 +327,9 @@ import axios from '../http'
   margin-top: 0.3rem;
   border: 1px solid lightgray;
 }
-.public button{
-  float: right;
+button{
+  left: 40%;
+  margin-top: 0.1rem;
 }
+
 </style>

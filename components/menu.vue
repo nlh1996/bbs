@@ -1,17 +1,17 @@
 <template>
   <div class="headlist bg">
     <div class="left">                
-      <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2564997198,4187947589&fm=58" style="width:0.8rem"/>
+      <img src="qijing.jpg" style="width:0.8rem"/>
     </div>
     
     <div class="text"> {{$route.params.home}}</div>
 
     <diV class="right">
       <ul>
-        <li v-if="!$store.state.login.isSignin"><button @click="signin">签到</button></li>
-        <li v-else><button disabled="false">已签</button></li>
-        <li><nuxt-link to='giftpack'><button>礼包</button></nuxt-link> </li>
-        <li><nuxt-link to='shoppingmall'><button>商城</button></nuxt-link> </li>
+        <li v-if="!$store.state.login.isSignin"><div class="btn" @click="signin"><img src="签到.png"><div class="btn-text">签到</div></div></li>
+        <li v-else><div class="btn"><img src="已签.png"><div class="btn-text">已签</div></div></li>
+        <li><nuxt-link to='giftpack'><div class="btn"><img src="礼包.png"><div class="btn-text">礼包</div></div></nuxt-link> </li>
+        <li><nuxt-link to='shoppingmall'><div class="btn"><img src="商城.png"><div class="btn-text">商城</div></div></nuxt-link> </li>
       </ul>
       
       <nuxt-link :to='user_route'>
@@ -73,13 +73,14 @@ import axios from '../http'
 }
 
 .right svg{
-  margin-left: 0.2rem;
+  margin-left: 0.3rem;
+  height: 0.8rem;
 }
 
 ul,li{
   display: inline-block;
   list-style: none;
-  margin-left: 0.15rem;
+  margin-left: 0.2rem;
 }
 
 button{
@@ -93,5 +94,24 @@ button{
   /* -webkit-transition-duration: 0.4s; Safari */
   /* transition-duration: 0.4s; */
   box-shadow: 0 0.04rem 0.08rem 0 rgba(0,0,0,0.2), 0 0.06rem 0.1rem 0 rgba(0,0,0,0.19);
+}
+
+.btn{
+  margin: 0px;
+  padding: 0px;
+  overflow: unset;
+  line-height: 0.3rem;
+}
+
+.btn img{
+  width: 0.5rem;
+  padding-left: 0.01rem;
+}
+
+.btn-text{
+  margin: 0px;
+  padding: 0px;
+  font-size: 0.25rem;
+  color: black;
 }
 </style>

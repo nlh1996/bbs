@@ -4,56 +4,36 @@
     <header-view :name="msg"></header-view>
     <div class="title">最近访问</div>
     <hr>
-    <nuxt-link :to="router"> 
-      <dl>
-        <dt><img :src="form.topicImg" style="width:1.5rem"></dt>
-        <dd>     
-          <div class="text">
-            <h3>王者荣耀</h3>
-            <p>{{form.topicNum}}话题</p>
-          </div>
-        </dd>
-      </dl>
-    </nuxt-link>
+    <div v-for="(item, index) in form" :key="index" style="margin-left: 0.1rem;">
+      <nuxt-link :to="item.Name"> 
+        <dl>
+          <dt><img src="item.ImgURL" style="width:1.5rem"></dt>
+          <dd>     
+            <div class="text">
+              <h3>{{item.Name}}</h3>
+              <p>{{item.Num}}话题</p>
+            </div>
+          </dd>
+        </dl>
+      </nuxt-link>
+    </div>
 
-    <nuxt-link :to="router2"> 
-      <dl>
-        <dt><img :src="form.topicImg" style="width:1.5rem"></dt>
-        <dd>     
-          <div class="text">
-            <h3>绝地求生</h3>
-            <p>{{form.topicNum}}话题</p>
-          </div>
-        </dd>
-      </dl>
-    </nuxt-link>
     <div class="clean"></div>
 
     <div class="title">全部游戏圈</div>
-    <nuxt-link :to="router"> 
-      <dl>
-        <dt><img :src="form.topicImg" style="width:1.5rem"></dt>
-        <dd>     
-          <div class="text">
-            <h3>王者荣耀</h3>
-            <p>{{form.topicNum}}话题</p>
-          </div>
-        </dd>
-      </dl>
-    </nuxt-link>
-
-    <nuxt-link :to="router2"> 
-      <dl>
-        <dt><img :src="form.topicImg" style="width:1.5rem"></dt>
-        <dd>     
-          <div class="text">
-            <h3>绝地求生</h3>
-            <p>{{form.topicNum}}话题</p>
-          </div>
-        </dd>
-      </dl>
-    </nuxt-link>
-    
+    <div v-for="item in form" :key="item.Name" style="margin-left: 0.1rem;">
+      <nuxt-link :to="item.Name"> 
+        <dl style="margin-right: 20px;">
+          <dt><img src="qijing.jpg" style="width:1.5rem;"></dt>
+          <dd>     
+            <div class="text">
+              <h3>{{item.Name}}</h3>
+              <p>{{item.Num}}话题</p>
+            </div>
+          </dd>
+        </dl>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -64,8 +44,6 @@ export default {
   data() {
     return {
       msg: "微信游戏圈",
-      router: "/王者",
-      router2: "/绝地"
     }
   },
   components: {

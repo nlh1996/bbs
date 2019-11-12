@@ -38,7 +38,7 @@
           <nuxt-link :to="'/post/'+item.tid" id="link">
           <div class="box">
             <div class="row">
-              <div class="tag" style="margin-right:0.2rem;">攻略</div>
+              <div class="tag" style="margin-right:0.2rem;"><img :src="item.tag + '.png'" style="width:0.6rem"></div>
                 <h2>{{item.title}}</h2>
               <svg class="icon shanchu" aria-hidden="true" @click="shanchu(item.tid)"
               v-if="item.uName == $store.state.login.userdata.uName || $store.state.login.userdata.uName == 'admin'">
@@ -97,9 +97,9 @@ import axios from '~/http/'
     data() {
       return {
         icons: [
-          {name:"#icon-zuixin",msg: "最新"},
-          {name:"#icon-remen1",msg: "热门"},
-          {name:"#icon-zhengcegonggao",msg: "攻略"},
+          {name:"#icon-zuixin",msg: "玩家交流"},
+          {name:"#icon-remen1",msg: "玩家交易"},
+          {name:"#icon-zhengcegonggao",msg: "意见采集"},
         ],
         msg: this.$route.params.home+'游戏圈',
         publish_route: '/'+this.$route.params.home+'/publish',
@@ -109,6 +109,9 @@ import axios from '~/http/'
         index: 0,
         show: false,
         post: {},
+        list2: [],
+        notice: '',
+        posts: [],
       }
     },
     props: ["tid"],
@@ -118,18 +121,24 @@ import axios from '~/http/'
       headMenu,
     },
     async asyncData ({ params }) {
-      let [ data1, data2, data3 ] = await Promise.all([
-        axios.get('/v1/posts'),
-        axios.get('/v1/notices/get'),
-        axios.get('/v1/zhiding/get')
-      ])
-      return { 
-        posts: data1.data.posts,
-        notice: data2.data.msg,
-        list2: data3.data.list 
-      }
+      let {data} = await axios.get('/v1/posts?topic='+ params.home)
+      return { posts: data.posts }
     },
-    mounted() {
+    beforeMount() {
+      axios.get('/v1/notices/get').then(
+        res => {
+          if(res.status == 200) {
+            this.notice = res.data.msg
+          }
+        }
+      )
+      axios.get('/v1/zhiding/get').then(
+        res => {
+          if(res.status == 200) {
+            this.list2 = res.data.list
+          }
+        }
+      )
       this.$store.dispatch("isLoad")
     },
     methods: {
@@ -235,12 +244,11 @@ import axios from '~/http/'
 }
 
 .classify li{  
-  margin: 0 0.4rem;
+  margin: 0 0.1rem;
 }
 
 .tag{
   margin-top: 0.15rem;
-  background-color: darkorange;
 }
 
 .icon-box{
@@ -280,8 +288,7 @@ import axios from '~/http/'
 }
 
 .row .tag{
-  margin: 0.02rem;
-  background-color: chartreuse;
+  margin: 0rem;
 }
 
 .row{
@@ -329,6 +336,5 @@ import axios from '~/http/'
 
 .title{
   display: inline-block;
-  margin-left: 0.1rem;
 }
 </style>
