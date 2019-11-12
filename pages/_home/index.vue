@@ -111,7 +111,7 @@ import axios from '~/http/'
         post: {},
         list2: [],
         notice: '',
-        posts: [],
+        posts:[]
       }
     },
     props: ["tid"],
@@ -119,10 +119,6 @@ import axios from '~/http/'
       headerView,
       footerView,
       headMenu,
-    },
-    async asyncData ({ params }) {
-      let {data} = await axios.get('/v1/posts?topic='+ params.home)
-      return { posts: data.posts }
     },
     beforeMount() {
       axios.get('/v1/notices/get').then(
@@ -141,11 +137,34 @@ import axios from '~/http/'
       )
       this.$store.dispatch("isLoad")
     },
+    mounted() {
+      this.enum = new Map()
+      this.enum.set("玩家交流", 0)
+      this.enum.set("玩家交易", 1)
+      this.enum.set("意见采集", 2)
+      this.select("玩家交流")
+    },
     methods: {
+      getposts(type) {
+        this.list = []
+        this.index = 0
+        axios.get('/v1/posts?topic=' + this.$route.params.home + '&type=' + type).then(
+          res => {
+            this.posts = res.data.posts
+            this.finished = false
+          }
+        )
+      },
       onLoad() {
         // 异步更新数据
         setTimeout(() => {
-          for (let i = 0; i < 5; i++) {
+          let len = 0
+          if(this.posts.length<5) {
+            len = this.posts.length
+          }else{
+            len = 5
+          }
+          for (let i = 0; i < len; i++) {
             i
             let obj = this.posts[this.index]
             if(obj){
@@ -223,7 +242,8 @@ import axios from '~/http/'
         for(let i=0; i<icons.length; i++) {
           icons[i].style.setProperty("background-color","white")
         }
-        icon.style.setProperty("background-color","darkorange")       
+        icon.style.setProperty("background-color","darkorange")
+        this.getposts(this.enum.get(id))
       }
     },
     scrollBehavior (to, from, savedPosition) {
@@ -289,6 +309,12 @@ import axios from '~/http/'
 
 .row .tag{
   margin: 0rem;
+}
+
+.bg .tag{
+  background-color: chocolate;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
 }
 
 .row{
