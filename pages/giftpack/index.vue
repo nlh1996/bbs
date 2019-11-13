@@ -2,35 +2,15 @@
   <div class="view">
     <header-view :name="title"></header-view>
 
-    <div>
-      <div class="row">
-        <span>选择渠道：</span>
-        <select v-model="Channel" @click="clean">
-          <option  v-for="(item,index) in option1" :key="index">
-            {{item.ChannelName}}
-          </option>
-        </select>
-      </div>
-
-      <div class="row">
-        <span>选择区服：</span>
-        <select v-model="Area" @click="showGiftPack">
-          <option  v-for="(item,index) in option2" :key="index">
-            {{item.ServerName}}
-          </option>
-        </select>
-      </div>
-    </div>
-
     <div v-for="(item,index) in gifts" :key="index">
       <van-card
         :num="item.GiftPackNum"
-        desc="描述信息"  
+        :desc="item.Comment"  
         :title="item.GiftPackName"
         thumb="timg.jpg"
       >
         <div slot="tags" class="tag">
-          <van-tag plain type="danger">20积分</van-tag>
+          <van-tag plain type="danger">{{item.Jifen}}积分</van-tag>
         </div>
         <div slot="footer">
           <van-button size="mini" @click="getGift(item)">领取</van-button>
@@ -47,11 +27,7 @@ import axios from '../../http'
     data() {
       return {
         title: "礼包",
-        option1: [],
-        option2: [],
         gifts: [],
-        Channel: '',
-        Area: '',
         url: 'https://www.yinghuo2018.com:20000/gm',
         code: {}
       }
@@ -63,35 +39,11 @@ import axios from '../../http'
       this.$store.dispatch("isLoad")
     },
     mounted() {
-      axios.get(this.url + '/getChannels').then (
-        res => {
-          if(res.status == 200) {
-            this.option1 = res.data.data
-          }
-        }
-      )
+      this.showGiftPack()
     },
     methods: {
-      filter() {
-        axios.get(this.url + '/getAreas', {"ChannelName": this.Channel}).then( res => {
-          if (res.status == 200) {
-            this.option2 = res.data.data
-          }
-        })
-      },
-      clean() {
-        this.option2 = []
-        axios.get(this.url + '/getChannels').then (
-          res => {
-            if(res.status == 200) {
-              this.option1 = res.data.data
-              this.filter()
-            }
-          }
-        )
-      },  
       showGiftPack() {
-        axios.post("/v2/gift/showGiftPack", {Channel: this.Channel, Area: this.Area}).then( res => {
+        axios.post("/v2/gift/showGiftPack").then( res => {
           if(res.status == 200) {
             this.gifts = res.data.gift
           }
@@ -100,9 +52,8 @@ import axios from '../../http'
       getGift(data) {
         axios.post("/v2/gift/getGiftPack", data).then( res => {
           if(res.status == 200) {
-            this.code = res.data
             data.GiftPackNum --
-            console.log(this.code)
+            this.$toast('领取成功，请前往个人中心查看。')
           }
         })
       }
@@ -125,6 +76,20 @@ select {
   font-size: 0.32rem;
   padding: 0.06rem;
   height: 0.6rem;
+}
+.van-card__bottom {
+  line-height: 0;
+}
+
+.van-card__num {
+  margin-top: -1rem;
+  margin-right: 0.3rem;
+}
+
+.van-card__footer .van-button{
+  float: right;
+  margin-top: -0.5rem;
+  margin-right: 0.3rem;
 }
 
 .van-card__title {

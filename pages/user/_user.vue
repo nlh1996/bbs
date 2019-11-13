@@ -19,10 +19,13 @@
       </div>
     </div>
 
-    <van-cell-group>
-      <van-cell title="最近浏览" is-link />
-      <van-cell title="我的收藏" is-link />
-    </van-cell-group>
+    <van-collapse v-model="activeNames">
+      <van-collapse-item title="最近浏览" name="1">该功能暂未实现</van-collapse-item>
+      <van-collapse-item title="我的收藏" name="2">该功能暂未实现</van-collapse-item>
+      <van-collapse-item title="我的礼包" name="3">
+        <div v-for="(item, index) in form.myGifts" :key="index"> <span style="width:3rem;display:inline-block;">礼包名称：{{item.GiftPackName}}</span> <span> 兑换码：{{item.Code}}</span></div>
+      </van-collapse-item>
+    </van-collapse>
 
     <van-tabs v-model="active" color="green">
       <van-tab title="我的贴子">
@@ -49,6 +52,7 @@ import headerView from '~/components/header'
   export default {
     data() {
       return {
+        activeNames: [],
         title: "个人信息",
         active: 0,
         myposts: [],
@@ -64,6 +68,7 @@ import headerView from '~/components/header'
     },
     beforeMount() {
       this.$store.dispatch("isLoad")
+      console.log(this.form)
     },
     mounted() {
       axios.post('v2/user/myposts').then( res => {

@@ -186,7 +186,7 @@ import axios from '~/http/'
         }, 50);
       },
       shanchu(id) {
-        var r=confirm("贴子一但删除，无法恢复!")
+        let r = confirm("贴子一但删除，无法恢复!")
         if (r==true) {
           axios.delete('/v2/delpost',
           {

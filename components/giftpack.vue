@@ -1,27 +1,19 @@
 <template>
   <div class="box">
     <div class="row">
-      <span>选择渠道：</span>
-      <select v-model="Channel" @click="clean">
-        <option  v-for="(item,index) in option1" :key="index">
-          {{item.ChannelName}}
-        </option>
-      </select>
+      <span>礼包描述：</span>
+      <input type="text" v-model="Comment" style="width:3.5rem;">
     </div>
 
     <div class="row">
-      <span>选择区服：</span>
-      <select v-model="Area">
-        <option  v-for="(item,index) in option2" :key="index">
-          {{item.ServerName}}
-        </option>
-      </select>
+      <span>需要积分：</span>
+      <input type="text" v-model.number="Jifen" style="width:3.5rem;">
     </div>
 
     <div class="row">
       <span>选择礼包：</span>
       <select v-model="GiftPackName">
-        <option  v-for="(item,index) in option3" :key="index">
+        <option  v-for="(item,index) in options" :key="index">
           {{item.GiftPackName}}
         </option>
       </select>
@@ -36,6 +28,21 @@
     <van-row type="flex" justify="center">
       <van-button type="primary" @click="seed" class="btn">发放</van-button>
     </van-row>
+    <div class="row"></div>
+    <h2>礼包删除</h2>
+    <hr>
+    <div class="row">
+      <span>选择礼包：</span>
+      <select v-model="GiftPackName2">
+        <option  v-for="(item,index) in options2" :key="index">
+          {{item.GiftPackName}}
+        </option>
+      </select>
+    </div>
+
+    <van-row type="flex" justify="center">
+      <van-button type="warning" @click="del" class="btn">删除</van-button>
+    </van-row>
   </div>
 </template>
 
@@ -44,85 +51,74 @@ import axios from '../http'
   export default {
     data() {
       return {
-        Channel: '',
-        Area: '',
         GiftPackName: '',
+        GiftPackName2: '',
         AccessNum: 0,
-        GiftPackNum: null,
+        GiftPackNum: '',
         Comment: '',
-        option1: [],
-        option2: [],
-        option3: [],
-        url: 'https://www.yinghuo2018.com:20000/gm'
+        options: [],
+        options2: [],
+        url: 'https://www.yinghuo2018.com:20000/gm',
+        Jifen: 0,
       }
     },
     mounted() {
-      axios.get(this.url + '/getChannels').then (
-        res => {
-          if(res.status == 200) {
-            this.option1 = res.data.data
-          }
-        }
-      )
       axios.get(this.url + '/getGiftPacks').then( 
         res=> {
           if(res.status == 200) {
-            this.option3 = res.data.data
+            this.options = res.data.data
           }
         }
       )
+      this.getGiftPacks()
     },
     methods: {
-      filter() {
-        axios.get(this.url + '/getAreas', {"ChannelName": this.Channel})
-        .then( res => {
-          if (res.status == 200) {
-            this.option2 = res.data.data
-          }
-        })
-      },
-      clean() {
-        this.option2 = []
-        axios.get(this.url + '/getChannels').then (
-          res => {
+      del() {
+        axios.post('/admin/delGiftPack',{GiftPackName: this.GiftPackName2}).then( 
+          res=> {
             if(res.status == 200) {
-              this.option1 = res.data.data
-              this.filter()
+              this.$toast({message: "删除成功！"})
+              this.getGiftPacks()
+              this.GiftPackName2 = ''
+            }
+          }
+        )
+      },
+      getGiftPacks() {
+        axios.post('/admin/getGiftPacks').then( 
+          res=> {
+            if(res.status == 200) {
+              this.options2 = res.data.gifts
             }
           }
         )
       },
       count() {
-        if(this.Channel != ''&& this.Area != ''&& this.GiftPackName != '') {
-          axios.get(this.url + '/countRedeemCodes',{"Channel": this.Channel,"Area": this.Area,"GiftPackName": this.GiftPackName}).then(
+        if(this.GiftPackName != '') {
+          axios.post(this.url + '/countRedeemCodes',{"GiftPackName": this.GiftPackName}).then(
             res => {
               if(res.status == 200) {
-                this.AccessNum = res.data.GiftPackNum
+                this.AccessNum = res.data.count
               }
             }
           )
         }
       },
       seed() {
-        if(this.Channel == ''|| this.Area == ''|| this.GiftPackName == '') {
+        if(this.GiftPackName == '' || this.Comment == '') {
           this.$toast('请填写完整')
           return
         }
-        if(/*this.GiftPackNum <= this.AccessNum && */this.GiftPackNum != null) {
-          for(let i of this.option3) {
-            if(i.GiftPackName == this.GiftPackName) {
-              this.Comment = i.Comment
-            }
-          }
+        if(this.GiftPackNum <= this.AccessNum && this.GiftPackNum != '') {
           axios.post('/admin/sendGiftPack',{
-            Channel: this.Channel,
-            Area: this.Area,
             GiftPackName: this.GiftPackName,
             GiftPackNum: this.GiftPackNum,
-            Comment: this.Comment
+            Comment: this.Comment,
+            Jifen: this.Jifen
           }).then( res => {
             if(res.status == 200) {
               this.$toast({message: "发送成功！"})
+              this.getGiftPacks()
             }else {
               this.$toast({message: res.data})
             }
