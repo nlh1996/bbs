@@ -68,7 +68,6 @@ import headerView from '~/components/header'
     },
     beforeMount() {
       this.$store.dispatch("isLoad")
-      console.log(this.form)
     },
     mounted() {
       axios.post('v2/user/myposts').then( res => {

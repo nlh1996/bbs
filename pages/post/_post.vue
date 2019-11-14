@@ -2,6 +2,7 @@
 <template>
   <div class="view">
     <cover-layer></cover-layer>
+    <header-view></header-view>
     <div class="box">
       <div class="row row-top">
         <dl>
@@ -85,6 +86,7 @@ import axios from '~/http/'
       this.$store.commit("CLOSE_SHOW")
       this.$store.commit("isDianzan",this.post.tid)
     },
+
     methods: {
       reply(name) {
         let value = document.getElementById('commit').innerText
@@ -107,6 +109,7 @@ import axios from '~/http/'
                   duration: 1000
                 })
                 this.$store.commit("ADD_REPLY1",response.data.reply)
+                this.$store.commit("GET_SCORE")
               }
             }           
           )

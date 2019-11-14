@@ -41,7 +41,9 @@ import register from '~/components/register'
       },
       logout() {
         this.$store.commit('LOGIN_OUT')
-        location.reload()
+        this.$router.push({
+          name: 'index',
+        })
       }
     },
     components: {

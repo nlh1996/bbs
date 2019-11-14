@@ -92,7 +92,6 @@ import axios from '~/http'
           this.loading = false;
           if(!this.loading)
           {
-            console.log(this.list.length)
           }
 
           // 数据全部加载完成
@@ -124,6 +123,7 @@ import axios from '~/http'
                   duration: 1000
                 })
                 this.$store.commit("ADD_REPLY2",response.data.reply)
+                this.$store.commit("GET_SCORE")
               }
             }           
           )

@@ -28,6 +28,10 @@ export default {
       state.userdata.exp += 10
       state.userdata.integral += 10
     },
+    GET_SCORE(state) {
+      state.userdata.exp += 5
+      state.userdata.integral += 5
+    }
   },
 
   // 监听分发事件，可用于处理多个监听事件，方法名与分发名相同

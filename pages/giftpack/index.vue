@@ -13,7 +13,7 @@
           <van-tag plain type="danger">{{item.Jifen}}积分</van-tag>
         </div>
         <div slot="footer">
-          <van-button size="mini" @click="getGift(item)">领取</van-button>
+          <van-button size="mini" @click="getGift(item)">{{item.state}}</van-button>
         </div>
       </van-card>
     </div>
@@ -29,7 +29,8 @@ import axios from '../../http'
         title: "礼包",
         gifts: [],
         url: 'https://www.yinghuo2018.com:20000/gm',
-        code: {}
+        code: {},
+        btn: '',
       }
     },
     components: {
@@ -41,21 +42,51 @@ import axios from '../../http'
     mounted() {
       this.showGiftPack()
     },
+    computed: {
+      userdata: function() {
+        return this.$store.state.login.userdata || ''
+      }
+    },
     methods: {
       showGiftPack() {
         axios.post("/v2/gift/showGiftPack").then( res => {
           if(res.status == 200) {
             this.gifts = res.data.gift
+            for(let i of this.gifts) {
+              if(this.userdata.myGifts.length == 0) {
+                i.state = "领取"
+                continue
+              }
+              for(let j of this.userdata.myGifts) {
+                if(i.GiftPackName == j.GiftPackName) {
+                  i.state = "已领取"
+                  break
+                }else{
+                  i.state = "领取"
+                }
+              }
+            }
           }
         })
       },
       getGift(data) {
-        axios.post("/v2/gift/getGiftPack", data).then( res => {
-          if(res.status == 200) {
-            data.GiftPackNum --
-            this.$toast('领取成功，请前往个人中心查看。')
-          }
-        })
+        if(data.GiftPackNum <= 0) {
+          this.$toast('很抱歉，您来晚了！')
+          return
+        }
+        if(data.state == "领取") {
+          axios.post("/v2/gift/getGiftPack", data).then( res => {
+            if(res.status == 200) {
+              data.GiftPackNum --
+              this.$toast('领取成功，请前往个人中心查看。')
+              data.state = "已领取"
+            }else if(res.status == 201) {
+              this.$toast('很抱歉，您的积分不够！')
+            }else {
+              this.$toast('很抱歉，领取失败！')
+            }
+          })
+        }
       }
     }
   }

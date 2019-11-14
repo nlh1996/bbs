@@ -95,7 +95,7 @@ import axios from '../http'
       },
       count() {
         if(this.GiftPackName != '') {
-          axios.post(this.url + '/countRedeemCodes',{"GiftPackName": this.GiftPackName}).then(
+          axios.post('/admin/countRedeemCodes',{"GiftPackName": this.GiftPackName}).then(
             res => {
               if(res.status == 200) {
                 this.AccessNum = res.data.count
