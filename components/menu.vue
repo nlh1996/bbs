@@ -8,10 +8,10 @@
 
     <diV class="right">
       <ul>
-        <li v-if="!$store.state.login.isSignin"><div class="btn" @click="signin"><img src="签到.png"><div class="btn-text">签到</div></div></li>
-        <li v-else><div class="btn"><img src="已签.png"><div class="btn-text">已签</div></div></li>
-        <li><nuxt-link to='giftpack'><div class="btn"><img src="礼包.png"><div class="btn-text">礼包</div></div></nuxt-link> </li>
-        <li><nuxt-link to='shoppingmall'><div class="btn"><img src="商城.png"><div class="btn-text">商城</div></div></nuxt-link> </li>
+        <li v-if="!$store.state.login.isSignin"><div class="btn" @click="signin"><img src="qiandao.png"><div class="btn-text">签到</div></div></li>
+        <li v-else><div class="btn"><img src="yiqian.png"><div class="btn-text">已签</div></div></li>
+        <li><nuxt-link to='giftpack'><div class="btn"><img src="gift.png"><div class="btn-text">礼包</div></div></nuxt-link> </li>
+        <li><nuxt-link to='shoppingmall'><div class="btn"><img src="shop.png"><div class="btn-text">商城</div></div></nuxt-link> </li>
       </ul>
       
       <nuxt-link :to='user_route'>
