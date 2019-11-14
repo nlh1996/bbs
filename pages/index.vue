@@ -7,7 +7,7 @@
     <div v-for="(item, index) in form" :key="index" style="margin-left: 0.1rem;">
       <nuxt-link :to="item.Name"> 
         <dl>
-          <dt><img src="item.ImgURL" style="width:1.5rem"></dt>
+          <dt><img :src="item.ImgURL" style="width:1.5rem"></dt>
           <dd>     
             <div class="text">
               <h3>{{item.Name}}</h3>
@@ -24,7 +24,7 @@
     <div v-for="item in form" :key="item.Name" style="margin-left: 0.1rem;">
       <nuxt-link :to="item.Name"> 
         <dl style="margin-right: 20px;">
-          <dt><img src="qijing.jpg" style="width:1.5rem;"></dt>
+          <dt><img :src="item.ImgURL" style="width:1.5rem;"></dt>
           <dd>     
             <div class="text">
               <h3>{{item.Name}}</h3>

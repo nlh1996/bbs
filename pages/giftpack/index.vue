@@ -70,8 +70,15 @@ import axios from '../../http'
         })
       },
       getGift(data) {
+        if(data.state == "已领取") {
+          return
+        }
         if(data.GiftPackNum <= 0) {
           this.$toast('很抱歉，您来晚了！')
+          return
+        }
+        if(data.Jifen > this.userdata.integral) {
+          this.$toast('很抱歉，您的积分不足！')
           return
         }
         if(data.state == "领取") {
@@ -79,9 +86,10 @@ import axios from '../../http'
             if(res.status == 200) {
               data.GiftPackNum --
               this.$toast('领取成功，请前往个人中心查看。')
+              this.$store.commit("CHANGE_JIFEN", -data.Jifen)
               data.state = "已领取"
             }else if(res.status == 201) {
-              this.$toast('很抱歉，您的积分不够！')
+              this.$toast('很抱歉，您的积分不足！')
             }else {
               this.$toast('很抱歉，领取失败！')
             }

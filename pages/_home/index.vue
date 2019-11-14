@@ -11,7 +11,7 @@
             <svg class="icon" aria-hidden="true">
               <use :xlink:href=item.name></use>
             </svg>
-            {{item.msg}}
+            <span class="icon-span">{{item.msg}}</span>
           </div>
         </li>
       </ul>
@@ -97,9 +97,9 @@ import axios from '~/http/'
     data() {
       return {
         icons: [
-          {name:"#icon-zuixin",msg: "玩家交流"},
-          {name:"#icon-remen1",msg: "玩家交易"},
-          {name:"#icon-zhengcegonggao",msg: "意见采集"},
+          {name:"#icon-question",msg: "玩家交流"},
+          {name:"#icon-jisuanji",msg: "玩家交易"},
+          {name:"#icon-beiwanglu",msg: "意见采集"},
         ],
         msg: this.$route.params.home+'游戏圈',
         publish_route: '/'+this.$route.params.home+'/publish',
@@ -278,6 +278,7 @@ import axios from '~/http/'
 .icon-box:hover{
   cursor: pointer;
 }
+
 
 #最新{
   background-color:darkorange

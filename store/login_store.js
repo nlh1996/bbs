@@ -31,6 +31,9 @@ export default {
     GET_SCORE(state) {
       state.userdata.exp += 5
       state.userdata.integral += 5
+    },
+    CHANGE_JIFEN(state, data) {
+      state.userdata.integral += data
     }
   },
 

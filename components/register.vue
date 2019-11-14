@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import axios from '~/http/'
   export default {
     data() {
       return {
@@ -80,8 +81,22 @@
             done(false);
             return
           }
-          this.$store.dispatch('register', {uName:this.username,password:this.password})
-          setTimeout(done, 1000);
+          axios.post(
+            '/v1/register',
+            {
+              uName: this.username,
+              password: this.password
+            }
+          ).then(response => {
+            //此处数据模拟从后端获取，正确处理用response.data替换下面的数据
+            if(response.status == 200) {
+              this.$store.commit('USER_REGISTER', response.data)
+              setTimeout(done, 1000);
+            }else{
+              this.msg = response.data
+              done(false);
+            }
+          })
         } else {
           done();
         }
