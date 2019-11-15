@@ -31,15 +31,17 @@ import axios from '../../http'
         url: 'https://www.yinghuo2018.com:20000/gm',
         code: {},
         btn: '',
-        test: ''
+        test: '',
       }
     },
     components: {
       headerView,
     },
+
     beforeMount() {
       this.$store.dispatch("isLoad")
     },
+
     mounted() {
       this.showGiftPack()
     },
@@ -47,8 +49,9 @@ import axios from '../../http'
     computed: {
       userdata: function() {
         return this.$store.state.login.userdata || ''
-      }
+      },
     },
+    
     methods: {
       showGiftPack() {
         axios.post("/v2/gift/showGiftPack").then( res => {
@@ -152,5 +155,6 @@ select {
   border-color:rgb(226, 193, 4);
   color: rgb(226, 193, 4);
   background-color: white;
+  font-size: 0.2rem;
 }
 </style>
