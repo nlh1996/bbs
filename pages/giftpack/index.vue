@@ -13,7 +13,7 @@
           <van-tag plain type="danger">{{item.Jifen}}积分</van-tag>
         </div>
         <div slot="footer">
-          <van-button size="mini" @click="getGift(item)">{{item.state}}</van-button>
+          <van-button size="mini" @click="getGift(item)"><div class="state">{{item.state}}</div></van-button>
         </div>
       </van-card>
     </div>
@@ -31,6 +31,7 @@ import axios from '../../http'
         url: 'https://www.yinghuo2018.com:20000/gm',
         code: {},
         btn: '',
+        test: ''
       }
     },
     components: {
@@ -42,6 +43,7 @@ import axios from '../../http'
     mounted() {
       this.showGiftPack()
     },
+
     computed: {
       userdata: function() {
         return this.$store.state.login.userdata || ''
@@ -144,4 +146,11 @@ select {
   width: 1.5rem;
 }
 
+.state{
+  border-style: solid; 
+  border-width: 1px;
+  border-color:rgb(226, 193, 4);
+  color: rgb(226, 193, 4);
+  background-color: white;
+}
 </style>

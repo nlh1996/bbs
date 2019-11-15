@@ -134,3 +134,11 @@
   .van-field .van-cell__title{
     margin-right: 0.1rem;
   }
+
+  .van-ellipsis{
+    overflow: unset !important; 
+  }
+
+  .van-popup--top{
+    width: 7.5rem !important;
+  }

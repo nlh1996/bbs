@@ -240,9 +240,9 @@ import axios from '~/http/'
         let icon = document.getElementById(id)
         let icons = document.getElementsByClassName('icon-box')
         for(let i=0; i<icons.length; i++) {
-          icons[i].style.setProperty("background-color","white")
+          icons[i].style.setProperty("border-color","white")
         }
-        icon.style.setProperty("background-color","darkorange")
+        icon.style.setProperty("border-color","#ffde42")
         this.getposts(this.enum.get(id))
       }
     },
@@ -260,7 +260,7 @@ import axios from '~/http/'
 .classify ul,li{
   display: inline-block;
   list-style: none;
-  margin-left: 0.15rem;
+  margin-left: 0.12rem;
 }
 
 .classify li{  
@@ -272,16 +272,15 @@ import axios from '~/http/'
 }
 
 .icon-box{
-  padding-right: 0.1rem;
+  padding-right: 0.06rem;
+  border-style: solid; 
+  border-width: 3px;
+  border-color: white;
+  line-height: 0.7rem;
 }
 
 .icon-box:hover{
   cursor: pointer;
-}
-
-
-#最新{
-  background-color:darkorange
 }
 
 .list{

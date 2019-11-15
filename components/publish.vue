@@ -46,8 +46,8 @@
     <div class="clean"></div>
 
     <van-dropdown-menu>
-      <van-dropdown-item v-model="value1" :options="option1" @change="choose" :title="title1"/>
-      <van-dropdown-item v-model="value2" :options="option2" @change="choose" :title="title2"/>
+      <van-dropdown-item class="choose" v-model="value1" :options="option1" @change="choose" :title="title1"/>
+      <van-dropdown-item class="choose" v-model="value2" :options="option2" @change="choose" :title="title2"/>
     </van-dropdown-menu>
 
     <div class="publish-btn" @click="publish">
@@ -60,7 +60,6 @@
 
 <script>
 import axios from '~/http'
-
   export default {
     data() {
       return {
@@ -277,5 +276,9 @@ import axios from '~/http'
   margin-left: 0.1rem;
   font-size:  0.35rem;
   font-weight: bold;
+}
+
+.van-ellipsis{
+  overflow: unset; 
 }
 </style>

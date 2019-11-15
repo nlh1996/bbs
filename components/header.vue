@@ -17,7 +17,7 @@
       <button class="text-button" @click="logout">登出</button>
     </div>
     <div class="box box-right" v-if="$store.state.login.isLoad == 1">
-      <span>{{$store.state.login.userdata.uName}}</span>
+      <!-- <span>{{$store.state.login.userdata.uName}}</span> -->
       <span>等级:{{level}}</span>
       <span>积分:{{$store.state.login.userdata.integral}}</span>
       <button class="text-button" @click="logout">登出</button>

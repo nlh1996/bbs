@@ -7,6 +7,7 @@
       show-cancel-button
       :before-close="beforeClose" 
       :title="msg"
+      width="6rem"
     >
     <van-field
       v-model="username"

@@ -20,9 +20,9 @@
         </svg>
       </nuxt-link>
       
-      <svg class="icon" aria-hidden="true">
+      <!-- <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-sousuo"></use>
-      </svg>
+      </svg> -->
 
     </div>            
   </div>
@@ -68,11 +68,11 @@ import axios from '../http'
 }
 
 .right{
-  margin-left: 2.4rem;
+  margin-left: 3rem;
 }
 
 .right svg{
-  margin-left: 0.4rem;
+  margin-left: 1rem;
   height: 0.8rem;
 }
 
