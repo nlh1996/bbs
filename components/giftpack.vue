@@ -58,7 +58,7 @@ import axios from '../http'
         Comment: '',
         options: [],
         options2: [],
-        url: 'https://www.yinghuo2018.com:20000/gm',
+        url: 'https://yinghuo2018.com:20000/gm',
         Jifen: 0,
       }
     },

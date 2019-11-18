@@ -28,7 +28,7 @@ import axios from '../../http'
       return {
         title: "礼包",
         gifts: [],
-        url: 'https://www.yinghuo2018.com:20000/gm',
+        url: 'https://yinghuo2018.com:20000/gm',
         code: {},
         btn: '',
         test: '',
