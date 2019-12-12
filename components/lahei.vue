@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <table bgcolor='black' spellcheck="1px" class="table1">
       <tr bgcolor='white'>
         <td class="name">用户名</td>
@@ -161,6 +161,9 @@ import axios from '../http'
 </script>
 
 <style>
+.box{
+  background-color: #fff;
+}
 .table1{
   width: 6rem;
   height: 3rem;

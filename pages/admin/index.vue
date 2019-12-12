@@ -105,7 +105,7 @@ import giftpack from '@/components/giftpack'
 }
 .box-admin{
   width: 6.9rem;
-  height: 100%;
+  height: 10.5rem;
   background-color: white;
   margin: 0 auto;
   padding: 0.3rem;

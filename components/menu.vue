@@ -1,7 +1,7 @@
 <template>
   <div class="headlist bg">
     <div class="left">                
-      <img src="qijing.jpg" style="width:0.8rem"/>
+      <img src="qijing.png" style="width:0.8rem"/>
     </div>
     
     <div class="text"> {{$route.params.home}}</div>

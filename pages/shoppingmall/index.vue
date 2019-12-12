@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="view">
     <header-view :name="title"></header-view>
   </div>
 </template>
