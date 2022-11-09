@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "vant": "^2.2.12"
   },
   "devDependencies": {
