@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "vant": "^2.2.12"
   },
   "devDependencies": {
@@ -23,7 +23,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^4.19.1",
     "eslint-friendly-formatter": "^4.0.1",
-    "eslint-loader": "^2.1.1",
+    "eslint-loader": "^4.0.2",
     "eslint-plugin-vue": "^4.0.0"
   },
   "config": {
